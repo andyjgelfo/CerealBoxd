@@ -1,0 +1,104 @@
+@font-face {
+    font-family: "SharpGroteskBook20";
+    src: local("SharpGroteskBook20"),
+     url("../Fonts/SharpGroteskBook20.otf") format("truetype");
+}
+
+.logo { 
+    margin-top: 30px;
+    height: 280px; 
+    width: 280px; 
+    box-sizing: border-box; 
+}
+    
+* {
+    padding: 0; 
+    margin: 0; 
+    box-sizing: border-box; 
+    font-family: 'SharpGroteskBook20';
+    background-color: var(--mainColor);
+}
+
+:root {
+    --mainColor: #2C3440; 
+    --secondaryColor: #F2EAC1; 
+    --textColor1: white; 
+    --textColor2: #1C2143;
+    --hover: #40bcf4;  
+}
+
+header {
+    margin-left: 8%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    height: 80px; 
+    padding: 0 1rem; 
+    background-color: var(--mainColor);
+    color: var(--textColor1); 
+}
+
+nav a {
+    margin: 0 3.5rem; 
+    color: var(--textColor1); 
+    text-decoration: none;
+    font-size: 1.4rem; 
+}
+
+nav a:hover {
+    color: var(--hover); 
+}
+
+header .nav-btn {
+    cursor: pointer;
+    background: transparent;
+    border: none; 
+    outline: none;
+    color: var(--textColor1); 
+    visibility: hidden;
+    opacity: 0; 
+    font-size: 1.8rem; 
+}
+
+@media only screen and (max-width: 1024px) {
+    header .nav-btn {
+        visibility: visible; 
+        opacity: 1; 
+        margin-top: 15px;
+        font-size: 1.8rem; 
+    }
+
+    header nav {
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        height: 100%;
+        width: 100%; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: center;
+        gap: 1.5rem; 
+        background-color: var(--mainColor);
+        transition: 1s; 
+        transform: translateY(-100vh); 
+    }
+
+    header .responsive_nav {
+        transform: none; 
+    }
+
+    nav .nav-close-btn {
+        position: absolute; 
+        top: 2rem; 
+        right: 2rem; 
+    }
+
+    nav .nav-close-btn:hover {
+        color: var(--hover); 
+    }
+
+    nav a {
+        font-size: 1.5rem; 
+    }
+}
