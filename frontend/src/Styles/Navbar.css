@@ -1,7 +1,19 @@
 @font-face {
-    font-family: "SharpGroteskBook20";
+    font-family: "Book20";
     src: local("SharpGroteskBook20"),
      url("../Fonts/SharpGroteskBook20.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "SemiBold15";
+    src: local("SharpGroteskSemiBold15"),
+     url("../Fonts/SharpGroteskSemiBold15.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "SemiBold20";
+    src: local("SharpGroteskSemiBold20"),
+     url("../Fonts/SharpGroteskSemiBold20.otf") format("truetype");
 }
 
 .logo { 
@@ -15,7 +27,7 @@
     padding: 0; 
     margin: 0; 
     box-sizing: border-box; 
-    font-family: 'SharpGroteskBook20';
+    font-family: 'Book20';
     background-color: var(--mainColor);
 }
 
