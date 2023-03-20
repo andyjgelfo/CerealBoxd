@@ -7,5 +7,11 @@
     "mongodb": "^5.1.0",
     "nodemon": "^2.0.21",
     "react-icons": "^4.8.0"
+    
+  },
+  "scripts": {
+    "start": "node server.js",
+    "heroku-postbuild": " NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   }
+
 }
