@@ -8,7 +8,6 @@ const client = new MongoClient(url);
 client.connect(console.log("mongodb connected"));
 
 
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use((req, res, next) => 
@@ -318,7 +317,6 @@ app.post('/api/editUser', async (req, res, next) =>
   var ret = { error: error };
   res.status(200).json(ret);
 })
-
 
 
 
