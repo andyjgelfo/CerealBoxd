@@ -1,7 +1,6 @@
 import React from 'react'; 
 import Login from '../Components/Login'; 
-import Navbar from "./Components/Navbar"; 
-import "../Styles/Login.css"; 
+import Navbar from "../Components/Navbar"; 
 
 const LoginPage = () =>
 {
@@ -13,4 +12,5 @@ const LoginPage = () =>
     ); 
 }; 
 
-export default LoginPage; 
+export default LoginPage;
+

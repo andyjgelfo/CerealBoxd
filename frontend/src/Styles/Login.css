@@ -24,6 +24,7 @@
     box-sizing: border-box; 
 }
 
+
 :root {
     --mainColor: #2C3440; 
     --secondaryColor: #F2EAC1; 
@@ -40,7 +41,7 @@
     align-items: center;
 }
 
-.loginDiv {
+#loginDiv {
     background-color: var(--mainColor);
     width: 30em; 
     height: 35em; 
@@ -67,4 +68,19 @@ input {
     width: 40%; 
     height: 3em; 
     background-color: var(--textColor2);
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s; 
+    border-radius: 0.25em;
+    cursor: pointer; 
+}
+
+#loginButton:hover {
+    transform: scale(1.25); 
+}
+
+#registerButton {
+    position: relative; 
+    bottom: -2em; 
 }

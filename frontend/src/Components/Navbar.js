@@ -1,9 +1,9 @@
 import { useRef } from "react"; 
 import { FaBars, FaTimes } from "react-icons/fa"; 
 import '../Fonts/SharpGroteskBook20.otf';
-import "../Styles/Navbar.css"
+import "../Styles/Navbar.css"; 
 
-function Navbar() {
+const Navbar = () =>{
     const navRef = useRef(); 
 
     const showNavbar = () => {
@@ -14,7 +14,7 @@ function Navbar() {
         <header>
             <img src={require('../Images/logo.png')} alt='logo' className="logo"/>
             <nav ref={navRef}>
-                <a href="../Pages/AboutUsPage.js">ABOUT US</a>
+                <a href="../Pages/AboutPage.js">ABOUT</a>
                 <a href="../Pages/CerealsPage.js">CEREALS</a>
                 <a href="../Pages/LoginPage.js">LOGIN</a>
                 <a href="../Pages/RegisterPage.js">REGISTER</a>
