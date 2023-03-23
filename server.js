@@ -3,11 +3,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const path = require('path');           
-const PORT = process.env.PORT || 5000;  
+const PORT = process.env.PORT || 6000;  
 
 const app = express();
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 6000));
 
 const url = 'mongodb+srv://Andy:yGxWWlynMTgYcdVV@cluster0.r74qhgh.mongodb.net/?retryWrites=true&w=majority';
 const MongoClient = require("mongodb").MongoClient;
@@ -51,30 +51,35 @@ app.post('/api/login', async (req, res, next) =>
 {
   // incoming: login, password
   // outgoing: id, firstName, lastName, error
-	
+
   var error = '';
 
-  const { username, password } = req.body;
+  const { login, password } = req.body;
 
-  console.log(password);
-
+  //Our specific DB is "cerealbox" and we want to access the "user" collection
   const db = client.db("cerealbox");
-  const results = await db.collection('user').find({userName:username,password:password}).toArray();
+  const results = await db.collection('user').find({userName:login,password:password}).toArray();
 
   var id = -1;
   var fn = '';
   var ln = '';
 
+  //Get login results - if there are none, declare error
   if( results.length > 0 )
   {
-    id = results[0].UserID;
-    fn = results[0].FirstName;
-    ln = results[0].LastName;
+    id = results[0]._id;
+    fn = results[0].fName;
+    ln = results[0].lName;
+  }
+  else
+  {
+    error = "Incorrect username/password";
   }
 
-  var ret = { id:id, firstName:fn, lastName:ln, error:''};
+  var ret = { id:id, fName:fn, lName:ln, error:error};
   res.status(200).json(ret);
 });
+
 
 
 app.post('/api/register', async (req, res, next) =>
