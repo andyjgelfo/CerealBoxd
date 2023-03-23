@@ -131,12 +131,12 @@ app.post('/api/searchUser', async (req, res, next) =>
 
   var error = '';
 
-  const { username} = req.body;
+  const { name} = req.body;
 
-  var _search = username.trim();
+  var _search = name.trim();
   
   const db = client.db("cerealbox");
-  const results = await db.collection('user').find({"userName":{$regex:_search+'.*', $options:'ri'}}).toArray();
+  const results = await db.collection('user').find({"name":{$regex:_search+'.*', $options:'ri'}}).toArray();
   
   var _ret = [];
   for( var i=0; i<results.length; i++ )
@@ -243,7 +243,7 @@ app.post('/api/searchCereal', async (req, res, next) =>
   var _ret = [];
   for( var i=0; i<results.length; i++ )
   {
-    _ret.push( results[i].userName );
+    _ret.push( results[i].name );
   }
   
   // var ret = {results:_ret, error:error};
