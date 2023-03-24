@@ -43,19 +43,16 @@ function Login()
 
             
             var res = JSON.parse(await response.text());
-            window.alert("stan weeekly");
 
             if( res.id <= 0 )
             {
-                window.alert("stan weeekly 1");
                 setMessage('User/Password combination incorrect');
             }
             else
             {
-                window.alert("stan weeekly 2");
                 var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
                 localStorage.setItem('user_data', JSON.stringify(user));
-                setMessage('');
+                setMessage(firstName);
             }
         }
         catch(e)
