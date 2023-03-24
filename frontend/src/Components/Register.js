@@ -52,7 +52,7 @@ function Register()
             //     setMessage('User has been added');
             // }
 
-            window.location.href = buildPath('/');
+            window.location.href = buildPath('');
         }
         catch(e)
         {

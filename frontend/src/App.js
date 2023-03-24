@@ -15,6 +15,7 @@ function App() {
        <Route path="/AboutPage" index element = {<React.Fragment><Navbar /><About /></React.Fragment>}/>
        <Route path="/CerealsPage" index element = {<React.Fragment><Navbar /><Cereals /></React.Fragment>}/>
        <Route path="/" index element={<React.Fragment><Navbar /><Login /></React.Fragment>} />
+       <Route path="/LoginPage" index element={<React.Fragment><Navbar /><Login /></React.Fragment>} />
        <Route path="/RegisterPage" index element = {<React.Fragment><Navbar /><Register /></React.Fragment>}/>
       </Routes>
     </BrowserRouter>
