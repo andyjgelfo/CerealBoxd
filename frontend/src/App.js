@@ -2,7 +2,6 @@
 
 
 import React from 'react'; 
-import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar"; 
 import Login from "./Components/Login"; 
@@ -13,8 +12,8 @@ function App() {
   return(
     <BrowserRouter>
       <Routes>
-        <Route path = "/" index element = {<LoginPage/>} />
-        <Route path = "/AboutUs" index element = {<AboutUs/>}/>
+        <Route path="/" index element = {<LoginPage />} />
+        <Route path="/AboutUs" index element = {<AboutUs />}/>
       </Routes>
     </BrowserRouter>
   ); 
