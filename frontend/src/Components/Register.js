@@ -39,6 +39,8 @@ function Register()
             
             const response = await fetch(buildPath('/api/register'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+            
+            window.alert("stan loona");
 
             
             // var res = JSON.parse(await response.text());
@@ -67,7 +69,7 @@ function Register()
 
     return(
     <div id="registerDiv">
-        <form>
+        <form onSubmit={doRegister}>
             <span id="title">REGISTER</span><br />
             {/* <input type="text" id="loginName" placeholder="Username" ref={(c) => loginName = c} /><br /> */}
             <input type="text" id="registerFirstName" placeholder="FIRST NAME" ref={(c) => registerFirstName =c}/><br />
