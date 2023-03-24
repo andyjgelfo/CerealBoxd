@@ -53,9 +53,9 @@ function Login()
                 var user = {firstName:res.fName,lastName:res.lName,id:res.id}
                 localStorage.setItem('user_data', JSON.stringify(user));
                 
-                // setMessage(JSON.stringify(user));
-                setMesage('');
-                return 'https://' + app_name +  '.herokuapp.com/Pages/AboutPage.js';
+                setMessage(JSON.stringify(user));
+                // setMessage('');
+                // window.location.href = buildPath('Pages/AboutPage.js')
             }
         }
         catch(e)

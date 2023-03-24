@@ -3,13 +3,18 @@
 import React from 'react'; 
 import Navbar from "./Components/Navbar"; 
 import Login from "./Components/Login"; 
+import AboutUs from "./pages/AboutPage";
 
 function App() {
   return(
-    <React.Fragment>
-      <Navbar />
-      <Login />
-    </React.Fragment>
+    <BrowserRouter>
+      <Routes>
+        <Route path = "/" index element = {
+          <Navbar />
+          <Login />} />
+        <Route path = "/AboutUs" index element = {<AboutUs/>}/>
+      </Routes>
+    </BrowserRouter>
   ); 
 
 }
