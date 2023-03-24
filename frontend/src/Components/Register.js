@@ -36,7 +36,7 @@ function Register()
 
         try
         {    
-            setMessage(JSON.stringify(js));
+            window.alert(JSON.stringify(js));
             const response = await fetch(buildPath('/api/register'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
             
