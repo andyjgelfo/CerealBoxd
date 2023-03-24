@@ -3,6 +3,7 @@ import "../Styles/Register.css"
 
 function Register()
 {
+    return(
     <div id="registerDiv">
         <form>
             <span id="title">REGISTER</span><br />
@@ -13,6 +14,7 @@ function Register()
             <input type="submit" id="registerButton" class="buttons" value = "SIGN UP" onclick="window.location.href='../Pages/LoginPage.js';"/>
         </form>
     </div>
+    );
 };
 
 export default Register;

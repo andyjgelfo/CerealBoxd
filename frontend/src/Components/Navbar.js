@@ -15,9 +15,9 @@ const Navbar = () =>{
             <img src={require('../Images/logo.png')} alt='logo' className="logo"/>
             <nav ref={navRef}>
                 <a href="AboutPage">ABOUT</a>
-                <a href="../Pages/CerealsPage.js">CEREALS</a>
+                <a href="CerealsPage">CEREALS</a>
                 <a href="/">LOGIN</a>
-                <a href="../Pages/RegisterPage.js">REGISTER</a>
+                <a href="RegisterPage">REGISTER</a>
                 <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                     <FaTimes/>
                 </button>
