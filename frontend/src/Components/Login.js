@@ -74,7 +74,7 @@ function Login()
                 <input type="submit" id="loginButton" class="buttons" value = "SIGN IN" onClick={doLogin} />
                 <button id="registerButton" onclick="window.location.href='../Pages/RegisterPage.js';">Don't Have An Account? Register Here!</button>
             </form>
-            <span id="loginResult"></span>
+            <span id="loginResult">{message}</span>
         </div>
     );
 
