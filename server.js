@@ -9,6 +9,7 @@ const app = express();
 
 app.set('port', (process.env.PORT || 6000));
 
+require('dotenv').config();
 const url = 'mongodb+srv://Andy:yGxWWlynMTgYcdVV@cluster0.r74qhgh.mongodb.net/?retryWrites=true&w=majority';
 const MongoClient = require("mongodb").MongoClient;
 const client = new MongoClient(url);
@@ -261,7 +262,7 @@ app.post('/api/addReview', async (req, res, next) =>
 
   try
   {
-    const db = client.db("cerealbox").insertOne(newReview);
+    const db = client.db("cerealbox").collection('reviews').insertOne(newReview);
   }
   catch(e)
   {
