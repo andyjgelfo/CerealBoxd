@@ -30,14 +30,14 @@ function Register()
     {
         event.preventDefault();
 
-        var obj = {registerFirstName:registerFirstName, registerLastName:registerLastName, registerUsername:registerUsername,registerPassword:registerPassword};
+        var obj = {fName:registerFirstName.value, lName:registerLastName.value, userName:registerUsername.value,password:registerPassword.value};
 
         var js = JSON.stringify(obj);
 
         try
         {    
             
-            const response = await fetch(buildPath('api/register'),
+            const response = await fetch(buildPath('/api/register'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
             
@@ -71,10 +71,10 @@ function Register()
             <span id="title">REGISTER</span><br />
             {/* <input type="text" id="loginName" placeholder="Username" ref={(c) => loginName = c} /><br /> */}
             <input type="text" id="registerFirstName" placeholder="FIRST NAME" ref={(c) => registerFirstName =c}/><br />
-            <input type="text" id="registerLastName" placeholder="LAST NAME"/><br />
-            <input type="text" id="registerUsername" placeholder="USERNAME"/><br />
+            <input type="text" id="registerLastName" placeholder="LAST NAME" ref={(c) => registerLastName =c}/><br />
+            <input type="text" id="registerUsername" placeholder="USERNAME" ref={(c) => registerUsername =c}/><br />
             {/* <input type="text" id="registerEMAIL" placeholder="EMAIL"/><br /> */}
-            <input type="password" id="registerPassword" placeholder="PASSWORD" /><br />
+            <input type="password" id="registerPassword" placeholder="PASSWORD" ref={(c) => registerPassword =c}/><br />
             {/* <input type="password" id="retypePassword" placeholder="RETYPE PASSWORD" /><br /> */}
             <input type="submit" id="registerButton" class="buttons" value = "SIGN UP" onclick={doRegister}/>
         </form>
