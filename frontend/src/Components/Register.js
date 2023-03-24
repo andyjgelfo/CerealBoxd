@@ -40,32 +40,26 @@ function Register()
             const response = await fetch(buildPath('/api/register'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
             
-            window.alert("stan loona");
+            let txt = await response.text();
+            let res = JSON.parse(txt);
 
-            
-            // var res = JSON.parse(await response.text());
+            if( res.error.length > 0 )
+            {
+                setMessage( "API Error:" + res.error );
+            }
+            else
+            {
+                setMessage('User has been added');
+            }
 
-            // if( res.id <= 0 )
-            // {
-            //     setMessage('User/Password combination incorrect');
-            // }
-            // else
-            // {
-            //     var user = {firstName:res.fName,lastName:res.lName,id:res.id}
-            //     localStorage.setItem('user_data', JSON.stringify(user));
-                
-            //     // setMessage(JSON.stringify(user));
-            //     setMessage('');
-            //     window.location.href = buildPath('AboutPage');
-            // }
             window.location.href = buildPath('/');
         }
         catch(e)
         {
-            alert(e.toString());
-            return;
+            setMessage(e.toString());
         }
-    }
+    
+    };
 
     return(
     <div id="registerDiv">
