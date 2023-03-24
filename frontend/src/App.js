@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar"; 
 import Login from "./Components/Login"; 
 import AboutUs from "./Pages/AboutPage";
+import LoginPage from "./Pages/LoginPage";
 
 function App() {
   return(
