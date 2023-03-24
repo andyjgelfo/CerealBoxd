@@ -10,8 +10,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path = "/" index element = {
-          <Navbar />
-          <Login />} />
+          <div>
+            <Navbar />
+            <Login />
+          </div>} />
         <Route path = "/AboutUs" index element = {<AboutUs/>}/>
       </Routes>
     </BrowserRouter>
