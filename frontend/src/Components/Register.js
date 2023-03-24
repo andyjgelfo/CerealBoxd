@@ -40,17 +40,17 @@ function Register()
             const response = await fetch(buildPath('/api/register'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
             
-            let txt = await response.text();
-            let res = JSON.parse(txt);
+            // let txt = await response.text();
+            // let res = JSON.parse(txt);
 
-            if( res.error.length > 0 )
-            {
-                setMessage( "API Error:" + res.error );
-            }
-            else
-            {
-                setMessage('User has been added');
-            }
+            // if( res.error.length > 0 )
+            // {
+            //     setMessage( "API Error:" + res.error );
+            // }
+            // else
+            // {
+            //     setMessage('User has been added');
+            // }
 
             window.location.href = buildPath('/');
         }
