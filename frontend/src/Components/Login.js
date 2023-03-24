@@ -72,7 +72,7 @@ function Login()
                 <input type="text" id="loginName" placeholder="Username" ref={(c) => loginName = c} /><br />
                 <input type="password" id="loginPassword" placeholder="Password" ref={(c) => loginPassword = c} /><br />
                 <input type="submit" id="loginButton" class="buttons" value = "SIGN IN" onClick={doLogin} />
-                <button id="registerButton" onclick="window.location.href='../Pages/RegisterPage.js';">Don't Have An Account? Register Here!</button>
+                <button id="registerButton" onclick="window.location.href='/Register';">Don't Have An Account? Register Here!</button>
             </form>
             <span id="loginResult">{message}</span>
         </div>

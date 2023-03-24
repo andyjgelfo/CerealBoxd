@@ -7,6 +7,7 @@ import Navbar from "./Components/Navbar";
 import Login from "./Components/Login"; 
 import AboutPage from "./Pages/AboutPage";
 import LoginPage from './Pages/LoginPage';
+import RegisterPage from './Pages/RegisterPage';
 
 function App() {
   return(
@@ -17,6 +18,7 @@ function App() {
       <Login />
     </React.Fragment>} />
         <Route path="/AboutPage" index element = {<AboutPage />}/>
+        <Route path="/Register" index element = {<RegisterPage />}/>
       </Routes>
     </BrowserRouter>
     // <React.Fragment>
