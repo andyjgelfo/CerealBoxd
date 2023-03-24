@@ -3,7 +3,7 @@
 import React from 'react'; 
 import Navbar from "./Components/Navbar"; 
 import Login from "./Components/Login"; 
-import AboutUs from "./pages/AboutPage";
+import AboutUs from "./Pages/AboutPage";
 
 function App() {
   return(
