@@ -18,7 +18,7 @@ function App() {
       <Login />
     </React.Fragment>} />
         <Route path="/AboutPage" index element = {<AboutPage />}/>
-        <Route path="/Register" index element = {<RegisterPage />}/>
+        <Route path="/RegisterPage" index element = {<RegisterPage />}/>
       </Routes>
     </BrowserRouter>
     // <React.Fragment>

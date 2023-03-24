@@ -17,7 +17,7 @@ const Navbar = () =>{
                 <a href="AboutPage">ABOUT</a>
                 <a href="../Pages/CerealsPage.js">CEREALS</a>
                 <a href="/">LOGIN</a>
-                <a href="Register">REGISTER</a>
+                <a href="RegisterPage">REGISTER</a>
                 <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                     <FaTimes/>
                 </button>
