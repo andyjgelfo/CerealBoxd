@@ -30,14 +30,14 @@ function Register()
     {
         event.preventDefault();
 
-        var obj = {fName:registerFirstName.value, lName:registerLastName.value, userName:registerUsername.value,password:registerPassword.value};
+        var obj = {fName:registerFirstName.value,lName:registerLastName.value,userName:registerUsername.value,password:registerPassword.value};
 
         var js = JSON.stringify(obj);
 
         try
         {    
             window.alert(JSON.stringify(js));
-            const response = await fetch(buildPath('/api/register'),
+            const response = await fetch(buildPath('api/register'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
             
             // let txt = await response.text();
