@@ -59,7 +59,7 @@ function Register()
             setMessage(e.toString());
         }
     
-    };
+    }
 
     return(
     <div id="registerDiv">
