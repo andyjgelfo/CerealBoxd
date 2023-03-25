@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import "../Styles/Login.css"; 
 import { useEffect } from 'react'; 
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 function Login()
 {
+    // Page Title
     useEffect(() => {
         document.title = 'Login';
     }, []);
@@ -28,21 +30,15 @@ function Login()
 
     const doLogin = async event =>
     {
-        
         event.preventDefault();
-        
-
         var obj = {login:loginName.value,password:loginPassword.value};
-        
         var js = JSON.stringify(obj);
-
 
         try
         {    
             const response = await fetch(buildPath('api/login'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
-            
             var res = JSON.parse(await response.text());
 
             if( res.id <= 0 )
@@ -67,15 +63,17 @@ function Login()
     }
 
     return(
-        <div id="loginDiv">
-             <form onSubmit={doLogin}>
-                <span id="title">LOGIN</span><br />
-                <input type="text" id="loginName" placeholder="Username" ref={(c) => loginName = c} /><br />
-                <input type="password" id="loginPassword" placeholder="Password" ref={(c) => loginPassword = c} /><br />
-                <input type="submit" id="loginButton" class="buttons" value = "SIGN IN" onClick={doLogin} />
-            </form>
-            <a href="/RegisterPage"><button id="registerButton">Don't Have An Account? Register Here!</button></a>
-            <span id="loginResult">{message}</span>
+        <div class='wrapper d-flex align-items-center justify-content-center'>
+            <div class='container align-items-center justify-content-center' id="loginDiv">
+                <form onSubmit={doLogin}>
+                    <center><span id= "title">LOGIN</span></center>
+                    <center><input type="text" id="loginName" placeholder='USERNAME' ref={(c) => loginName = c} /><br /></center>
+                    <center><input type="password" id="loginPassword" placeholder="PASSWORD" ref={(c) => loginPassword = c} /><br /></center>
+                    <center><input type="submit" id="loginButton" class="buttons" value="SIGN IN" onClick={doLogin} /></center>
+                    <center><a href="/RegisterPage"><span id="noAccount">Don't Have An Account? Register Here!</span></a></center>
+                    <span id="loginResult">{message}</span>
+                </form>
+            </div>
         </div>
     );
 };
