@@ -32,7 +32,7 @@
     --hover: #40bcf4;  
 }
 
-.wrapper {
+.wrapper-login {
     margin-top: 6em; 
 }
 
@@ -60,9 +60,12 @@ center {
 }
 
 #loginName {
-    font-size: 1.6rem;
+    width: 16em; 
+    font-family: 'SemiBold15';
+    font-size: 1.8rem;
+    text-align: center;
     color: #1C2143; 
-    height: 3.2em; 
+    height: 3em; 
     padding-top: 0.2em; 
     padding-bottom: 0.2em; 
     background-color: white;
@@ -74,9 +77,12 @@ center {
 }
 
 #loginPassword {
-    font-size: 1.6rem;
+    width: 16em; 
+    font-family: 'SemiBold15';
+    font-size: 1.8rem;
+    text-align: center;
     color: #1C2143; 
-    height: 3.2em; 
+    height: 3em; 
     padding-top: 0.2em; 
     padding-bottom: 0.2em; 
     background-color: white;

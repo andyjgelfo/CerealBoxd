@@ -63,7 +63,7 @@ function Login()
     }
 
     return(
-        <div class='wrapper d-flex align-items-center justify-content-center'>
+        <div class='wrapper-login d-flex align-items-center justify-content-center'>
             <div class='container align-items-center justify-content-center' id="loginDiv">
                 <form onSubmit={doLogin}>
                     <center><span id= "title">LOGIN</span></center>

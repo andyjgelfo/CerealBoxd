@@ -9,7 +9,7 @@ function About()
 
     return(
         <div>
-            <h1>It worked!</h1>
+            <h1>About</h1>
         </div>
     );
 
