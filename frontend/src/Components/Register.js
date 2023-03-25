@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import "../Styles/Register.css"
+import { useEffect } from 'react'; 
 
 function Register()
 {
+    useEffect(() => {
+        document.title = 'Register';
+    }, []);
+
     let user = '';
     let search = '';
     let registerFirstName;

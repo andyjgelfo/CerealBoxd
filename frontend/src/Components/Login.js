@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import "../Styles/Login.css"; 
-
+import { useEffect } from 'react'; 
 
 function Login()
 {
-    // var loginName; 
-    // var loginPassword; 
+    useEffect(() => {
+        document.title = 'Login';
+    }, []);
+
     let loginName;
     let loginPassword;
 
@@ -24,7 +26,6 @@ function Login()
         }
     }
 
-
     const doLogin = async event =>
     {
         
@@ -38,7 +39,6 @@ function Login()
 
         try
         {    
-            
             const response = await fetch(buildPath('api/login'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 

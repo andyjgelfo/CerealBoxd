@@ -12,11 +12,11 @@ const Navbar = () =>{
 
     return (
         <header>
-            <img src={require('../Images/logo.png')} alt='logo' className="logo"/>
+            <a href="/"><img src={require('../Images/logo.png')} alt='logo' className="logo"/></a>
             <nav ref={navRef}>
                 <a href="AboutPage">ABOUT</a>
                 <a href="CerealsPage">CEREALS</a>
-                <a href="/">LOGIN</a>
+                <a href="LoginPage">LOGIN</a>
                 <a href="RegisterPage">REGISTER</a>
                 <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                     <FaTimes/>
