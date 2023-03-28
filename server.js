@@ -47,11 +47,21 @@ if (process.env.NODE_ENV === 'production')
   });
 }
 
+app.post('/api/addDB', async(req, res, next) =>
+{
+  const db = client.db("cerealbox");
+  const results = db.collection('user').updateMany({}, {$set:{"email": null}});
+  res.status(200)
+}
+);
 
 app.post('/api/login', async (req, res, next) => 
 {
   // incoming: login, password
   // outgoing: id, firstName, lastName, error
+
+  	// "login" : "Chuu",
+  	// "password" : "StanLoona123"
 
   var error = '';
 
@@ -92,9 +102,9 @@ app.post('/api/register', async (req, res, next) =>
   // 	"password" : "StanLoona123"
 
 
-  const { fName, lName, userName, password } = req.body;
+  const { fName, lName, userName, password, email } = req.body;
 
-  const newUser = {fName:fName, lName:lName, userName:userName, password: password};
+  const newUser = {fName:fName, lName:lName, userName:userName, password: password, email: email};
   var error = '';
   var dupe = '';
   var _search = userName.trim();
@@ -103,16 +113,17 @@ app.post('/api/register', async (req, res, next) =>
   {
     const db = client.db("cerealbox");
     const userBase = db.collection('user');
-    dupe = await db.collection('user').find({"userName":{$regex:_search+'.*', $options:'ri'}}).toArray();
+    // dupe = await db.collection('user').find({"userName":{$regex:_search+'.*', $options:'ri'}}).toArray();
     
-    if (dupe != '')
-    {
-      e = "User with this username already exist, please try again";
-      throw(e);
-    }
-    else {
-      const result = userBase.insertOne(newUser);
-    }
+    // if (dupe != '')
+    // {
+    //   e = "User with this username already exist, please try again";
+    //   throw(e);
+    // }
+    // else {
+    //   const result = userBase.insertOne(newUser);
+    // }
+    const result = userBase.insertOne(newUser);
     // console.log(result);
   }
   catch(e)
@@ -132,12 +143,12 @@ app.post('/api/searchUser', async (req, res, next) =>
 
   var error = '';
 
-  const { name} = req.body;
+  const {name} = req.body;
 
   var _search = name.trim();
   
   const db = client.db("cerealbox");
-  const results = await db.collection('user').find({"name":{$regex:_search+'.*', $options:'ri'}}).toArray();
+  const results = await db.collection('user').find({"userName":{$regex:_search+'.*', $options:'ri'}}).toArray();
   
   var _ret = [];
   for( var i=0; i<results.length; i++ )
@@ -148,6 +159,7 @@ app.post('/api/searchUser', async (req, res, next) =>
   // var ret = {results:_ret, error:error};
   var ret = {results:results, error:error};
   res.status(200).json(ret);
+
 });
 
 app.post('/api/removeUser', async (req, res, next) => 
@@ -346,6 +358,34 @@ app.post('/api/editUser', async (req, res, next) =>
   var ret = { error: error };
   res.status(200).json(ret);
 })
+
+app.post('/api/sortWillKill', async (req, res, next) => 
+{
+  // incoming: userId, search
+  // outgoing: results[], error
+
+  var error = '';
+
+  // const {name} = req.body;
+
+  // var _search = name.trim();
+  
+  const db = client.db("cerealbox").collection('box');
+  const results = await db.find().sort({"willItKillYou":-1}).toArray();
+
+
+  // const results =  db
+  
+  var _ret = [];
+  for( var i=0; i<results.length; i++ )
+  {
+    _ret.push( results[i].name );
+  }
+  
+  // var ret = {results:_ret, error:error};
+  var ret = {results:results, error:error};
+  res.status(200).json(ret);
+});
 
 
 app.listen(PORT, () => 
