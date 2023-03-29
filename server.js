@@ -136,53 +136,6 @@ app.post('/api/register', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
-app.post('/api/searchUser', async (req, res, next) => 
-{
-  // incoming: userId, search
-  // outgoing: results[], error
-
-  var error = '';
-
-  const {name} = req.body;
-
-  var _search = name.trim();
-  
-  const db = client.db("cerealbox");
-  const results = await db.collection('user').find({"userName":{$regex:_search+'.*', $options:'ri'}}).toArray();
-  
-  var _ret = [];
-  for( var i=0; i<results.length; i++ )
-  {
-    _ret.push( results[i].userName );
-  }
-  
-  // var ret = {results:_ret, error:error};
-  var ret = {results:results, error:error};
-  res.status(200).json(ret);
-
-});
-
-app.post('/api/removeUser', async (req, res, next) => 
-{
-  var error = '';
-  var ObjectId = require('mongodb').ObjectId;
-
-  const {_id} = req.body;
-
-  try
-  {
-    const db = client.db("cerealbox");
-    dupe = await db.collection('user').deleteOne({_id: new ObjectId(_id)});
-  }
-  catch(e)
-  {
-    error = e.toString();
-  }
-
-  var ret = { error: error };
-  res.status(200).json(ret);
-});
-
 app.post('/api/addCereal', async (req, res, next) =>
 {
 
@@ -218,52 +171,6 @@ app.post('/api/addCereal', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
-app.post('/api/removeCereal', async (req, res, next) => 
-{
-  var error = '';
-  var ObjectId = require('mongodb').ObjectId;
-
-  const {_id} = req.body;
-
-  try
-  {
-    const db = client.db("cerealbox");
-    dupe = await db.collection('box').deleteOne({_id: new ObjectId(_id)});
-  }
-  catch(e)
-  {
-    error = e.toString();
-  }
-
-  var ret = { error: error };
-  res.status(200).json(ret);
-});
-
-app.post('/api/searchCereal', async (req, res, next) => 
-{
-  // incoming: userId, search
-  // outgoing: results[], error
-
-  var error = '';
-
-  const { name} = req.body;
-
-  var _search = name.trim();
-  
-  const db = client.db("cerealbox");
-  const results = await db.collection('box').find({"name":{$regex:_search+'.*', $options:'ri'}}).toArray();
-  
-  var _ret = [];
-  for( var i=0; i<results.length; i++ )
-  {
-    _ret.push( results[i].name );
-  }
-  
-  // var ret = {results:_ret, error:error};
-  var ret = {results:results, error:error};
-  res.status(200).json(ret);
-});
-
 app.post('/api/addReview', async (req, res, next) =>
 {
 
@@ -275,26 +182,6 @@ app.post('/api/addReview', async (req, res, next) =>
   try
   {
     const db = client.db("cerealbox").collection('reviews').insertOne(newReview);
-  }
-  catch(e)
-  {
-    error = e.toString();
-  }
-
-  var ret = { error: error };
-  res.status(200).json(ret);
-});
-
-app.post('/api/removeReview', async (req, res, next) => 
-{
-  var error = '';
-  var ObjectId = require('mongodb').ObjectId;
-
-  const {_id} = req.body;
-
-  try
-  {
-    const db = client.db("cerealbox").collection('reviews').deleteOne({_id: new ObjectId(_id)});
   }
   catch(e)
   {
@@ -359,34 +246,6 @@ app.post('/api/editUser', async (req, res, next) =>
   res.status(200).json(ret);
 })
 
-app.post('/api/sortWillKill', async (req, res, next) => 
-{
-  // incoming: userId, search
-  // outgoing: results[], error
-
-  var error = '';
-
-  // const {name} = req.body;
-
-  // var _search = name.trim();
-  
-  const db = client.db("cerealbox").collection('box');
-  const results = await db.find().sort({"willItKillYou":-1}).toArray();
-
-
-  // const results =  db
-  
-  var _ret = [];
-  for( var i=0; i<results.length; i++ )
-  {
-    _ret.push( results[i].name );
-  }
-  
-  // var ret = {results:_ret, error:error};
-  var ret = {results:results, error:error};
-  res.status(200).json(ret);
-});
-
 app.post('/api/sort', async (req, res, next) => 
 {
   // incoming: userId, search
@@ -415,6 +274,54 @@ app.post('/api/sort', async (req, res, next) =>
   
   // var ret = {results:_ret, error:error};
   var ret = {results:results, error:error};
+  res.status(200).json(ret);
+});
+
+app.post('/api/search', async (req, res, next) => 
+{
+  // incoming: userId, search
+  // outgoing: results[], error
+
+  var error = '';
+
+  const {collection, column, target} = req.body;
+
+  var _collection = collection.trim();
+  var _column = column.trim();
+  var _target = target.trim();
+  
+  const db = client.db("cerealbox");
+  const results = await db.collection(_collection).find({[_column]:{$regex:_target+'.*', $options:'ri'}}).toArray();
+  
+  var _ret = [];
+  for( var i=0; i<results.length; i++ )
+  {
+    _ret.push( results[i].name );
+  }
+  
+  // var ret = {results:_ret, error:error};
+  var ret = {results:results, error:error};
+  res.status(200).json(ret);
+});
+
+app.post('/api/remove', async (req, res, next) => 
+{
+  var error = '';
+  var ObjectId = require('mongodb').ObjectId;
+
+  const {collection, _id} = req.body;
+  var _collection = collection.trim();
+
+  try
+  {
+    const db = client.db("cerealbox").collection(_collection).deleteOne({_id: new ObjectId(_id)});
+  }
+  catch(e)
+  {
+    error = e.toString();
+  }
+
+  var ret = { error: error };
   res.status(200).json(ret);
 });
 
