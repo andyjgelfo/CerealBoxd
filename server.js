@@ -387,6 +387,37 @@ app.post('/api/sortWillKill', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
+app.post('/api/sort', async (req, res, next) => 
+{
+  // incoming: userId, search
+  // outgoing: results[], error
+
+  var error = '';
+
+  // ascending: 1, descending: -1
+  const {collection, column, order} = req.body;
+
+  var _collection = collection.trim();
+  var _column = column.trim();
+  
+  
+  const db = client.db("cerealbox").collection(_collection);
+  const results = await db.find().sort({[_column]:[order]}).toArray();
+
+
+  // const results =  db
+  
+  var _ret = [];
+  for( var i=0; i<results.length; i++ )
+  {
+    _ret.push( results[i].name );
+  }
+  
+  // var ret = {results:_ret, error:error};
+  var ret = {results:results, error:error};
+  res.status(200).json(ret);
+});
+
 
 app.listen(PORT, () => 
 {
