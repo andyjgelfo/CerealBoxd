@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const path = require('path');           
+const { ObjectId } = require('mongodb');
 const PORT = process.env.PORT || 6000;  
 
 const app = express();
@@ -50,7 +51,7 @@ if (process.env.NODE_ENV === 'production')
 app.post('/api/addDB', async(req, res, next) =>
 {
   const db = client.db("cerealbox");
-  const results = db.collection('user').updateMany({}, {$set:{"email": null}});
+  const results = db.collection('box').updateMany({}, {$set:{"rating": null}});
   res.status(200)
 }
 );
@@ -174,9 +175,9 @@ app.post('/api/addCereal', async (req, res, next) =>
 app.post('/api/addReview', async (req, res, next) =>
 {
 
-  const {cerealName, reviewerName, rating, body} = req.body;
+  const {cerealName, reviewerName, rating, body, cerealID} = req.body;
 
-  const newReview = {cerealName:cerealName, reviewerName:reviewerName, rating:rating, body:body};
+  const newReview = {cerealName:cerealName, reviewerName:reviewerName, rating:rating, body:body, cerealID: new ObjectId(cerealID)};
   var error = '';
 
   try
@@ -323,6 +324,76 @@ app.post('/api/remove', async (req, res, next) =>
 
   var ret = { error: error };
   res.status(200).json(ret);
+});
+
+app.post('/api/editCerealID', async (req, res, next) =>
+{
+  const {_id, _cerealID} = req.body;
+  var ObjectId = require('mongodb').ObjectId;
+  var error = '';
+
+  try
+  {
+    const rev = client.db("cerealbox").collection('reviews');
+    const filter = {_id: new ObjectId(_id)};
+    const edit = {
+      $set: {
+        cerealID: new ObjectId(_cerealID)
+      },
+    };
+
+    const result = await rev.updateOne(filter, edit);
+  }
+  catch(e)
+  {
+    error = e.toString();
+  }
+
+  var ret = { error: error };
+  res.status(200).json(ret);
+})
+
+// what this does is that for each cereal, it gets the rating based on the average review score of corresponding cereal
+app.post('/api/setAvgReview', async (req, res, next) =>
+{
+  var error = '';
+  var avg = '';
+
+
+  const box = client.db("cerealbox").collection('box');
+  const rev = client.db("cerealbox").collection('reviews');
+
+
+  let result = await rev.aggregate([
+    {
+      $group: {
+        _id: "$cerealID",
+        avgReview: {$avg: "$rating"}
+      }
+    }
+  ]).toArray();
+
+  let i = 0;
+  while (i < result.length)
+  {
+    
+    let id = result[i]._id;
+    let average = result[i].avgReview
+
+    let filter = {_id: new ObjectId(id)};
+    let edit = {
+      $set: {
+        rating: average
+      },
+    };
+
+    let edited = await box.updateOne(filter, edit);
+    i++;
+  }
+
+  var ret = {result: result };
+  res.status(200).json(ret);
+
 });
 
 
