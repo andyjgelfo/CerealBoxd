@@ -1,3 +1,17 @@
+/* Article Description */ 
+@font-face {
+  font-family: "Book20";
+  src: local("SharpGroteskBook20"),
+   url("../Fonts/SharpGroteskBook20.otf") format("truetype");
+}
+
+/* Headers & Article Titles */ 
+@font-face {
+  font-family: "SemiBold15";
+  src: local("SharpGroteskSemiBold15"),
+   url("../Fonts/SharpGroteskSemiBold15.otf") format("truetype");
+}
+
 .articles {
     display: flex;
     flex-direction: row;
@@ -5,14 +19,43 @@
     align-items: flex-start;
     justify-content: space-evenly;
   }
-  
+
+figure {
+  border-radius: 10px;
+}
+
+h1 {
+  color: #ffffff;
+  font-family: "SemiBold15";
+  font-size: larger;
+  padding-top: 5%;
+  text-align: center;
+}
+
+/*
+Busted ass divider line
+hr {
+  background-color: #0a5ffc;
+  height: 10px;
+  width:50%;
+  padding-left: 30px;
+  text-align: center;
+}
+*/
+
+.banner {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+} 
   .article-wrapper {
     max-width: 400px;
     margin-bottom: 40px;
     padding: 20px;
     background-color: rgb(244, 220, 175);
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    border-radius: 10px;
   }
   
   .article-wrapper:hover {
@@ -21,19 +64,16 @@
   
   .article-wrapper h2 {
     color: #ffffff;
+    font-family: "SemiBold15";
     margin-top: 0;
     margin-bottom: 20px;
     font-size: 1.5rem;
     font-weight: 700;
-
-  }
-
-  .article-body {
-    border-radius: 10px;
   }
   
   .article-wrapper p {
     color: #ffffff;
+    font-family: "Book20";
     margin-top: 0;
     margin-bottom: 20px;
     font-size: 1rem;
@@ -43,12 +83,13 @@
   .article-wrapper img {
     width: 100%;
     height: auto;
-    border-radius: 0px;
+    border-radius: 10px;
   }
   
   .read-more {
     display: inline-block;
     margin-top: 20px;
+    font-family: "Book20";
     font-size: 1rem;
     font-weight: 700;
     text-decoration: none;
