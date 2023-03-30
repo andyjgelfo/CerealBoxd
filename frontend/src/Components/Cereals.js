@@ -41,8 +41,9 @@ function Cereals()
                 cerealData = JSON.parse(await response.text()); 
 
                 alert("We're in try"); 
-                
-                setCereal(cerealData); 
+                alert(cerealData[1]); 
+
+                //setCereal(cerealData); 
 
                 //cerealData = await response.json(); 
 
@@ -52,7 +53,7 @@ function Cereals()
             }
 
             //setAllUsers(userData.results); 
-            //setCereal(cerealData); 
+            setCereal(cerealData); 
         })(); 
     }, []); 
 
