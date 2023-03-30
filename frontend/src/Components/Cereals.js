@@ -49,7 +49,7 @@ function Cereals()
             }
 
             //setAllUsers(userData.results); 
-            // setCereal(cerealData); 
+            setCereal(cerealData.results); 
         })(); 
     }, []); 
 
