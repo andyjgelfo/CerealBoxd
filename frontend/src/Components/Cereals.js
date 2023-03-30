@@ -40,20 +40,16 @@ function Cereals()
 
                 cerealData = JSON.parse(await response.text()); 
 
-                alert("We're in try"); 
-                alert(cerealData[1]); 
-
                 //setCereal(cerealData); 
 
                 //cerealData = await response.json(); 
 
             } catch (error) {
-                alert(error); 
                 cerealData = []; 
             }
 
             //setAllUsers(userData.results); 
-            setCereal(cerealData); 
+            // setCereal(cerealData); 
         })(); 
     }, []); 
 
