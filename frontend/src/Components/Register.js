@@ -97,6 +97,7 @@ function Register()
                     <center><input type="password" id="registerPassword" placeholder="PASSWORD" ref={(c) => registerPassword =c}/><br /></center>
                     <center><input type="password" id="retypePassword" placeholder="RETYPE PASSWORD" ref={(c) => registerRetype =c}/><br /></center>
                     <center><input type="submit" id="registerButton" class="buttons" value = "SIGN UP" onclick={doRegister}/></center>
+                    <span id="registerResult">{message}</span>
                 </form>
             </div>
         </div>
