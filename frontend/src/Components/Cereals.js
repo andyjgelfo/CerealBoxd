@@ -1,8 +1,8 @@
 import React from 'react';
 import "../Styles/Cereals.css"; 
-import { useEffect } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import CerealCard from '../Components/CerealCard'; 
+import CerealCard from '../Components/CerealCard'; 
 
 function Cereals()
 {
@@ -11,45 +11,47 @@ function Cereals()
         document.title = 'Cereals';
     }, []);
 
-    // //const [allUsers, setAllUsers] = useState([]); 
-    // const [cereal, setCereal] = useState([]); 
+    //const [allUsers, setAllUsers] = useState([]); 
+    const [cereal, setCereal] = useState([]); 
 
-    // let cerealData; 
+    let cerealData; 
 
-    // const app_name = 'cerealboxd'
-    // function buildPath(route)
-    // {
-    //     if (process.env.NODE_ENV === 'production') 
-    //     {
-    //         return 'https://' + app_name +  '.herokuapp.com/' + route;
-    //     }
-    //     else
-    //     {        
-    //         return 'http://localhost:6000/' + route;
-    //     }
-    // }
+    const app_name = 'cerealboxd'
+    function buildPath(route)
+    {
+        if (process.env.NODE_ENV === 'production') 
+        {
+            return 'https://' + app_name +  '.herokuapp.com/' + route;
+        }
+        else
+        {        
+            return 'http://localhost:6000/' + route;
+        }
+    }
 
-    // useEffect(() => {
-    //     (async () => {
-    //         var obj = {collection:"box",column:"name",target:''};
-    //         var js = JSON.stringify(obj); 
+    useEffect(() => {
+        (async () => {
+            var obj = {collection:"box",column:"name",target:''};
+            var js = JSON.stringify(obj); 
 
-    //         try {
-    //             const response = await fetch(buildPath('api/search'),
-    //             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+            try {
+                const response = await fetch(buildPath('api/search'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
-    //             // cerealData = JSON.parse(await repsonse.text()); 
-    //             cerealData = await response.json(); 
+                cerealData = JSON.parse(await response.text()); 
 
-    //         } catch (error) {
-    //             console.log(error); 
-    //             cerealData = []; 
-    //         }
+                alert("We're in try"); 
+                //cerealData = await response.json(); 
 
-    //         //setAllUsers(userData.results); 
-    //         setCereal(cerealData); 
-    //     })(); 
-    // }, []); 
+            } catch (error) {
+                alert(error); 
+                cerealData = []; 
+            }
+
+            //setAllUsers(userData.results); 
+            setCereal(cerealData); 
+        })(); 
+    }, []); 
 
     // const filterCards = event => {
     //     const value = event.target.value.toLowerCase(); 
@@ -65,11 +67,11 @@ function Cereals()
 
             <input className="searchBar" placeholder="SEARCH..." /*onInput={filterCards}*/ />
      
-            {/* <div className="cardContainer">
+            <div className="cardContainer">
                 {cereal.map((box, index) => (
                     <CerealCard cerealData={box} key={index}/>
                 ))}
-            </div> */}
+            </div>
         </div>
     );
 };
