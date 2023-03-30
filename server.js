@@ -137,6 +137,41 @@ app.post('/api/register', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
+app.post('/api/checkUsername', async (req, res, next) => 
+{
+  const {username} = req.body;
+  var error = '';
+  var dupe = '';
+  var _search = username.trim();
+
+  try
+  {
+    const db = client.db("cerealbox");
+    dupe = await db.collection('user').find({"userName":{$regex:_search+'.*', $options:'ri'}}).toArray();
+
+    i = 0;
+    while (i < dupe.length)
+    {
+      if (username.toLowerCase() === dupe[i].userName.toLowerCase())
+      {
+        ret = dupe[i].userName
+        break;
+      }
+      i++;
+    }
+
+
+  }
+  catch(e)
+  {
+    error = e.toString();
+  }
+  
+
+  var ret = { error: error, ret:ret };
+  res.status(200).json(ret);
+});
+
 app.post('/api/addCereal', async (req, res, next) =>
 {
 
