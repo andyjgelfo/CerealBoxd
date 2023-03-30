@@ -1,0 +1,71 @@
+@font-face {
+    font-family: "Book20";
+    src: local("SharpGroteskBook20"),
+     url("../Fonts/SharpGroteskBook20.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "SemiBold15";
+    src: local("SharpGroteskSemiBold15"),
+     url("../Fonts/SharpGroteskSemiBold15.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "SemiBold20";
+    src: local("SharpGroteskSemiBold20"),
+     url("../Fonts/SharpGroteskSemiBold20.otf") format("truetype");
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --mainColor: #2C3440; 
+    --secondaryColor: #F2EAC1; 
+    --textColor1: white; 
+    --textColor2: #1C2143;
+    --hover: #40bcf4;  
+}
+
+.title {
+    font-family: 'SemiBold20';
+    color: white; 
+    font-size: 2.2rem;
+    margin-bottom: 1.4em;
+    align-items: center;
+    justify-content: center; 
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 1.4em; 
+}
+
+.searchBar {
+    font-family: 'SemiBold15';
+    font-size: 1.6rem;
+    background-color: white;
+    border-radius: 24px; 
+    border-color: #1C2143; 
+    border-width: 0.3em; 
+    border-style: solid;
+    width: 30em; 
+    height: 2.4em; 
+    margin-bottom: 1.4em;
+    padding-top: 0.8em; 
+    padding-bottom: 0.8em; 
+    padding-left: 0.8em; 
+}
+
+.cardContainer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+#wrapper {
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
