@@ -143,6 +143,7 @@ app.post('/api/checkUsername', async (req, res, next) =>
   var error = '';
   var dupe = '';
   var _search = username.trim();
+  var results = 0;
 
   try
   {
@@ -154,7 +155,7 @@ app.post('/api/checkUsername', async (req, res, next) =>
     {
       if (username.toLowerCase() === dupe[i].userName.toLowerCase())
       {
-        ret = dupe[i].userName
+        results = 1
         break;
       }
       i++;
@@ -168,7 +169,7 @@ app.post('/api/checkUsername', async (req, res, next) =>
   }
   
 
-  var ret = { error: error, ret:ret };
+  var ret = { results:results, error: error };
   res.status(200).json(ret);
 });
 

@@ -65,8 +65,9 @@ function Register()
             // let dupe = JSON.parse(txt);
             // alert("stan Adora");
             // var dupe = JSON.parse(await dupe.text());
+            alert(dupe.results)
 
-            if (dupe.results.length !== 0)
+            if (dupe.results !== 0)
             {
                 throw("User with this username already exists");
             }
