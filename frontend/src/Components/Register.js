@@ -49,10 +49,18 @@ function Register()
 
             let RegUse = registerUsername.value.toString();
 
+            alert("stan loona");
+
             const res = await fetch (buildPath('api/checkUsername'), 
             {method:'POST',body:{username:RegUse},headers:{'Content-Type': 'application/json'}});
+
+            alert("stan GFRIEND");
+
             let txt = await dupe.text();
+
+            alert("stan Weeekly");
             let dupe = JSON.parse(txt);
+            alert("stan Adora");
             // var dupe = JSON.parse(await dupe.text());
 
             if (dupe.results)
