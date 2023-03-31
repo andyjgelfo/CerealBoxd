@@ -66,20 +66,22 @@ function Register()
     
     }
 
-    return(
-    <div id="registerDiv">
-        <form onSubmit={doRegister}>
-            <span id="title">REGISTER</span><br />
-            {/* <input type="text" id="loginName" placeholder="Username" ref={(c) => loginName = c} /><br /> */}
-            <input type="text" id="registerFirstName" placeholder="FIRST NAME" ref={(c) => registerFirstName =c}/><br />
-            <input type="text" id="registerLastName" placeholder="LAST NAME" ref={(c) => registerLastName =c}/><br />
-            <input type="text" id="registerUsername" placeholder="USERNAME" ref={(c) => registerUsername =c}/><br />
-            {/* <input type="text" id="registerEMAIL" placeholder="EMAIL"/><br /> */}
-            <input type="password" id="registerPassword" placeholder="PASSWORD" ref={(c) => registerPassword =c}/><br />
-            {/* <input type="password" id="retypePassword" placeholder="RETYPE PASSWORD" /><br /> */}
-            <input type="submit" id="registerButton" class="buttons" value = "SIGN UP" onclick={doRegister}/>
-        </form>
-    </div>
-)};
+    return (
+        <div class='wrapper-register d-flex align-items-center justify-content-center'>
+            <div class='container align-items-center justify-content-center' id="registerDiv">
+                <form onSubmit={doRegister}>
+                    <center><span id= "title">REGISTER</span></center>
+                    <center><input type="text" id="registerFirstName" placeholder="FIRST NAME" ref={(c) => registerFirstName =c}/><br /></center>
+                    <center><input type="text" id="registerLastName" placeholder="LAST NAME" ref={(c) => registerLastName =c}/><br /></center>
+                    <center><input type="text" id="registerUsername" placeholder="USERNAME" ref={(c) => registerUsername =c}/><br /></center>
+                    <center><input type="text" id="registerEmail" placeholder="EMAIL"/><br /></center>
+                    <center><input type="password" id="registerPassword" placeholder="PASSWORD" ref={(c) => registerPassword =c}/><br /></center>
+                    <center><input type="password" id="retypePassword" placeholder="RETYPE PASSWORD" /><br /></center>
+                    <center><input type="submit" id="registerButton" class="buttons" value = "SIGN UP" onclick={doRegister}/></center>
+                </form>
+            </div>
+        </div>
+    );
+};
 
 export default Register;
