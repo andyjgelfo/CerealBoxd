@@ -50,33 +50,17 @@ function Register()
                 throw("Retype Password does not match Password");
             }    
 
-            // let RegUse = registerUsername.value.toString();
-
-            // alert("stan loona");
-
             const res = await fetch (buildPath('api/checkUsername'), 
             {method:'POST',body:js2,headers:{'Content-Type': 'application/json'}});
 
-            alert("stan Weeekly");
-
             var dupe = JSON.parse(await res.text()); 
-            
-            alert("stan GFRIEND");
 
-            // let txt = await res.text();
-
-            // alert("stan Weeekly");
-            // let dupe = JSON.parse(txt);
-            // alert("stan Adora");
-            // var dupe = JSON.parse(await dupe.text());
-            alert(dupe.results)
 
             if (dupe.results !== 0)
             {
                 throw("User with this username already exists");
             }
 
-            // window.alert(JSON.stringify(js));
             const response = await fetch(buildPath('api/register'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
             
