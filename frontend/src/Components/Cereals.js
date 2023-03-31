@@ -11,7 +11,7 @@ function Cereals()
         document.title = 'Cereals';
     }, []);
 
-    //const [allUsers, setAllUsers] = useState([]); 
+    const [allCereals, setAllCereals] = useState([]); 
     const [cereal, setCereal] = useState([]); 
 
     let cerealData; 
@@ -44,16 +44,16 @@ function Cereals()
                 cerealData = []; 
             }
 
-            //setAllCereals(cerealData.results); 
+            setAllCereals(cerealData.results); 
             setCereal(cerealData.results); 
         })(); 
     }, []); 
 
-    // const filterCards = event => {
-    //     const value = event.target.value.toLowerCase(); 
-    //     const filteredUsers = allUsers.filter(user => (`${user.name.first} ${user.name.last}`.toLowerCase().includes(value))); 
-    //     setUsers(filteredUsers); 
-    // }; 
+    const filterCards = event => {
+        const value = event.target.value.toLowerCase(); 
+        const filteredCereals = allCereals.filter(cereal => (`${cereal.name}`.toLowerCase().includes(value))); 
+        setCereal(filteredCereals); 
+    }; 
 
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapper">
@@ -61,7 +61,7 @@ function Cereals()
                  Silly rabbit, you're not signed in!
              </div>
 
-            <input className="searchBar" placeholder="SEARCH..." /*onInput={filterCards}*/ />
+            <input className="searchBar" placeholder="SEARCH..." onInput={filterCards} />
      
             <div className="cardContainer">
                 {cereal.map((box, index) => (
@@ -73,3 +73,4 @@ function Cereals()
 };
 
 export default Cereals;
+
