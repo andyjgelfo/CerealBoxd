@@ -47,12 +47,15 @@ function Register()
                 throw("Retype Password does not match Password");
             }    
 
-            const dupe = await fetch (buildPath('api/checkUsername'), 
-            {method:'POST',body:{username:registerUsername.value},headers:{'Content-Type': 'application/json'}});
-            let txt = await dupe.text();
-            let res = JSON.parse(txt);
+            let RegUse = registerUsername.value.toString();
 
-            if (res !== '')
+            const res = await fetch (buildPath('api/checkUsername'), 
+            {method:'POST',body:{username:RegUse},headers:{'Content-Type': 'application/json'}});
+            let txt = await dupe.text();
+            let dupe = JSON.parse(txt);
+            // var dupe = JSON.parse(await dupe.text());
+
+            if (dupe.results)
             {
                 throw("User with this username already exists");
             }
