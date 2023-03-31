@@ -40,7 +40,7 @@ function Register()
 
         var js = JSON.stringify(obj);
 
-        var obj2 = {username:registerUsername};
+        var obj2 = {username:registerUsername.value};
         var js2 = JSON.stringify(obj2);
 
         try
