@@ -11,8 +11,8 @@ function Home()
     }, []);
 
     useEffect(() => {
-        AOS.init({duration: 2000});
-        AOS.refreshHard(); 
+        AOS.init({duration: 2000,
+            once: false});
     }, []);
 
     return(
@@ -23,7 +23,7 @@ function Home()
             
            <section class="articles">
 
-                <article data-aos="fade-down" data-aos-once="false">
+                <article data-aos="fade-down">
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/SadCereal.png')} className="cards" />
@@ -39,7 +39,7 @@ function Home()
                     </div>
                 </article>
 
-                <article data-aos="fade-down" data-aos-once="false">
+                <article data-aos="fade-down">
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/RaisinBran.png')} className="cards" />
@@ -54,7 +54,7 @@ function Home()
                     </div>
                 </article>
 
-                <article data-aos="fade-down" data-aos-once="false">
+                <article data-aos="fade-down">
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/SugarFree.png')} className="cards" />
