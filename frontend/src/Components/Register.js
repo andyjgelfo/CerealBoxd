@@ -40,6 +40,9 @@ function Register()
 
         var js = JSON.stringify(obj);
 
+        var obj2 = {username:registerUsername};
+        var js2 = JSON.stringify(obj2);
+
         try
         {
             if (registerPassword.value !== registerRetype.value)
@@ -47,12 +50,12 @@ function Register()
                 throw("Retype Password does not match Password");
             }    
 
-            let RegUse = registerUsername.value.toString();
+            // let RegUse = registerUsername.value.toString();
 
             // alert("stan loona");
 
             const res = await fetch (buildPath('api/checkUsername'), 
-            {method:'POST',body:{username:RegUse},headers:{'Content-Type': 'application/json'}});
+            {method:'POST',body:js2,headers:{'Content-Type': 'application/json'}});
 
             alert("stan Weeekly");
 
