@@ -22,7 +22,7 @@ function Home()
             
            <section class="articles">
 
-                <article data-aos="fade-down">
+                <article data-aos="fade-down" data-aos-once="false">
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/SadCereal.png')} className="cards" />
@@ -38,7 +38,7 @@ function Home()
                     </div>
                 </article>
 
-                <article data-aos="fade-down">
+                <article data-aos="fade-down" data-aos-once="false">
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/RaisinBran.png')} className="cards" />
@@ -53,7 +53,7 @@ function Home()
                     </div>
                 </article>
 
-                <article data-aos="fade-down">
+                <article data-aos="fade-down" data-aos-once="false">
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/SugarFree.png')} className="cards" />
