@@ -56,7 +56,7 @@ function Register()
 
             alert("stan GFRIEND");
 
-            let txt = await dupe.text();
+            let txt = await res.text();
 
             alert("stan Weeekly");
             let dupe = JSON.parse(txt);
