@@ -1,8 +1,6 @@
 import React from 'react'; 
 import { useEffect } from 'react';
 import "../Styles/Home.css"; 
-import AOS from 'aos'; 
-import 'aos/dist/aos.css'; 
 
 function Home()
 {
@@ -10,20 +8,15 @@ function Home()
         document.title = 'Cerealboxd';
     }, []);
 
-    useEffect(() => {
-        AOS.init({duration: 2000,
-            once: false});
-    }, []);
-
     return(
         <div>
             <img src={require('../Images/BannerFade2Text.png')} alt='banner' className="banner"/>
-            <h1 data-aos="flip-left">Featured Articles</h1>
+            <h1>Featured Articles</h1>
             <br />
             
            <section class="articles">
 
-                <article data-aos="fade-down">
+                <article>
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/SadCereal.png')} className="cards" />
@@ -39,7 +32,7 @@ function Home()
                     </div>
                 </article>
 
-                <article data-aos="fade-down">
+                <article>
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/RaisinBran.png')} className="cards" />
@@ -54,7 +47,7 @@ function Home()
                     </div>
                 </article>
 
-                <article data-aos="fade-down">
+                <article>
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/SugarFree.png')} className="cards" />
