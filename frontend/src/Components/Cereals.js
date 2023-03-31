@@ -11,13 +11,12 @@ function Cereals()
         document.title = 'Cereals';
     }, []);
 
-    const [allCereals, setAllCereals] = useState([]); 
+    //const [allUsers, setAllUsers] = useState([]); 
     const [cereal, setCereal] = useState([]); 
 
     let cerealData; 
 
     const app_name = 'cerealboxd'
-
     function buildPath(route)
     {
         if (process.env.NODE_ENV === 'production') 
@@ -32,7 +31,6 @@ function Cereals()
 
     useEffect(() => {
         (async () => {
-
             var obj = {collection:"box",column:"name",target:''};
             var js = JSON.stringify(obj); 
 
@@ -46,16 +44,16 @@ function Cereals()
                 cerealData = []; 
             }
 
-            setAllCereals(cerealData.results); 
+            //setAllCereals(cerealData.results); 
             setCereal(cerealData.results); 
         })(); 
     }, []); 
 
-    const filterCards = event => {
-        const value = event.target.value.toLowerCase(); 
-        const filteredCereals = allCereals.filter(cereal => (`${cereal.name}`.toLowerCase().includes(value))); 
-        setUsers(filteredCereals); 
-    }; 
+    // const filterCards = event => {
+    //     const value = event.target.value.toLowerCase(); 
+    //     const filteredUsers = allUsers.filter(user => (`${user.name.first} ${user.name.last}`.toLowerCase().includes(value))); 
+    //     setUsers(filteredUsers); 
+    // }; 
 
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapper">
@@ -63,7 +61,7 @@ function Cereals()
                  Silly rabbit, you're not signed in!
              </div>
 
-            <input className="searchBar" placeholder="SEARCH..." onInput={filterCards} />
+            <input className="searchBar" placeholder="SEARCH..." /*onInput={filterCards}*/ />
      
             <div className="cardContainer">
                 {cereal.map((box, index) => (
