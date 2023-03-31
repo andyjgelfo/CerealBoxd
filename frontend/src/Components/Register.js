@@ -49,21 +49,24 @@ function Register()
 
             let RegUse = registerUsername.value.toString();
 
-            alert("stan loona");
+            // alert("stan loona");
 
             const res = await fetch (buildPath('api/checkUsername'), 
             {method:'POST',body:{username:RegUse},headers:{'Content-Type': 'application/json'}});
 
-            alert("stan GFRIEND");
 
-            let txt = await res.text();
+            var dupe = JSON.parse(await res.text()); 
+            
+            // alert("stan GFRIEND");
 
-            alert("stan Weeekly");
-            let dupe = JSON.parse(txt);
-            alert("stan Adora");
+            // let txt = await res.text();
+
+            // alert("stan Weeekly");
+            // let dupe = JSON.parse(txt);
+            // alert("stan Adora");
             // var dupe = JSON.parse(await dupe.text());
 
-            if (dupe.results)
+            if (dupe.results.length !== 0)
             {
                 throw("User with this username already exists");
             }
