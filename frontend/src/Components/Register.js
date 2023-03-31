@@ -46,6 +46,17 @@ function Register()
             {
                 throw("Retype Password does not match Password");
             }    
+
+            const dupe = await fetch (buildPath('api/checkUsername'), 
+            {method:'POST',body:{username:registerUsername.value},headers:{'Content-Type': 'application/json'}});
+            let txt = await dupe.text();
+            let res = JSON.parse(txt);
+
+            if (res !== '')
+            {
+                throw("User with this username already exists");
+            }
+
             // window.alert(JSON.stringify(js));
             const response = await fetch(buildPath('api/register'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
@@ -83,7 +94,7 @@ function Register()
                     <center><input type="password" id="registerPassword" placeholder="PASSWORD" ref={(c) => registerPassword =c}/><br /></center>
                     <center><input type="password" id="retypePassword" placeholder="RETYPE PASSWORD" ref={(c) => registerRetype =c}/><br /></center>
                     <center><input type="submit" id="registerButton" class="buttons" value = "SIGN UP" onclick={doRegister}/></center>
-                    {/* <span id="registerResult">{message}</span> */}
+                    <span id="registerResult">{message}</span>
                 </form>
             </div>
         </div>
