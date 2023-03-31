@@ -19,7 +19,6 @@ function Home()
             <img src={require('../Images/BannerFade2Text.png')} alt='banner' className="banner"/>
             <h1 data-aos="flip-left">Featured Articles</h1>
             <br />
-            <br />
             
            <section class="articles">
 

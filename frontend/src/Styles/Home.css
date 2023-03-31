@@ -37,6 +37,7 @@ h1 {
   font-family: "SemiBold15";
   font-size: 1rem;
   padding-top: 5%;
+  padding-bottom: 5%; 
   text-align: center;
   background-color: transparent;
 }
