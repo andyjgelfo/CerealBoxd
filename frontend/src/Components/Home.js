@@ -12,6 +12,7 @@ function Home()
 
     useEffect(() => {
         AOS.init({duration: 2000});
+        AOS.refreshHard(); 
     }, []);
 
     return(
