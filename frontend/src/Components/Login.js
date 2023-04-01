@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import "../Styles/Login.css"; 
 import { useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import $ from 'jquery'; 
 
 function Login()
 {
@@ -13,7 +12,6 @@ function Login()
 
     let loginName;
     let loginPassword;
-    let error_message
 
     const [message,setMessage] = useState('');
 
@@ -45,9 +43,7 @@ function Login()
 
             if( res.id <= 0 )
             {
-                //setMessage('Username/Password Combination Incorrect');
-                error_message = '<p class ="error">Username/Password Combination Incorrect</p>'; 
-                $("#result").html(error_message); 
+                setMessage('Username/Password Combination Incorrect');
             }
             else
             {
@@ -65,10 +61,6 @@ function Login()
             return;
         }   
     }
-
-    // error_message = '<p class="error">This field is required</p>';
-    // $("#result").html(error_message);
-    // return false;
 
     return(
         <div class='wrapper-login d-flex align-items-center justify-content-center'>
