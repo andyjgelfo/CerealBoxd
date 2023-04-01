@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../Styles/Login.css"; 
 import { useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import $ from 'jquery'; 
 
 function Login()
 {
@@ -47,7 +48,6 @@ function Login()
                 //setMessage('Username/Password Combination Incorrect');
                 error_message = '<p class ="error">Username/Password Combination Incorrect</p>'; 
                 $("#result").html(error_message); 
-
             }
             else
             {
