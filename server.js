@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === 'production')
 app.post('/api/addDB', async(req, res, next) =>
 {
   const db = client.db("cerealbox");
-  const results = db.collection('box').updateMany({}, {$set:{"rating": null}});
+  const results = db.collection('box').updateMany({}, {$set:{"image": null}});
   res.status(200)
 }
 );
@@ -176,9 +176,9 @@ app.post('/api/checkUsername', async (req, res, next) =>
 app.post('/api/addCereal', async (req, res, next) =>
 {
 
-  const { name, description, releaseDate, willItKillYou, manufacturer } = req.body;
+  const { name, description, releaseDate, willItKillYou, manufacturer, image } = req.body;
 
-  const newCereal = {name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer};
+  const newCereal = {name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer, image:image};
   var error = '';
   var dupe = '';
   var _search = name.trim();
