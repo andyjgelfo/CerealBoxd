@@ -95,7 +95,7 @@ function Register()
                     <center><input type="text" id="registerUsername" placeholder="USERNAME" ref={(c) => registerUsername =c}/><br /></center>
                     <center><input type="text" id="registerEmail" placeholder="EMAIL" ref={(c) => registerEmail =c}/><br /></center>
                     <center><input type="password" id="registerPassword" placeholder="PASSWORD" ref={(c) => registerPassword =c}/><br /></center>
-                    <center><input type="password" id="retypePassword" placeholder="RETYPE PASSWORD" ref={(c) => registerRetype =c}/><br /></center>
+                    <center><input type="password" id="retypePassword" placeholder="RETYPE PASSWORD"  ref={(c) => registerRetype =c}/><br /></center>
                     <center><input type="submit" id="registerButton" class="buttons" value = "SIGN UP" onclick={doRegister}/></center>
                     <span id="registerResult">{message}</span>
                 </form>
