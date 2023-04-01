@@ -13,7 +13,6 @@
     "nodemon": "^2.0.21",
     "react-bootstrap": "^2.7.2",
     "react-icons": "^4.8.0",
-    "react-password-checklist": "^1.4.3",
     "react-router-dom": "^6.9.0"
   },
   "scripts": {
