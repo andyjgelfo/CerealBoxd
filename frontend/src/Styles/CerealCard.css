@@ -43,8 +43,9 @@
 } 
 
 .card img {
-    object-fit: contain;
-    width:  200px;
+    align-items: center;
+    justify-content: center;
+    width:  150px;
     height: auto; 
 }
 
