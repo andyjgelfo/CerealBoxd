@@ -208,6 +208,33 @@ app.post('/api/addCereal', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
+app.post('/api/editCereal', async (req, res, next) =>
+{
+  const { name, description, releaseDate, willItKillYou, manufacturer, image } = req.body;
+  var ObjectId = require('mongodb').ObjectId;
+  var error = '';
+
+  try
+  {
+    const rev = client.db("cerealbox").collection('box');
+    const filter = {_id: new ObjectId(_id)};
+    const edit = {
+      $set: {
+        name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer, image:image
+      },
+    };
+
+    const result = await rev.updateOne(filter, edit);
+  }
+  catch(e)
+  {
+    error = e.toString();
+  }
+
+  var ret = { error: error };
+  res.status(200).json(ret);
+})
+
 app.post('/api/addReview', async (req, res, next) =>
 {
 
