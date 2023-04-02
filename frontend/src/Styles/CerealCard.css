@@ -43,6 +43,7 @@
 } 
 
 .card img {
+    object-fit: contain;
     width:  200px;
     height: auto; 
 }
