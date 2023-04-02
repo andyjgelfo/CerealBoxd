@@ -28,13 +28,10 @@
     background-color: transparent; 
     margin: 1.6rem 1.6rem 1.6rem 0; 
     width: 200px; 
-    height: 250px; 
+    height: 275px; 
     overflow: hidden; 
-    border: none; 
     transition: transform .3s ease;
     cursor: pointer; 
-    border: solid; 
-    border-color: red;
     border-radius: 12px; 
 }
 
