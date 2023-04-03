@@ -1,15 +1,16 @@
 import React from 'react'; 
+import Login from '../Components/Login'; 
 import Navbar from "../Components/Navbar"; 
-import About from "../Components/About";
 
 const InfoPage = () =>
 {
     return (
         <div className="page">
             <Navbar />
-            <About />
+            <Login />
         </div>
     ); 
 }; 
 
 export default InfoPage;
+
