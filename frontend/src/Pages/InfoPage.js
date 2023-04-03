@@ -1,5 +1,5 @@
 import React from 'react'; 
-import Login from '../Components/Login'; 
+import Info from '../Components/Info'; 
 import Navbar from "../Components/Navbar"; 
 
 const InfoPage = () =>
@@ -7,7 +7,7 @@ const InfoPage = () =>
     return (
         <div className="page">
             <Navbar />
-            <Login />
+            <Info />
         </div>
     ); 
 }; 
