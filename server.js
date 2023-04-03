@@ -51,7 +51,10 @@ if (process.env.NODE_ENV === 'production')
 app.post('/api/addDB', async(req, res, next) =>
 {
   const db = client.db("cerealbox");
-  const results = db.collection('box').updateMany({}, {$set:{"image": null}});
+  const results = db.collection('nutrition').updateMany({}, {$set:{"vitaminD": 0.0,
+  "calcium":0.0, "iron":0.0, "potassium":0.0, "vitaminC":0.0, "thiamin":0.0,
+   "riboflavin":0.0, "niacin":0.0, "vitaminB6":0.0, "folate":0.0, "vitaminB12":0.0
+}});
   res.status(200)
 }
 );
@@ -176,9 +179,9 @@ app.post('/api/checkUsername', async (req, res, next) =>
 app.post('/api/addCereal', async (req, res, next) =>
 {
 
-  const { name, description, releaseDate, willItKillYou, manufacturer, image } = req.body;
+  const { name, description, releaseDate, willItKillYou, manufacturer, image, ingredients } = req.body;
 
-  const newCereal = {name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer, image:image};
+  const newCereal = {name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer, image:image, ingredients: ingredients};
   var error = '';
   var dupe = '';
   var _search = name.trim();
@@ -210,7 +213,7 @@ app.post('/api/addCereal', async (req, res, next) =>
 
 app.post('/api/editCereal', async (req, res, next) =>
 {
-  const { name, description, releaseDate, willItKillYou, manufacturer, image } = req.body;
+  const { name, description, releaseDate, willItKillYou, manufacturer, image, ingredients } = req.body;
   var ObjectId = require('mongodb').ObjectId;
   var error = '';
 
@@ -220,7 +223,7 @@ app.post('/api/editCereal', async (req, res, next) =>
     const filter = {_id: new ObjectId(_id)};
     const edit = {
       $set: {
-        name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer, image:image
+        name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer, image: image, ingredients: ingredients
       },
     };
 
@@ -416,6 +419,34 @@ app.post('/api/editCerealID', async (req, res, next) =>
   res.status(200).json(ret);
 })
 
+// app.post('/api/editIngredients', async (req, res, next) =>
+// {
+//   const {_id, ingredients} = req.body;
+//   var ObjectId = require('mongodb').ObjectId;
+//   var error = '';
+//   var _ingredients = ingredients.trim().toLowerCase();
+
+//   try
+//   {
+//     const rev = client.db("cerealbox").collection('box');
+//     const filter = {_id: new ObjectId(_id)};
+//     const edit = {
+//       $set: {
+//         ingredients:_ingredients
+//       },
+//     };
+
+//     const result = await rev.updateOne(filter, edit);
+//   }
+//   catch(e)
+//   {
+//     error = e.toString();
+//   }
+
+//   var ret = { error: error };
+//   res.status(200).json(ret);
+// })
+
 // what this does is that for each cereal, it gets the rating based on the average review score of corresponding cereal
 app.post('/api/setAvgReview', async (req, res, next) =>
 {
@@ -458,6 +489,76 @@ app.post('/api/setAvgReview', async (req, res, next) =>
   res.status(200).json(ret);
 
 });
+
+app.post('/api/addNutrition', async (req, res, next) =>
+{
+
+  // "cerealID":"63faaa1517044af8be9e0530", 
+  // "image":"",
+  // "servingSize":39, 
+  // "calories":150, 
+  // "totalFat":1.5, 
+  // "saturatedFat":0.5, 
+  // "transFat":0, 
+  // "polyunsaturatedFat":0, 
+  // "monounsaturatedFat":0, 
+  // "cholesterol":0, 
+  // "sodium":210,
+  // "totalCarbohydrate":34, 
+  // "dietaryFiber":2, 
+  // "totalSugars":12, 
+  // "addedSugars":12, 
+  // "protein":2, 
+  // "vitaminD":0.1, 
+  // "calcium":0,
+  // "iron":0.25, 
+  // "potassium":0.0, 
+  // "vitaminC":0.25, 
+  // "thiamin":0.2, 
+  // "riboflavin":0.2,
+  // "niacin":0.2, 
+  // "phosphorus":0, 
+  // "magnesium":0, 
+  // "zinc":0, 
+  // "selenium":0, 
+  // "copper":0, 
+  // "manganese":0, 
+  // "vitaminB6":0.2, 
+  // "folate":0.2, 
+  // "vitaminB12":0.2
+
+  const {cerealID, servingSize, calories, totalFat, saturatedFat, 
+  transFat, polyunsaturatedFat, monounsaturatedFat, cholesterol, sodium,
+  totalCarbohydrate, dietaryFiber, totalSugars, addedSugars, protein, vitaminD, calcium,
+  iron, potassium, vitaminC, thiamin, riboflavin, niacin, phosphorus, magnesium, zinc, 
+  selenium, copper, manganese, vitaminB6, folate, vitaminB12} = req.body;
+
+  const newNutrition = {cerealID: new ObjectId(cerealID), servingSize:servingSize, calories:calories, 
+    totalFat:totalFat, saturatedFat:saturatedFat, 
+    transFat:transFat, polyunsaturatedFat:polyunsaturatedFat, monounsaturatedFat:monounsaturatedFat, 
+    cholesterol:cholesterol, sodium:sodium,
+    totalCarbohydrate:totalCarbohydrate, dietaryFiber:dietaryFiber, totalSugars:totalSugars, 
+    addedSugars:addedSugars, protein:protein, vitaminD:vitaminD, calcium:calcium,
+    iron:iron, potassium:potassium, vitaminC:vitaminC, thiamin:thiamin, riboflavin:riboflavin,
+    niacin:niacin, phosphorus:phosphorus, magnesium:magnesium, 
+    zinc:zinc, selenium:selenium, copper:copper, manganese:manganese,
+    vitaminB6:vitaminB6, folate:folate, vitaminB12:vitaminB12};
+  var error = '';
+
+  try
+  {
+    const db = client.db("cerealbox").collection('nutrition').insertOne(newNutrition);
+  }
+  catch(e)
+  {
+    error = e.toString();
+  }
+
+  var ret = { error: error };
+  res.status(200).json(ret);
+});
+
+
 
 
 app.listen(PORT, () => 
