@@ -51,9 +51,7 @@ if (process.env.NODE_ENV === 'production')
 app.post('/api/addDB', async(req, res, next) =>
 {
   const db = client.db("cerealbox");
-  const results = db.collection('nutrition').updateMany({}, {$set:{"vitaminD": 0.0,
-  "calcium":0.0, "iron":0.0, "potassium":0.0, "vitaminC":0.0, "thiamin":0.0,
-   "riboflavin":0.0, "niacin":0.0, "vitaminB6":0.0, "folate":0.0, "vitaminB12":0.0
+  const results = db.collection('nutrition').updateMany({}, {$set:{"name":"", "image":""
 }});
   res.status(200)
 }
@@ -493,47 +491,48 @@ app.post('/api/setAvgReview', async (req, res, next) =>
 app.post('/api/addNutrition', async (req, res, next) =>
 {
 
-  // "cerealID":"63faaa1517044af8be9e0530", 
-  // "image":"",
-  // "servingSize":39, 
-  // "calories":150, 
-  // "totalFat":1.5, 
-  // "saturatedFat":0.5, 
+  // "name":"Honey Kix",
+  // "cerealID":"641cd7c96673a2be783689f6",
+  // "image":"https://i.imgur.com/jgVjvh3.png",
+  // "servingSize":40, 
+  // "calories":160, 
+  // "totalFat":1, 
+  // "saturatedFat":0, 
   // "transFat":0, 
-  // "polyunsaturatedFat":0, 
+  // "polyunsaturatedFat":0.5, 
   // "monounsaturatedFat":0, 
   // "cholesterol":0, 
-  // "sodium":210,
+  // "sodium":220,
   // "totalCarbohydrate":34, 
-  // "dietaryFiber":2, 
-  // "totalSugars":12, 
-  // "addedSugars":12, 
-  // "protein":2, 
+  // "dietaryFiber":3, 
+  // "totalSugars":7, 
+  // "addedSugars":7, 
+  // "protein":3, 
   // "vitaminD":0.1, 
-  // "calcium":0,
-  // "iron":0.25, 
-  // "potassium":0.0, 
-  // "vitaminC":0.25, 
+  // "calcium":0.1,
+  // "iron":0.6, 
+  // "potassium":0.02, 
+  // "vitaminC":0.1, 
   // "thiamin":0.2, 
-  // "riboflavin":0.2,
-  // "niacin":0.2, 
-  // "phosphorus":0, 
-  // "magnesium":0, 
-  // "zinc":0, 
+  // "riboflavin":0.1,
+  // "niacin":0.1, 
+  // "phosphorus":0.06, 
+  // "magnesium":0.06, 
+  // "zinc":0.2, 
   // "selenium":0, 
   // "copper":0, 
   // "manganese":0, 
-  // "vitaminB6":0.2, 
-  // "folate":0.2, 
-  // "vitaminB12":0.2
+  // "vitaminB6":0, 
+  // "folate":0, 
+  // "vitaminB12":0
 
-  const {cerealID, servingSize, calories, totalFat, saturatedFat, 
+  const {name, cerealID, image, servingSize, calories, totalFat, saturatedFat, 
   transFat, polyunsaturatedFat, monounsaturatedFat, cholesterol, sodium,
   totalCarbohydrate, dietaryFiber, totalSugars, addedSugars, protein, vitaminD, calcium,
   iron, potassium, vitaminC, thiamin, riboflavin, niacin, phosphorus, magnesium, zinc, 
   selenium, copper, manganese, vitaminB6, folate, vitaminB12} = req.body;
 
-  const newNutrition = {cerealID: new ObjectId(cerealID), servingSize:servingSize, calories:calories, 
+  const newNutrition = {name:name, cerealID: new ObjectId(cerealID), image:image, servingSize:servingSize, calories:calories, 
     totalFat:totalFat, saturatedFat:saturatedFat, 
     transFat:transFat, polyunsaturatedFat:polyunsaturatedFat, monounsaturatedFat:monounsaturatedFat, 
     cholesterol:cholesterol, sodium:sodium,
