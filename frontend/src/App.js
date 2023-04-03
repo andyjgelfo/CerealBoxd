@@ -8,6 +8,7 @@ import About from "./Components/About";
 import Cereals from "./Components/Cereals"; 
 import Login from "./Components/Login"; 
 import Register from "./Components/Register"; 
+import Info from "./Components/Info"; 
 
 function App() {
   return(
