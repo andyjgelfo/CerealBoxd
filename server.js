@@ -77,42 +77,32 @@ app.post('/api/login', async (req, res, next) =>
   var fn = '';
   var ln = '';
 
+  var ret;
   if( results.length > 0 )
   {
     id = results[0].userName;
     fn = results[0].fName;
     ln = results[0].lName;
+    // ret=results;
+
+    try
+    {
+      const token = require("./createJWT.js");
+      ret = token.createToken( fn, ln, id );
+      // ret = {fn:fn, tok:tok};
+    }
+    catch(e)
+    {
+      ret = {error:e.message};
+      
+    }
+  }
+  else
+  {
+      ret = {error:"Login/Password incorrect"};
   }
 
-  var ret = { userName:id, fName:fn, lName:ln, error:''};
   res.status(200).json(ret);
-
-  // var ret;
-  // if( results.length > 0 )
-  // {
-  //   id = results[0].userName;
-  //   fn = results[0].fName;
-  //   ln = results[0].lName;
-  //   // ret=results;
-
-  //   try
-  //   {
-  //     const token = require("./createJWT.js");
-  //     tok = token.createToken( fn, ln, id );
-  //     // ret = {fn:fn, tok:tok};
-  //   }
-  //   catch(e)
-  //   {
-  //     ret = {error:e.message};
-      
-  //   }
-  // }
-  // else
-  // {
-  //     ret = {error:"Login/Password incorrect"};
-  // }
-
-  // res.status(200).json(ret);
 
 
   
