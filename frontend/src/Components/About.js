@@ -7,7 +7,7 @@ function About()
         document.title = 'About';
     }, []);
 
-    const aboot = localStorage.getItem('user_data');
+    const aboot = JSON.parse(localStorage.getItem('user_data'));
     alert(aboot);
 
     return(
