@@ -45,6 +45,9 @@ function Login()
 
             var res = JSON.parse(await response.text());
 
+            // do axios dumE
+            alert(res);
+
             if( res.id <= 0 )
             {
                 setMessage('Username/Password Combination Incorrect');
