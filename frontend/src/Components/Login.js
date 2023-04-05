@@ -60,6 +60,7 @@ function Login()
             }
             else 
             {	
+                alert(res);
                 alert("Stan Loona 1");
                 storage.storeToken(res);
                 var jwt = require('jsonwebtoken');
