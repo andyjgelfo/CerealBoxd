@@ -71,9 +71,10 @@ function Login()
                 var lastName = ud.payload.lName;
                   
                 var user = {firstName:firstName,lastName:lastName,id:userId}
+                alert(JSON.stringify(user))
                 localStorage.setItem('user_data', JSON.stringify(user));
 
-                const aboot = JSON.parse(localStorage.getItem('user_data'));
+                var aboot = JSON.parse(localStorage.getItem('user_data'));
                 alert(aboot);
 
                 window.location.href = buildPath('AboutPage');
