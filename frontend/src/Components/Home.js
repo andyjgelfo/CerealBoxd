@@ -30,7 +30,7 @@ function Home()
                 <article>
                     <div class="article-wrapper">
                         <figure>
-                            <img src={require('../Images/SadCereal.jpg')} className="cards" />
+                            <img src={require('../Images/SadCereal.png')} className="cards" />
                         </figure>
                         <div class="article-body">
                             <h2>&nbsp;Top 10 Cereals For A Rainy &nbsp;Day</h2>
