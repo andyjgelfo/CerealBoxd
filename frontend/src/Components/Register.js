@@ -19,22 +19,24 @@ function Register()
 
     const [message, setMessage] = useState()
 
-    const app_name = 'cerealboxd'
-    function buildPath(route, type)
-    {
-        if (process.env.NODE_ENV === 'production') 
-        {
-            return 'https://' + app_name +  '.herokuapp.com/' + route;
-        }
-        else
-        {        
-            // return 'http://127.0.0.1:6000/' + route;
-            if (type === 0)
-                return 'http://localhost:5050/' + route;
-            else
-                return 'http://localhost:3000/' + route;
-        }
-    }
+    // const app_name = 'cerealboxd'
+    // function buildPath(route, type)
+    // {
+    //     if (process.env.NODE_ENV === 'production') 
+    //     {
+    //         return 'https://' + app_name +  '.herokuapp.com/' + route;
+    //     }
+    //     else
+    //     {        
+    //         // return 'http://127.0.0.1:6000/' + route;
+    //         if (type === 0)
+    //             return 'http://localhost:5050/' + route;
+    //         else
+    //             return 'http://localhost:3000/' + route;
+    //     }
+    // }
+
+    var bp = require('./Path.js');
 
     const doRegister = async event => 
     {
@@ -54,7 +56,7 @@ function Register()
                 throw("Retype Password does not match Password");
             }    
 
-            const res = await fetch (buildPath('api/checkUsername', 0), 
+            const res = await fetch (bp.buildPath('api/checkUsername'), 
             {method:'POST',body:js2,headers:{'Content-Type': 'application/json'}});
 
             var dupe = JSON.parse(await res.text()); 
@@ -65,7 +67,7 @@ function Register()
                 throw("User with this username already exists");
             }
 
-            const response = await fetch(buildPath('api/register', 0),
+            const response = await fetch(bp.buildPath('api/register'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
             
             // let txt = await response.text();
@@ -80,7 +82,7 @@ function Register()
             //     setMessage('User has been added');
             // }
 
-            window.location.href = buildPath('', 1);
+            window.location.href = '/'
         }
         catch(e)
         {

@@ -21,22 +21,24 @@ function Login()
 
     const [message,setMessage] = useState('');
 
-    const app_name = 'cerealboxd'
-    function buildPath(route, type)
-    {
-        if (process.env.NODE_ENV === 'production') 
-        {
-            return 'https://' + app_name +  '.herokuapp.com/' + route;
-        }
-        else
-        {        
-            // return 'http://127.0.0.1:6000/' + route;
-            if (type === 0)
-                return 'http://localhost:5050/' + route;
-            else
-                return 'http://localhost:3000/' + route;
-        }
-    }
+    var bp = require('./Path.js');
+
+    // const app_name = 'cerealboxd'
+    // function buildPath(route, type)
+    // {
+    //     if (process.env.NODE_ENV === 'production') 
+    //     {
+    //         return 'https://' + app_name +  '.herokuapp.com/' + route;
+    //     }
+    //     else
+    //     {        
+    //         // return 'http://127.0.0.1:6000/' + route;
+    //         if (type === 0)
+    //             return 'http://localhost:5050/' + route;
+    //         else
+    //             return 'http://localhost:3000/' + route;
+    //     }
+    // }
 
     const doLogin = async event =>
     {
@@ -47,7 +49,7 @@ function Login()
         var config = 
         {
             method: 'post',
-            url: buildPath('api/login', 0),	
+            url: bp.buildPath('api/login'),	
             headers: 
             {
                 'Content-Type': 'application/json'
@@ -76,7 +78,7 @@ function Login()
                 var user = {firstName:firstName,lastName:lastName,id:userId}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
-                window.location.href = buildPath('AboutPage', 1);
+                window.location.href = '/AboutPage';
             }
         })
         .catch(function (error) 

@@ -16,22 +16,23 @@ function Cereals()
 
     let cerealData; 
 
-    const app_name = 'cerealboxd'
-    function buildPath(route, type)
-    {
-        if (process.env.NODE_ENV === 'production') 
-        {
-            return 'https://' + app_name +  '.herokuapp.com/' + route;
-        }
-        else
-        {        
-            // return 'http://127.0.0.1:6000/' + route;
-            if (type === 0)
-                return 'http://localhost:5050/' + route;
-            else
-                return 'http://localhost:3000/' + route;
-        }
-    }
+    // const app_name = 'cerealboxd'
+    // function buildPath(route, type)
+    // {
+    //     if (process.env.NODE_ENV === 'production') 
+    //     {
+    //         return 'https://' + app_name +  '.herokuapp.com/' + route;
+    //     }
+    //     else
+    //     {        
+    //         // return 'http://127.0.0.1:6000/' + route;
+    //         if (type === 0)
+    //             return 'http://localhost:5050/' + route;
+    //         else
+    //             return 'http://localhost:3000/' + route;
+    //     }
+    // }
+    var bp = require('./Path.js');
 
     useEffect(() => {
         (async () => {
@@ -39,7 +40,7 @@ function Cereals()
             var js = JSON.stringify(obj); 
 
             try {
-                const response = await fetch(buildPath('api/search', 0),
+                const response = await fetch(bp.buildPath('api/search'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
                 cerealData = JSON.parse(await response.text()); 
