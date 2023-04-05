@@ -60,24 +60,26 @@ function Login()
             }
             else 
             {	
+                alert("Stan Loona 1");
+                alert(res);
                 storage.storeToken(res);
                 var jwt = require('jsonwebtoken');
 
     
                 var ud = jwt.decode(storage.retrieveToken(),{complete:true});
-                alert("stan loona 1");
-                alert(ud);
+                alert("stan loona 2");
+                alert(JSON.stringify(ud));
 
                 var userId = ud.payload.userName;
                 var firstName = ud.payload.fName;
                 var lastName = ud.payload.lName;
                   
                 var user = {firstName:firstName,lastName:lastName,id:userId}
-                alert(JSON.stringify(user))
+                // alert(JSON.stringify(user))
                 localStorage.setItem('user_data', JSON.stringify(user));
 
                 var aboot = JSON.parse(localStorage.getItem('user_data'));
-                alert(aboot);
+                // alert(aboot);
 
                 window.location.href = buildPath('AboutPage');
             }
