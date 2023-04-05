@@ -77,20 +77,45 @@ app.post('/api/login', async (req, res, next) =>
   var fn = '';
   var ln = '';
 
-  //Get login results - if there are none, declare error
+  var ret;
   if( results.length > 0 )
   {
-    id = results[0]._id;
-    fn = results[0].fName;
-    ln = results[0].lName;
+    id = results[0].UserId;
+    fn = results[0].FirstName;
+    ln = results[0].LastName;
+
+    try
+    {
+      const token = require("./createJWT.js");
+      ret = token.createToken( fn, ln, id );
+    }
+    catch(e)
+    {
+      ret = {error:e.message};
+    }
   }
   else
   {
-    error = "Incorrect username/password";
+      ret = {error:"Login/Password incorrect"};
   }
 
-  var ret = { id:id, fName:fn, lName:ln, error:error};
   res.status(200).json(ret);
+
+
+  //Get login results - if there are none, declare error
+  // if( results.length > 0 )
+  // {
+  //   id = results[0]._id;
+  //   fn = results[0].fName;
+  //   ln = results[0].lName;
+  // }
+  // else
+  // {
+  //   error = "Incorrect username/password";
+  // }
+
+  // var ret = { id:id, fName:fn, lName:ln, error:error};
+  // res.status(200).json(ret);
 });
 
 

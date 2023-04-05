@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useJwt } from "react-jwt";
 import "../Styles/Login.css"; 
 import { useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+
 
 function Login()
 {
@@ -9,6 +11,8 @@ function Login()
     useEffect(() => {
         document.title = 'Login';
     }, []);
+
+    var storage = require('../tokenStorage.js');
 
     let loginName;
     let loginPassword;
@@ -47,11 +51,22 @@ function Login()
             }
             else
             {
-                var user = {firstName:res.fName,lastName:res.lName,id:res.id}
+                storage.storeToken(res);
+                var jwt = require('jsonwebtoken');
+    
+                var ud = jwt.decode(storage.retrieveToken(),{complete:true});
+                var userId = ud.payload.userId;
+                var firstName = ud.payload.firstName;
+                var lastName = ud.payload.lastName;
+                  
+                var user = {firstName:firstName,lastName:lastName,id:userId}
                 localStorage.setItem('user_data', JSON.stringify(user));
+
+                // var user = {firstName:res.fName,lastName:res.lName,id:res.id}
+                // localStorage.setItem('user_data', JSON.stringify(user));
                 
                 // setMessage(JSON.stringify(user));
-                setMessage('');
+                // setMessage('');
                 window.location.href = buildPath('AboutPage');
             }
         }
