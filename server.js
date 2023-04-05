@@ -80,18 +80,21 @@ app.post('/api/login', async (req, res, next) =>
   var ret;
   if( results.length > 0 )
   {
-    id = results[0].UserId;
-    fn = results[0].FirstName;
-    ln = results[0].LastName;
+    id = results[0].userName;
+    fn = results[0].fName;
+    ln = results[0].lName;
+    // ret=results;
 
     try
     {
       const token = require("./createJWT.js");
-      ret = token.createToken( fn, ln, id );
+      tok = token.createToken( fn, ln, id );
+      ret = {fn:fn, tok:tok};
     }
     catch(e)
     {
       ret = {error:e.message};
+      
     }
   }
   else
