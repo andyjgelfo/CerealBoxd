@@ -12,34 +12,88 @@
    url("../Fonts/SharpGroteskSemiBold15.otf") format("truetype");
 }
 
-:root {
-  --mainColor: #2C3440; 
-  --secondaryColor: #F2EAC1; 
-  --textColor1: white; 
-  --textColor2: #1C2143;
-  --hover: #40bcf4;  
-}
-
 .articles {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-evenly;
-}
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+  }
 
 figure {
   border-radius: 10px;
 }
 
-h1 {
-  color: white;
+.BannerNButton{
+  position: relative;
+  width: 100%;
+}
+
+.BannerNButton .banner {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+} 
+
+.BannerNButton .logBut{
+  position: absolute;
+  top: 48%;
+  left: 5.5%;
+  background-color: #ef0b0b00;
+  color: rgb(255, 255, 255);
   font-family: "SemiBold15";
-  font-size: 1rem;
-  padding-top: 5%;
-  padding-bottom: 5%; 
+  font-size: 1vw;
+  padding: 1% 2.5%;
+  border-color: #ffffff;
+  cursor: pointer;
+  border-radius: 5px;
   text-align: center;
-  background-color: transparent;
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+}
+
+.BannerNButton .logBut:hover {
+  background-color: #bdd48b;
+  box-shadow: 0px 15px 20px #a2c754;
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.BannerNButton .regBut{
+  position: absolute;
+  top: 48%;
+  left: 15%;
+  background-color: #ef0b0b00;
+  color: rgb(255, 255, 255);
+  font-family: "SemiBold15";
+  font-size: 1vw;
+  padding: 1% 2%;
+  border-color: #ffffff;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+}
+
+.BannerNButton .regBut:hover {
+  background-color: #8cbfaf;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+h1 {
+  color: #ffffff;
+  font-family: "SemiBold15";
+  font-size: larger;
+  padding-top: 5%;
+  text-align: center;
 }
 
 /*
@@ -52,69 +106,65 @@ hr {
   text-align: center;
 }
 */
-
-.banner {
-  position: relative;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-} 
-
-.article-wrapper {
-  max-width: 400px;
-  margin-bottom: 40px;
-  padding: 20px;
-  background-color: #F2EAC1;
-  border-color: #1C2143; 
-  border-radius: 32px; 
-  border-width: 0.6em; 
-  border-style: solid;
-}
-   
-.article-wrapper h2 {
-  color: #1C2143;
-  text-align: center;
-  background-color: #F2EAC1;
-  font-family: "SemiBold15";
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
+  .article-wrapper {
+    max-width: 400px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #414D5E;
+    /*background-color: rgb(41, 73, 143);*/
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
   
-.article-wrapper p {
-  color: #1C2143;
-  background-color: #F2EAC1;
-  text-align: center;
-  font-family: "Book20";
-  margin-top: 0;
-  margin-bottom: 24px;
-  font-size: 1rem;
-  line-height: 1.5;
-}
+  .article-wrapper:hover {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
   
-.article-wrapper img {
-  width: 100%;
-  height: 200px;
-  border-radius: 10px;
-}
+  .article-wrapper h2 {
+    color: #ffffff;
+    font-family: "SemiBold15";
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
   
-.read-more {
-  font-family: 'SemiBold15';
-  background-color: #F2EAC1;
-  text-align: center;
-  display: inline-block;
-  margin-top: 20px;
-  font-size: 1.2rem;
-  text-decoration: none;
-  color: #1C2143;
-  position: relative;
-}
+  .article-wrapper p {
+    color: #ffffff;
+    font-family: "Book20";
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
   
-.read-more:hover {
-  color: #40bcf4;
-}
-
-.article-body {
-  background-color: #F2EAC1;
-}
+  .article-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .read-more {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: "Book20";
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #96c3f3;
+    position: relative;
+  }
+  
+  .read-more:hover {
+    color: #ff9b05;
+  }
+  
+  .read-more svg {
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: 1px;
+    right: -20px;
+    fill: currentColor;
+  }
