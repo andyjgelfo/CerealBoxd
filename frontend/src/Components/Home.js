@@ -47,7 +47,7 @@ function Home()
                 <article>
                     <div class="article-wrapper">
                         <figure>
-                            <img src={require('../Images/RaisinBran.jpg')} className="cards" />
+                            <img src={require('../Images/RaisinBran.png')} className="cards" />
                         </figure>
                         <div class="article-body">
                             <h2>&nbsp;Editor's Choice: Raisin Bran</h2>
@@ -64,7 +64,7 @@ function Home()
                 <article>
                     <div class="article-wrapper">
                         <figure>
-                            <img src={require('../Images/SugarFree.jpg')} className="cards" />
+                            <img src={require('../Images/SugarFree.png')} className="cards" />
                         </figure>
                         <div class="article-body">
                             <h2>&nbsp;Top 5 Low-Sugar Cereals</h2>
