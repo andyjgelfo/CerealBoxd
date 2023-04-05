@@ -4,11 +4,11 @@ const cors = require('cors');
 
 const path = require('path');           
 const { ObjectId } = require('mongodb');
-const PORT = process.env.PORT || 6000;  
+const PORT = process.env.PORT || 5050;  
 
 const app = express();
 
-app.set('port', (process.env.PORT || 6000));
+app.set('port', PORT);
 
 require('dotenv').config();
 const url = 'mongodb+srv://Andy:yGxWWlynMTgYcdVV@cluster0.r74qhgh.mongodb.net/?retryWrites=true&w=majority';

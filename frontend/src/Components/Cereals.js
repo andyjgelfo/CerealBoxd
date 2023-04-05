@@ -17,7 +17,7 @@ function Cereals()
     let cerealData; 
 
     const app_name = 'cerealboxd'
-    function buildPath(route)
+    function buildPath(route, type)
     {
         if (process.env.NODE_ENV === 'production') 
         {
@@ -25,7 +25,11 @@ function Cereals()
         }
         else
         {        
-            return 'http://localhost:6000/' + route;
+            // return 'http://127.0.0.1:6000/' + route;
+            if (type === 0)
+                return 'http://localhost:5050/' + route;
+            else
+                return 'http://localhost:3000/' + route;
         }
     }
 
@@ -35,7 +39,7 @@ function Cereals()
             var js = JSON.stringify(obj); 
 
             try {
-                const response = await fetch(buildPath('api/search'),
+                const response = await fetch(buildPath('api/search', 0),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
                 cerealData = JSON.parse(await response.text()); 

@@ -20,7 +20,7 @@ function Register()
     const [message, setMessage] = useState()
 
     const app_name = 'cerealboxd'
-    function buildPath(route)
+    function buildPath(route, type)
     {
         if (process.env.NODE_ENV === 'production') 
         {
@@ -28,7 +28,11 @@ function Register()
         }
         else
         {        
-            return 'http://localhost:5000/' + route;
+            // return 'http://127.0.0.1:6000/' + route;
+            if (type === 0)
+                return 'http://localhost:5050/' + route;
+            else
+                return 'http://localhost:3000/' + route;
         }
     }
 
@@ -50,7 +54,7 @@ function Register()
                 throw("Retype Password does not match Password");
             }    
 
-            const res = await fetch (buildPath('api/checkUsername'), 
+            const res = await fetch (buildPath('api/checkUsername', 0), 
             {method:'POST',body:js2,headers:{'Content-Type': 'application/json'}});
 
             var dupe = JSON.parse(await res.text()); 
@@ -61,7 +65,7 @@ function Register()
                 throw("User with this username already exists");
             }
 
-            const response = await fetch(buildPath('api/register'),
+            const response = await fetch(buildPath('api/register', 0),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
             
             // let txt = await response.text();
@@ -76,7 +80,7 @@ function Register()
             //     setMessage('User has been added');
             // }
 
-            window.location.href = buildPath('');
+            window.location.href = buildPath('', 1);
         }
         catch(e)
         {

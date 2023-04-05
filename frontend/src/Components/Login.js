@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
 
+
 function Login()
 {
     // Page Title
@@ -21,7 +22,7 @@ function Login()
     const [message,setMessage] = useState('');
 
     const app_name = 'cerealboxd'
-    function buildPath(route)
+    function buildPath(route, type)
     {
         if (process.env.NODE_ENV === 'production') 
         {
@@ -29,7 +30,11 @@ function Login()
         }
         else
         {        
-            return 'http://localhost:6000/' + route;
+            // return 'http://127.0.0.1:6000/' + route;
+            if (type === 0)
+                return 'http://localhost:5050/' + route;
+            else
+                return 'http://localhost:3000/' + route;
         }
     }
 
@@ -42,7 +47,7 @@ function Login()
         var config = 
         {
             method: 'post',
-            url: buildPath('api/login'),	
+            url: buildPath('api/login', 0),	
             headers: 
             {
                 'Content-Type': 'application/json'
@@ -71,7 +76,7 @@ function Login()
                 var user = {firstName:firstName,lastName:lastName,id:userId}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
-                window.location.href = buildPath('AboutPage');
+                window.location.href = buildPath('AboutPage', 1);
             }
         })
         .catch(function (error) 
