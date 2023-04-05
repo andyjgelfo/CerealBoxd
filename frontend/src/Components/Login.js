@@ -68,6 +68,7 @@ function Login()
     
                 var ud = jwt.decode(storage.retrieveToken(),{complete:true});
                 alert("Stan Loona 3");
+                alert(ud);
                 var userId = ud.payload.userName;
                 var firstName = ud.payload.fName;
                 var lastName = ud.payload.lName;
