@@ -51,14 +51,18 @@ function Login()
             }
             else
             {
+                alert("Stan Loona 1");
                 storage.storeToken(res);
                 var jwt = require('jsonwebtoken');
     
+                alert("Stan Loona 2");
                 var ud = jwt.decode(storage.retrieveToken(),{complete:true});
+                alert("Stan Loona 3");
                 var userId = ud.payload.userName;
                 var firstName = ud.payload.fName;
                 var lastName = ud.payload.lName;
                   
+                alert("Stan Loona 4");
                 var user = {firstName:firstName,lastName:lastName,id:userId}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
