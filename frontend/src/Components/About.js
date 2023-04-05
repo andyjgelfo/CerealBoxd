@@ -7,6 +7,9 @@ function About()
         document.title = 'About';
     }, []);
 
+    const aboot = localStorage.getItem('user_data');
+    alert(aboot);
+
     return(
         <div>
             <h1>About</h1>

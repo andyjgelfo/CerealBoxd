@@ -60,21 +60,16 @@ function Login()
             }
             else 
             {	
-                alert(res);
-                alert("Stan Loona 1");
                 storage.storeToken(res);
                 var jwt = require('jsonwebtoken');
 
-                alert("Stan Loona 2");
     
                 var ud = jwt.decode(storage.retrieveToken(),{complete:true});
-                alert("Stan Loona 3");
-                alert(ud);
+
                 var userId = ud.payload.userName;
                 var firstName = ud.payload.fName;
                 var lastName = ud.payload.lName;
                   
-                alert("Stan Loona 4");
                 var user = {firstName:firstName,lastName:lastName,id:userId}
                 localStorage.setItem('user_data', JSON.stringify(user));
                 window.location.href = buildPath('AboutPage');
@@ -85,52 +80,6 @@ function Login()
             console.log(error);
         });
 
-
-        // try
-        // {    
-        //     const response = await fetch(buildPath('api/login'),
-        //         {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
-
-        //     var res = JSON.parse(await response.text());
-
-        //     // do axios dumE
-        //     alert(res);
-
-        //     if( res.id <= 0 )
-        //     {
-        //         setMessage('Username/Password Combination Incorrect');
-        //     }
-        //     else
-        //     {
-        //         alert("Stan Loona 1");
-        //         storage.storeToken(res);
-        //         var jwt = require('jsonwebtoken');
-    
-        //         alert("Stan Loona 2");
-        //         var ud = jwt.decode(storage.retrieveToken(),{complete:true});
-        //         alert("Stan Loona 3");
-        //         alert(ud);
-        //         var userId = ud.payload.userName;
-        //         var firstName = ud.payload.fName;
-        //         var lastName = ud.payload.lName;
-                  
-        //         alert("Stan Loona 4");
-        //         var user = {firstName:firstName,lastName:lastName,id:userId}
-        //         localStorage.setItem('user_data', JSON.stringify(user));
-
-        //         // var user = {firstName:res.fName,lastName:res.lName,id:res.id}
-        //         // localStorage.setItem('user_data', JSON.stringify(user));
-                
-        //         // setMessage(JSON.stringify(user));
-        //         // setMessage('');
-        //         window.location.href = buildPath('AboutPage');
-        //     }
-        // }
-        // catch(e)
-        // {
-        //     alert(e.toString());
-        //     return;
-        // }   
     }
 
     return(
