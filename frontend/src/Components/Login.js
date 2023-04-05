@@ -60,8 +60,6 @@ function Login()
             }
             else 
             {	
-                alert("Stan Loona 1");
-                alert(res);
                 storage.storeToken(res);
                 var jwt = require('jsonwebtoken');
 
@@ -70,16 +68,18 @@ function Login()
                 alert("stan loona 2");
                 alert(JSON.stringify(ud));
 
-                var userId = ud.payload.userName;
-                var firstName = ud.payload.fName;
-                var lastName = ud.payload.lName;
+                var userId = ud.payload.userId;
+                var firstName = ud.payload.firstName;
+                var lastName = ud.payload.lastName;
                   
                 var user = {firstName:firstName,lastName:lastName,id:userId}
-                // alert(JSON.stringify(user))
+                alert("stan loona 3");
+                alert(JSON.stringify(user))
                 localStorage.setItem('user_data', JSON.stringify(user));
 
                 var aboot = JSON.parse(localStorage.getItem('user_data'));
-                // alert(aboot);
+                alert("stan loona 4");
+                alert(aboot);
 
                 window.location.href = buildPath('AboutPage');
             }
