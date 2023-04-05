@@ -8,13 +8,14 @@ function About()
     }, []);
 
     const aboot = JSON.parse(localStorage.getItem('user_data'));
-    alert(aboot);
+    alert("Welcome " + aboot.id);
 
     return(
         <div>
             <h1>About</h1>
         </div>
     );
+    
 
 };
 
