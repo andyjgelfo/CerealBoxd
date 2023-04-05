@@ -77,7 +77,7 @@ function Login()
                 alert(JSON.stringify(user))
                 localStorage.setItem('user_data', JSON.stringify(user));
 
-                var aboot = JSON.parse(localStorage.getItem('user_data'));
+                var aboot = (localStorage.getItem('user_data'));
                 alert("stan loona 4");
                 alert(aboot);
 
