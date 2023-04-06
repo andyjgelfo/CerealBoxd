@@ -7,8 +7,14 @@ function About()
         document.title = 'About';
     }, []);
 
-    const aboot = JSON.parse(localStorage.getItem('user_data'));
-    alert("Welcome " + aboot.id);
+
+    // const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+
+    // if (JSON.stringify(tokenResponse) === "null")
+    //     alert("Welcome unnamed"); 
+    // else
+    //     alert("Welcome " + tokenResponse.id);
+
 
     return(
         <div>

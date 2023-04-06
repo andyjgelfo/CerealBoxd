@@ -60,10 +60,20 @@ function Cereals()
         setCereal(filteredCereals); 
     }; 
 
+    const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+
+    var sillyMessage = '';
+    if (JSON.stringify(tokenResponse) === "null")
+        sillyMessage = "Silly rabbit, you're not signed in!"
+    else
+        sillyMessage = "Silly Rabbit, Cerealboxd is for " + tokenResponse.id + "!";
+
+
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapper">
              <div className="title">
-                 Silly rabbit, you're not signed in!
+                 {sillyMessage}
+                 
              </div>
 
             <input className="searchBar" placeholder="SEARCH..." onInput={filterCards} />
