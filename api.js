@@ -206,13 +206,25 @@ exports.setApp = function (app, client)
     app.post('/api/addReview', async (req, res, next) =>
     {
 
-    const {cerealName, reviewerName, rating, body, cerealID} = req.body;
+    const {reviewerID, cerealID, rating, body,} = req.body;
 
-    const newReview = {cerealName:cerealName, reviewerName:reviewerName, rating:rating, body:body, cerealID: new ObjectId(cerealID)};
     var error = '';
+    var reviewerName;
+    var cerealName;
+    var newReview;
 
     try
     {
+        const user = client.db("cerealbox").collection('user');
+        const resUser = await user.find({"_id":new ObjectId(reviewerID.trim())}).toArray();
+        reviewerName = resUser[0].userName;
+
+        const box = client.db("cerealbox").collection('box');
+        const resBox = await box.find({"_id":new ObjectId(cerealID.trim())}).toArray();
+        cerealName = resBox[0].name;
+
+
+        newReview = {cerealName:cerealName, cerealID: new ObjectId(cerealID), reviewerName:reviewerName, reviewerID: new ObjectId(reviewerID), rating:rating, body:body};
         const db = client.db("cerealbox").collection('reviews').insertOne(newReview);
     }
     catch(e)
@@ -220,7 +232,7 @@ exports.setApp = function (app, client)
         error = e.toString();
     }
 
-    var ret = { error: error };
+    var ret = {results:newReview, error: error };
     res.status(200).json(ret);
     });
 
@@ -506,8 +518,15 @@ exports.setApp = function (app, client)
 
         // const db = client.db("cerealbox").collection(_collection);
         // const results = await db.find().sort({[_column]:[order]}).toArray();
-        var maxSugars = await nutrition.find().sort({"addedSugars":-1}).toArray();
-        var maxSugar = maxSugars[0].addedSugars;
+
+        var maxSugars = await nutrition.aggregate(
+            [
+                {$project: {_id: 1, ratio: {$divide: ["$addedSugars", "$servingSize"]}}}, 
+                {$sort: {ratio: -1}}
+            ]
+          ).toArray();
+        // var maxSugars = await nutrition.find().sort({"addedSugars":-1}).toArray();
+        var maxSugar = maxSugars[0].ratio;
 
 
         let result = await nutrition.aggregate([
@@ -515,7 +534,7 @@ exports.setApp = function (app, client)
             $group: {
                 _id: "$cerealID",
                 // kill: {$divide: ["$addedSugars", maxSugar]}
-                kill: {$first: "$addedSugars"}
+                // kill: {$first: "$addedSugars"}
             }
             }
         ]).toArray();
@@ -523,9 +542,17 @@ exports.setApp = function (app, client)
         var i = 0;
         while (i < result.length)
         {
-            
             let id = result[i]._id;
-            let kill = Math.round((result[i].kill / maxSugar) * 10 * 1e2 ) / 1e2;
+            var cereals = await nutrition.find({"cerealID":new ObjectId(id)}).toArray();
+            var cereal = cereals[0]
+            if (cereal.addedSugars !== 0)
+            {
+                var killBefore = (cereal.addedSugars/cereal.servingSize) / maxSugar;
+                
+                kill = Math.round(killBefore * 1e2 * 10) / 1e2;
+            }
+            else
+                kill = 0;
 
             let filter = {_id: new ObjectId(id)};
             let edit = {
@@ -538,7 +565,7 @@ exports.setApp = function (app, client)
             i++;
         }
 
-        var ret = {result: maxSugar, error: error};
+        var ret = {result: result, error: error};
         res.status(200).json(ret);
 
     });
