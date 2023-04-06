@@ -1,5 +1,5 @@
 require('express');
-require('mongodb');
+const { ObjectId } = require('mongodb');
 
 exports.setApp = function (app, client)
 {
@@ -384,34 +384,6 @@ exports.setApp = function (app, client)
     res.status(200).json(ret);
     })
 
-    // app.post('/api/editIngredients', async (req, res, next) =>
-    // {
-    //   const {_id, ingredients} = req.body;
-    //   var ObjectId = require('mongodb').ObjectId;
-    //   var error = '';
-    //   var _ingredients = ingredients.trim().toLowerCase();
-
-    //   try
-    //   {
-    //     const rev = client.db("cerealbox").collection('box');
-    //     const filter = {_id: new ObjectId(_id)};
-    //     const edit = {
-    //       $set: {
-    //         ingredients:_ingredients
-    //       },
-    //     };
-
-    //     const result = await rev.updateOne(filter, edit);
-    //   }
-    //   catch(e)
-    //   {
-    //     error = e.toString();
-    //   }
-
-    //   var ret = { error: error };
-    //   res.status(200).json(ret);
-    // })
-
     // what this does is that for each cereal, it gets the rating based on the average review score of corresponding cereal
     app.post('/api/setAvgReview', async (req, res, next) =>
     {
@@ -437,7 +409,8 @@ exports.setApp = function (app, client)
     {
         
         let id = result[i]._id;
-        let average = result[i].avgReview
+        let average = Math.round(result[i].avgReview * 1e2 ) / 1e2;
+        // let average = result[i].avgReview
 
         let filter = {_id: new ObjectId(id)};
         let edit = {
@@ -523,4 +496,51 @@ exports.setApp = function (app, client)
     var ret = { error: error };
     res.status(200).json(ret);
     });
+
+    app.post('/api/setKill', async (req, res, next) =>
+    {
+        var error = '';
+
+        const box = client.db("cerealbox").collection('box');
+        const nutrition = client.db("cerealbox").collection('nutrition');
+
+        // const db = client.db("cerealbox").collection(_collection);
+        // const results = await db.find().sort({[_column]:[order]}).toArray();
+        var maxSugars = await nutrition.find().sort({"addedSugars":-1}).toArray();
+        var maxSugar = maxSugars[0].addedSugars;
+
+
+        let result = await nutrition.aggregate([
+            {
+            $group: {
+                _id: "$cerealID",
+                // kill: {$divide: ["$addedSugars", maxSugar]}
+                kill: {$first: "$addedSugars"}
+            }
+            }
+        ]).toArray();
+
+        var i = 0;
+        while (i < result.length)
+        {
+            
+            let id = result[i]._id;
+            let kill = Math.round((result[i].kill / maxSugar) * 10 * 1e2 ) / 1e2;
+
+            let filter = {_id: new ObjectId(id)};
+            let edit = {
+            $set: {
+                willItKillYou: kill
+            },
+            };
+
+            let edited = await box.updateOne(filter, edit);
+            i++;
+        }
+
+        var ret = {result: maxSugar, error: error};
+        res.status(200).json(ret);
+
+    });
+
 }
