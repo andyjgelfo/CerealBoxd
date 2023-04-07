@@ -6,7 +6,7 @@ exports.setApp = function (app, client)
     app.post('/api/addDB', async(req, res, next) =>
     {
     //   const db = client.db("cerealbox");
-    //   const results = db.collection('nutrition').updateMany({}, {$set:{"name":"", "image":""
+    //   const results = db.collection('nutrition').updateMany({}, {$set:{"vitaminA":0
     // }});
     //   res.status(200)
     }
@@ -144,9 +144,9 @@ exports.setApp = function (app, client)
     app.post('/api/addCereal', async (req, res, next) =>
     {
 
-    const { name, description, releaseDate, willItKillYou, manufacturer, image, ingredients } = req.body;
+    const { name, description, releaseDate, willItKillYou, manufacturer, rating, image, ingredients } = req.body;
 
-    const newCereal = {name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer, image:image, ingredients: ingredients};
+    const newCereal = {name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer, rating:rating, image:image, ingredients: ingredients};
     var error = '';
     var dupe = '';
     var _search = name.trim();
@@ -212,33 +212,64 @@ exports.setApp = function (app, client)
     var reviewerName;
     var cerealName;
     var newReview;
+    var result;
 
     try
     {
+        
         const user = client.db("cerealbox").collection('user');
         const resUser = await user.find({"_id":new ObjectId(reviewerID.trim())}).toArray();
         reviewerName = resUser[0].userName;
 
         const box = client.db("cerealbox").collection('box');
-        const resBox = await box.find({"_id":new ObjectId(cerealID.trim())}).toArray();
+        let cerID = new ObjectId(cerealID.trim());
+        const resBox = await box.find({"_id":cerID}).toArray();
         cerealName = resBox[0].name;
-
 
         newReview = {cerealName:cerealName, cerealID: new ObjectId(cerealID), reviewerName:reviewerName, reviewerID: new ObjectId(reviewerID), rating:rating, body:body};
         const db = client.db("cerealbox").collection('reviews').insertOne(newReview);
+
+        result = await client.db("cerealbox").collection('reviews').aggregate([
+            {
+            $group: {
+                _id: "$cerealID",
+                avgReview: {$avg: "$rating"}
+            }
+            },
+            {
+                $match: {_id: {$eq: cerID}}
+            }
+        ]).toArray();
+
+        let id = result[0]._id;
+        let average = Math.round(result[0].avgReview * 1e2 ) / 1e2;
+        // let average = result[i].avgReview
+
+        let filter = {_id: cerID};
+        let edit = {
+        $set: {
+            rating: average
+        },
+        };
+
+        let edited = await box.updateOne(filter, edit);
+
+
+        
     }
     catch(e)
     {
         error = e.toString();
     }
 
-    var ret = {results:newReview, error: error };
+    var ret = {results:result, error: error };
     res.status(200).json(ret);
     });
 
+    // might need to edit later to work with local storage
     app.post('/api/editReview', async (req, res, next) =>
     {
-    const {_id, cerealName, reviewerName, rating, body} = req.body;
+    const {_id, rating, body} = req.body;
     var ObjectId = require('mongodb').ObjectId;
     var error = '';
 
@@ -248,7 +279,7 @@ exports.setApp = function (app, client)
         const filter = {_id: new ObjectId(_id)};
         const edit = {
         $set: {
-            cerealName:cerealName, reviewerName:reviewerName, rating:rating, body:body
+            rating:rating, body:body
         },
         };
 
@@ -478,27 +509,64 @@ exports.setApp = function (app, client)
     // "folate":0, 
     // "vitaminB12":0
 
-    const {name, cerealID, image, servingSize, calories, totalFat, saturatedFat, 
+    const {cerealID, image, servingSize, calories, totalFat, saturatedFat, 
     transFat, polyunsaturatedFat, monounsaturatedFat, cholesterol, sodium,
     totalCarbohydrate, dietaryFiber, totalSugars, addedSugars, protein, vitaminD, calcium,
     iron, potassium, vitaminC, thiamin, riboflavin, niacin, phosphorus, magnesium, zinc, 
-    selenium, copper, manganese, vitaminB6, folate, vitaminB12} = req.body;
+    selenium, copper, manganese, vitaminB6, folate, vitaminB12, vitaminA} = req.body;
 
-    const newNutrition = {name:name, cerealID: new ObjectId(cerealID), image:image, servingSize:servingSize, calories:calories, 
-        totalFat:totalFat, saturatedFat:saturatedFat, 
-        transFat:transFat, polyunsaturatedFat:polyunsaturatedFat, monounsaturatedFat:monounsaturatedFat, 
-        cholesterol:cholesterol, sodium:sodium,
-        totalCarbohydrate:totalCarbohydrate, dietaryFiber:dietaryFiber, totalSugars:totalSugars, 
-        addedSugars:addedSugars, protein:protein, vitaminD:vitaminD, calcium:calcium,
-        iron:iron, potassium:potassium, vitaminC:vitaminC, thiamin:thiamin, riboflavin:riboflavin,
-        niacin:niacin, phosphorus:phosphorus, magnesium:magnesium, 
-        zinc:zinc, selenium:selenium, copper:copper, manganese:manganese,
-        vitaminB6:vitaminB6, folate:folate, vitaminB12:vitaminB12};
+    
     var error = '';
+    var kill;
 
     try
     {
-        const db = client.db("cerealbox").collection('nutrition').insertOne(newNutrition);
+        const box = client.db("cerealbox").collection('box');
+        const cerID = new ObjectId(cerealID.trim());
+        const resBox = await box.find({"_id":cerID}).toArray();
+        let name = resBox[0].name;
+        const newNutrition = {name:name, cerealID: new ObjectId(cerealID), image:image, servingSize:servingSize, calories:calories, 
+            totalFat:totalFat, saturatedFat:saturatedFat, 
+            transFat:transFat, polyunsaturatedFat:polyunsaturatedFat, monounsaturatedFat:monounsaturatedFat, 
+            cholesterol:cholesterol, sodium:sodium,
+            totalCarbohydrate:totalCarbohydrate, dietaryFiber:dietaryFiber, totalSugars:totalSugars, 
+            addedSugars:addedSugars, protein:protein, vitaminD:vitaminD, calcium:calcium,
+            iron:iron, potassium:potassium, vitaminC:vitaminC, thiamin:thiamin, riboflavin:riboflavin,
+            niacin:niacin, phosphorus:phosphorus, magnesium:magnesium, 
+            zinc:zinc, selenium:selenium, copper:copper, manganese:manganese,
+            vitaminB6:vitaminB6, folate:folate, vitaminB12:vitaminB12, vitaminA: vitaminA};
+
+        const nutrition = client.db("cerealbox").collection('nutrition')
+        const db = nutrition.insertOne(newNutrition);
+
+        // var maxSugars = await nutrition.aggregate(
+        //     [
+        //         {$project: {_id: 1, ratio: {$divide: ["$addedSugars", "$servingSize"]}}}, 
+        //         {$sort: {ratio: -1}}
+        //     ]
+        //   ).toArray();
+        // var maxSugar = maxSugars[0].ratio;
+
+        // var cereals = await nutrition.find({"cerealID":cerID}).toArray();
+        //     var cereal = cereals[0]
+        //     if (cereal.addedSugars !== 0)
+        //     {
+        //         var killBefore = (cereal.addedSugars/cereal.servingSize) / maxSugar;
+                
+        //         kill = Math.round(killBefore * 1e2 * 10) / 1e2;
+        //     }
+        //     else
+        //         kill = 0;
+
+        // // editing kill score
+        // let filter = {_id: cerID};
+        // let edit = {
+        // $set: {
+        //     willItKillYou: kill
+        // },
+        // };
+
+        // let edited = await box.updateOne(filter, edit);
     }
     catch(e)
     {
@@ -516,26 +584,20 @@ exports.setApp = function (app, client)
         const box = client.db("cerealbox").collection('box');
         const nutrition = client.db("cerealbox").collection('nutrition');
 
-        // const db = client.db("cerealbox").collection(_collection);
-        // const results = await db.find().sort({[_column]:[order]}).toArray();
-
         var maxSugars = await nutrition.aggregate(
             [
                 {$project: {_id: 1, ratio: {$divide: ["$addedSugars", "$servingSize"]}}}, 
                 {$sort: {ratio: -1}}
             ]
           ).toArray();
-        // var maxSugars = await nutrition.find().sort({"addedSugars":-1}).toArray();
         var maxSugar = maxSugars[0].ratio;
 
 
         let result = await nutrition.aggregate([
             {
-            $group: {
-                _id: "$cerealID",
-                // kill: {$divide: ["$addedSugars", maxSugar]}
-                // kill: {$first: "$addedSugars"}
-            }
+                $group: {
+                    _id: "$cerealID",
+                }
             }
         ]).toArray();
 
