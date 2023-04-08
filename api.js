@@ -82,18 +82,8 @@ exports.setApp = function (app, client)
     {
         const db = client.db("cerealbox");
         const userBase = db.collection('user');
-        // dupe = await db.collection('user').find({"userName":{$regex:_search+'.*', $options:'ri'}}).toArray();
-        
-        // if (dupe != '')
-        // {
-        //   e = "User with this username already exist, please try again";
-        //   throw(e);
-        // }
-        // else {
-        //   const result = userBase.insertOne(newUser);
-        // }
+
         const result = userBase.insertOne(newUser);
-        // console.log(result);
     }
     catch(e)
     {
@@ -128,7 +118,6 @@ exports.setApp = function (app, client)
         }
         i++;
         }
-
 
     }
     catch(e)
@@ -178,7 +167,7 @@ exports.setApp = function (app, client)
 
     app.post('/api/editCereal', async (req, res, next) =>
     {
-    const { name, description, releaseDate, willItKillYou, manufacturer, image, ingredients } = req.body;
+    const { name, description, releaseDate, manufacturer, image, ingredients } = req.body;
     var ObjectId = require('mongodb').ObjectId;
     var error = '';
 
@@ -188,7 +177,7 @@ exports.setApp = function (app, client)
         const filter = {_id: new ObjectId(_id)};
         const edit = {
         $set: {
-            name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer, image: image, ingredients: ingredients
+            name:name, description:description, releaseDate:releaseDate, manufacturer: manufacturer, image: image, ingredients: ingredients
         },
         };
 
@@ -266,31 +255,57 @@ exports.setApp = function (app, client)
     res.status(200).json(ret);
     });
 
-    // might need to edit later to work with local storage
     app.post('/api/editReview', async (req, res, next) =>
     {
-    const {_id, rating, body} = req.body;
-    var ObjectId = require('mongodb').ObjectId;
+    const {reviewID, cerealID, rating, body} = req.body;
+    // var ObjectId = require('mongodb').ObjectId;
     var error = '';
+    var result;
 
     try
     {
-        const rev = client.db("cerealbox").collection('reviews');
-        const filter = {_id: new ObjectId(_id)};
-        const edit = {
+        const rev = client.db("cerealbox").collection('reviews')
+        const box = client.db("cerealbox").collection('box');
+        let cerID = new ObjectId(cerealID.trim());
+        var filter = {_id: new ObjectId(reviewID)};
+        var edit = {
         $set: {
-            rating:rating, body:body
+            'rating':rating, 'body':body
         },
         };
 
-        const result = await rev.updateOne(filter, edit);
+        result = await rev.updateOne(filter, edit);
+        result = await client.db("cerealbox").collection('reviews').aggregate([
+            {
+            $group: {
+                _id: "$cerealID",
+                avgReview: {$avg: "$rating"}
+            }
+            },
+            {
+                $match: {_id: {$eq: cerID}}
+            }
+        ]).toArray();
+
+        // let resID = result[0]._id;
+        let average = Math.round(result[0].avgReview * 1e2 ) / 1e2;
+        // let average = result[i].avgReview
+
+        filter = {_id: cerID};
+        edit = {
+        $set: {
+            rating: average
+        },
+        };
+
+        let edited = await box.updateOne(filter, edit);
     }
     catch(e)
     {
         error = e.toString();
     }
 
-    var ret = { error: error };
+    var ret = {result: result, error: error };
     res.status(200).json(ret);
     })
 
