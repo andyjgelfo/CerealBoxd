@@ -41,7 +41,7 @@
     padding-top: 1.4em; 
 }
 
-.searchBar {
+#searchBar {
     font-family: 'SemiBold15';
     font-size: 1.6rem;
     background-color: white;
@@ -57,7 +57,7 @@
     padding-left: 0.8em; 
 }
 
-.cardContainer {
+#cardContainer {
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -68,4 +68,24 @@
 #wrapper {
     flex-wrap: nowrap;
     flex-direction: column;
+}
+
+#card {
+    background-color: transparent; 
+    margin: 1.2rem 1.2rem 1.2rem 0; 
+    width: 200px; 
+    height: 285px; 
+    overflow: hidden; 
+    transition: transform .3s ease;
+    cursor: pointer; 
+    border-radius: 12px; 
+}
+
+#card:hover {
+    transform: scale(1.1); 
+} 
+
+#card img {
+    width:  200px;
+    height: auto; 
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import "../Styles/Cereals.css"; 
 import { useState, useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CerealCard from '../Components/CerealCard'; 
+import { Link } from "react-router-dom"; 
 
 function Cereals()
 {
@@ -71,21 +71,29 @@ function Cereals()
 
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapper">
-             <div className="title">
-                 {sillyMessage}
-                 
-             </div>
+            <div className="title">
+                {sillyMessage}
+            </div>
 
-            <input className="searchBar" placeholder="SEARCH..." onInput={filterCards} />
-     
-            <div className="cardContainer">
-                {cereal.map((box, index) => (
-                    <CerealCard cerealData={box} key={index}/>
-                ))}
+            <input id="searchBar" placeholder="SEARCH..." onInput={filterCards} />
+
+            <div id="cardContainer">
+                {cereal.map(cereal2 => {
+                    return (
+                        <Link 
+                        to={{
+                        pathname: `/view-cereal-details/${cereal2._id}`, 
+                        }}>
+                            <div id="card">
+                                <img src={cereal2.image}/>
+                            </div>
+                        </Link>
+                    ); 
+                })}
             </div>
         </div>
     );
-};
+}
 
 export default Cereals;
 
