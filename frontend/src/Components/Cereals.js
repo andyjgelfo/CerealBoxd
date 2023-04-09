@@ -82,7 +82,7 @@ function Cereals()
                     return (
                         <Link 
                         to={{
-                        pathname: `/view-cereal-details/${cereal2._id}`, 
+                        pathname: `/CerealCardPage/${cereal2._id}`, 
                         }}>
                             <div id="card">
                                 <img src={cereal2.image}/>

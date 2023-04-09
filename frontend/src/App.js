@@ -21,7 +21,7 @@ class App extends Component {
             <Route path="/CerealsPage" index element = {<React.Fragment><Navbar /><Cereals /></React.Fragment>}/>
             <Route path="/LoginPage" index element={<React.Fragment><Navbar /><Login /></React.Fragment>} />
             <Route path="/RegisterPage" index element = {<React.Fragment><Navbar /><Register /></React.Fragment>}/>
-            <Route path="/view-cereal-details/:_id" element={<React.Fragment><Navbar /><CerealCard /></React.Fragment>}/>
+            <Route path="/CerealCardPage/:_id" element={<React.Fragment><Navbar /><CerealCard /></React.Fragment>}/>
           </Routes>
         </div>
       </BrowserRouter>

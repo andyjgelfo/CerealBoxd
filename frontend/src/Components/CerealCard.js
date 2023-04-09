@@ -1,6 +1,7 @@
 import React from 'react'; 
 import { useParams } from "react-router-dom"; 
 import { useState, useEffect } from 'react'; 
+import "../Styles/CerealCard.css"; 
 
 const CerealCard = (_) => {
     // Obtains the ID of the cereal 
@@ -31,9 +32,14 @@ const CerealCard = (_) => {
     }, []); 
 
     return(
-        <div>
-            {info.name}
-            {info.manufacturer}
+        <div className='container d-flex align-items-center justify-content-center' id="wrapperCerealCard">
+            <div id="imageContainer">
+                <img src={info.image} />
+            </div>
+
+            <div id="infoContainer">
+                {info.name}
+            </div>
         </div>
     ); 
 }; 
