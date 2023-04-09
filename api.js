@@ -356,11 +356,11 @@ exports.setApp = function (app, client)
 
     // const results =  db
     
-    var _ret = [];
-    for( var i=0; i<results.length; i++ )
-    {
-        _ret.push( results[i].name );
-    }
+    // var _ret = [];
+    // for( var i=0; i<results.length; i++ )
+    // {
+    //     _ret.push( results[i].name );
+    // }
     
     // var ret = {results:_ret, error:error};
     var ret = {results:results, error:error};
@@ -663,14 +663,14 @@ exports.setApp = function (app, client)
     const db = client.db("cerealbox");
     const results = await db.collection(_collection).find({[_column]:new ObjectId(_target)}).toArray();
     
-    // var _ret = [];
-    // for( var i=0; i<results.length; i++ )
-    // {
-    //     _ret.push( results[i].name );
-    // }
+    var _ret = [];
+    for( var i=0; i<results.length; i++ )
+    {
+        _ret.push( results[i] );
+    }
     
     // var ret = {results:_ret, error:error};
-    var ret = {results:results, error:error};
+    var ret = {results:_ret[0], error:error};
     res.status(200).json(ret);
     });
 
