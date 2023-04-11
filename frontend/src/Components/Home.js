@@ -25,7 +25,7 @@ function Home()
             </div>
             <h1 data-aos = "fade-up">Featured Articles</h1>
             <br></br>
-            <hr></hr>
+
            <section data-aos = "fade-up" class="articles">
                 <article>
                     <div class="article-wrapper">
@@ -33,7 +33,7 @@ function Home()
                             <img src={require('../Images/SadCereal.png')} className="cards" />
                         </figure>
                         <div class="article-body">
-                            <h2>&nbsp;Top 10 Cereals For A Rainy &nbsp;Day</h2>
+                            <h2>&nbsp;Top 10 Cereals For A Rainy Day</h2>
                             <p>
                             &nbsp;Enter Description Here.
                             </p>

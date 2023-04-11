@@ -89,3 +89,15 @@
     width:  200px;
     height: auto; 
 }
+
+#newCerealButton {
+    background: none;
+    border: none; 
+    color: #F2EAC1; 
+    font-size: 3rem;
+    margin-left: 5px;
+}
+
+#newCerealButton:hover {
+    color: #40bcf4; 
+}

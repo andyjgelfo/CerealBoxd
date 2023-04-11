@@ -10,6 +10,9 @@ const CerealCard = (_) => {
     const [info, setInfo] = useState([]); 
     let infoData; 
 
+    // const [nutrition, setNutrition] = useState([]); 
+    // let nutritionData; 
+
     var bp = require('./Path.js');
     
     useEffect(() => {
@@ -31,6 +34,25 @@ const CerealCard = (_) => {
         })(); 
     }, []); 
 
+    // useEffect(() => {
+    //     (async () => {
+    //         var obj = {collection:"box",column:"_id",target:_id};
+    //         var js = JSON.stringify(obj); 
+
+    //         try {
+    //             const response = await fetch(bp.buildPath('api/addNutrition'),
+    //             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+    //             nutritionData = JSON.parse(await response.text()); 
+
+    //         } catch (error) {
+    //             nutritionData = []; 
+    //         }
+
+    //         setNutrition(nutritionData.results); 
+    //     })(); 
+    // }, []); 
+
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapperCerealCard">
             <div id="imageContainer">
@@ -47,6 +69,7 @@ const CerealCard = (_) => {
                 <span id="willItKillYou">{info.willItKillYou}</span>
                 <span id="ratingLabel">Overall Rating</span>
                 <span id="rating">{info.rating}</span>
+                {/* {nutrition.sodium} */}
             </div>
         </div>
     ); 

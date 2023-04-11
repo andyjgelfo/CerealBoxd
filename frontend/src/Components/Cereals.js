@@ -3,6 +3,7 @@ import "../Styles/Cereals.css";
 import { useState, useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom"; 
+import { HiPlusCircle } from "react-icons/hi"; 
 
 function Cereals()
 {
@@ -75,7 +76,13 @@ function Cereals()
                 {sillyMessage}
             </div>
 
-            <input id="searchBar" placeholder="SEARCH..." onInput={filterCards} />
+            <div>
+                <input id="searchBar" placeholder="SEARCH..." onInput={filterCards} />
+
+                <button id="newCerealButton">
+                    <HiPlusCircle />
+                </button>
+            </div>
 
             <div id="cardContainer">
                 {cereal.map(cereal2 => {
