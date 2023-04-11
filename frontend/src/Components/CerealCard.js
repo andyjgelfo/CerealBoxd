@@ -34,11 +34,19 @@ const CerealCard = (_) => {
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapperCerealCard">
             <div id="imageContainer">
-                <img src={info.image} />
+                <img id="image" src={info.image}></img>
             </div>
 
             <div id="infoContainer">
-                {info.name}
+                <span id="name">{info.name}</span>
+                <span id="subtitle">{info.releaseDate}  |  Produced by {info.manufacturer}</span>
+                <span id="description">{info.description}</span>
+                <span id="ingredientsLabel">Ingredients</span>
+                <span id="ingredients">{info.ingredients}</span>
+                <span id="willItKillYouLabel">Will It Kill You? Meter</span>
+                <span id="willItKillYou">{info.willItKillYou}</span>
+                <span id="ratingLabel">Overall Rating</span>
+                <span id="rating">{info.rating}</span>
             </div>
         </div>
     ); 

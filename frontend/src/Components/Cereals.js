@@ -66,7 +66,7 @@ function Cereals()
     if (JSON.stringify(tokenResponse) === "null")
         sillyMessage = "Silly rabbit, you're not signed in!"
     else
-        sillyMessage = "Silly Rabbit, Cerealboxd is for " + tokenResponse.id + "!";
+        sillyMessage = "Silly rabbit, Cerealboxd is for " + tokenResponse.id + "!";
 
 
     return(
@@ -82,7 +82,7 @@ function Cereals()
                     return (
                         <Link 
                         to={{
-                        pathname: `/CerealCardPage/${cereal2._id}`, 
+                        pathname: `/CerealDetails/${cereal2._id}`, 
                         }}>
                             <div id="card">
                                 <img src={cereal2.image}/>

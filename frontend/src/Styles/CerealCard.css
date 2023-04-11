@@ -1,0 +1,163 @@
+@font-face {
+    font-family: "Book20";
+    src: local("SharpGroteskBook20"),
+     url("../Fonts/SharpGroteskBook20.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "SemiBold15";
+    src: local("SharpGroteskSemiBold15"),
+     url("../Fonts/SharpGroteskSemiBold15.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "SemiBold20";
+    src: local("SharpGroteskSemiBold20"),
+     url("../Fonts/SharpGroteskSemiBold20.otf") format("truetype");
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --mainColor: #2C3440; 
+    --secondaryColor: #F2EAC1; 
+    --textColor1: white; 
+    --textColor2: #1C2143;
+    --hover: #40bcf4;  
+}
+
+#wrapperCerealCard {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#imageContainer {
+    width: 25em; 
+    height: max-content; 
+    background-color: transparent;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
+    margin-top: 3.6em; 
+    margin-bottom: auto; 
+}
+
+#image {
+    width: 100%;  
+    border-radius: 12px;
+}
+
+#infoContainer {
+    width: 45em; 
+    height: max-content; 
+    border-color: #1C2143; 
+    border-radius: 32px; 
+    border-width: 0.6em; 
+    border-style: solid; 
+    background-color: #F2EAC1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
+    margin-left: 2%; 
+    margin-top: 3em; 
+    margin-bottom: 3em; 
+}
+
+#name {
+    background-color: #F2EAC1;
+    font-family: 'SemiBold20';
+    color: #1C2143; 
+    font-size: 2.4rem;
+    padding-top: 2%;
+    padding-left: 6%;
+    padding-right: 6%; 
+    border-radius: 32px;
+}
+
+#subtitle {
+    background-color: #F2EAC1;
+    font-family: 'SemiBold15';
+    color: #1C2143; 
+    font-size: 1.6rem; 
+    padding-bottom: 3%;
+    padding-left: 6%;
+    padding-right: 6%; 
+}
+
+#description {
+    background-color: #F2EAC1;
+    font-family: 'Book20';
+    color: #1C2143; 
+    font-size: 1.2rem; 
+    padding-left: 6%;
+    padding-right: 6%; 
+    padding-bottom: 3%; 
+    align-items: center;
+    justify-content: center;
+}
+
+#ingredientsLabel {
+    background-color: #F2EAC1;
+    font-family: 'SemiBold15';
+    color: #1C2143; 
+    font-size: 1.4rem; 
+    padding-left: 6%;
+    padding-right: 6%; 
+}
+
+#ingredients {
+    background-color: #F2EAC1;
+    font-family: 'Book20';
+    color: #1C2143; 
+    font-size: 1rem;
+    padding-left: 6%; 
+    padding-right: 6%; 
+    padding-bottom: 3%; 
+}
+
+#willItKillYouLabel {
+    background-color: #F2EAC1;
+    font-family: 'SemiBold15';
+    color: #1C2143; 
+    font-size: 1.4rem; 
+    padding-left: 6%;
+    padding-right: 6%; 
+}
+
+#willItKillYou {
+    background-color: #F2EAC1;
+    font-family: 'Book20';
+    color: #1C2143; 
+    font-size: 1rem;
+    padding-left: 6%; 
+    padding-right: 6%; 
+    padding-bottom: 3%; 
+}
+
+#ratingLabel {
+    background-color: #F2EAC1;
+    font-family: 'SemiBold15';
+    color: #1C2143; 
+    font-size: 1.4rem; 
+    padding-left: 6%;
+    padding-right: 6%; 
+}
+
+#rating {
+    background-color: #F2EAC1;
+    font-family: 'Book20';
+    color: #1C2143; 
+    font-size: 1rem;
+    padding-left: 6%; 
+    padding-right: 6%; 
+    padding-bottom: 2%; 
+}
