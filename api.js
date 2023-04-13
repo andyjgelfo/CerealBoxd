@@ -539,9 +539,9 @@ exports.setApp = function (app, client)
         const box = client.db("cerealbox").collection('box');
         const cerID = new ObjectId(cerealID.trim());
         // const cerID = cerealID;
-        const resBox = await box.find({"_id":cerID}).toArray();
-        let name = resBox[0].name;
-        const newNutrition = {name:name, cerealID: new ObjectId(cerealID), image:image, servingSize:servingSize, calories:calories, 
+        // const resBox = await box.find({"_id":cerID}).toArray();
+        // let name = resBox[0].name;
+        const newNutrition = {cerealID: new ObjectId(cerealID), image:image, servingSize:servingSize, calories:calories, 
             totalFat:totalFat, saturatedFat:saturatedFat, 
             transFat:transFat, polyunsaturatedFat:polyunsaturatedFat, monounsaturatedFat:monounsaturatedFat, 
             cholesterol:cholesterol, sodium:sodium,
