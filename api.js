@@ -524,7 +524,7 @@ exports.setApp = function (app, client)
     // "folate":0, 
     // "vitaminB12":0
 
-    const {cerealID, image, servingSize, calories, totalFat, saturatedFat, 
+    const {cerealID, servingSize, calories, totalFat, saturatedFat, 
     transFat, polyunsaturatedFat, monounsaturatedFat, cholesterol, sodium,
     totalCarbohydrate, dietaryFiber, totalSugars, addedSugars, protein, vitaminD, calcium,
     iron, potassium, vitaminC, thiamin, riboflavin, niacin, phosphorus, magnesium, zinc, 
@@ -541,7 +541,7 @@ exports.setApp = function (app, client)
         // const cerID = cerealID;
         // const resBox = await box.find({"_id":cerID}).toArray();
         // let name = resBox[0].name;
-        const newNutrition = {cerealID: new ObjectId(cerealID), image:image, servingSize:servingSize, calories:calories, 
+        const newNutrition = {cerealID: new ObjectId(cerealID), servingSize:servingSize, calories:calories, 
             totalFat:totalFat, saturatedFat:saturatedFat, 
             transFat:transFat, polyunsaturatedFat:polyunsaturatedFat, monounsaturatedFat:monounsaturatedFat, 
             cholesterol:cholesterol, sodium:sodium,
