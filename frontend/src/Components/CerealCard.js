@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react';
 import "../Styles/CerealCard.css"; 
 import { VscHeartFilled } from "react-icons/vsc"; 
 import { BsFillStarFill } from "react-icons/bs"; 
+import { MdMenuBook } from "react-icons/md"; 
+import { BsSpeedometer2 } from "react-icons/bs"; 
+import { BsStars } from "react-icons/bs"; 
+import { IoMdNutrition } from "react-icons/io"; 
 
 const CerealCard = (_) => {
     // Obtains the ID of the cereal 
@@ -56,7 +60,7 @@ const CerealCard = (_) => {
     }, []); 
 
     const [rating, setRating] = useState(null); 
-    const [hover, setHover] = useState(null); 
+    const [hover, setHover] = useState(null);  
 
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapperCerealCard">
@@ -97,12 +101,46 @@ const CerealCard = (_) => {
                 <span id="name">{info.name}</span>
                 <span id="subtitle">{info.releaseDate}  |  Produced by {info.manufacturer}</span>
                 <span id="description">{info.description}</span>
-                <span id="ingredientsLabel">Ingredients</span>
+                <span id="ratingLabel"><BsStars id="ratingIcon"/> Overall Rating <BsStars id="ratingIcon"/></span>
+                <span id="rating">{info.rating} / 5</span>
+                <span id="ingredientsLabel"><MdMenuBook id="ingredientsIcon"/> Ingredients <MdMenuBook id="ingredientsIcon"/></span>
                 <span id="ingredients">{info.ingredients}</span>
-                <span id="willItKillYouLabel">Will It Kill You? Meter</span>
+
+                <span id="nutritionLabel"><IoMdNutrition id="nutritionIcon"/> Nutrition Facts <IoMdNutrition id="nutritionIcon"/></span>
+                <span class="nutritionFacts">Serving Size: {nutrition.servingSize} g</span>
+                <span class="nutritionFacts">Calories: {nutrition.calories}</span>
+                <span class="nutritionFacts">Total Fat: {nutrition.totalFat} g</span>
+                <span class="nutritionFacts">Saturated Fat: {nutrition.saturatedFat} g</span>
+                <span class="nutritionFacts">Trans Fat: {nutrition.transFat} g</span>
+                <span class="nutritionFacts">Polyunsaturated Fat: {nutrition.polyunsaturatedFat} g</span>
+                <span class="nutritionFacts">Monounsaturated Fat: {nutrition.monounsaturatedFat} g</span>
+                <span class="nutritionFacts">Cholesterol: {nutrition.cholesterol} mg</span>
+                <span class="nutritionFacts">Sodium: {nutrition.sodium} mg</span>
+                <span class="nutritionFacts">Total Carbohydrate: {nutrition.totalCarbohydrate} g</span>
+                <span class="nutritionFacts">Dietary Fiber: {nutrition.dietaryFiber} g</span>
+                <span class="nutritionFacts">Total Sugars: {nutrition.totalSugars} g</span>
+                <span class="nutritionFacts">Added Sugars: {nutrition.addedSugars} g</span>
+                <span class="nutritionFacts">Protein: {nutrition.protein} g</span>
+                <span class="nutritionFacts">Vitamin D: {nutrition.vitaminD}</span>
+                <span class="nutritionFacts">Calcium: {nutrition.calcium}</span>
+                <span class="nutritionFacts">Iron: {nutrition.iron}</span>
+                <span class="nutritionFacts">Potassium: {nutrition.potassium}</span>
+                <span class="nutritionFacts">Vitamin C: {nutrition.vitaminC}</span>
+                <span class="nutritionFacts">Thiamin: {nutrition.thiamin}</span>
+                <span class="nutritionFacts">Riboflavin: {nutrition.riboflavin}</span>
+                <span class="nutritionFacts">Niacin: {nutrition.niacin}</span>
+                <span class="nutritionFacts">Phosphorus: {nutrition.phosphorus}</span>
+                <span class="nutritionFacts">Magnesium: {nutrition.magnesium}</span>
+                <span class="nutritionFacts">Zinc: {nutrition.zinc}</span>
+                <span class="nutritionFacts">Selenium: {nutrition.selenium}</span>
+                <span class="nutritionFacts">Copper: {nutrition.copper}</span>
+                <span class="nutritionFacts">Manganese: {nutrition.manganese}</span>
+                <span class="nutritionFacts">Vitamin B6: {nutrition.vitaminB6}</span>
+                <span class="nutritionFacts">Folate: {nutrition.folate}</span>
+                <span class="nutritionFacts">Vitamin B12: {nutrition.vitaminB12}</span>
+
+                <span id="willItKillYouLabel"><BsSpeedometer2 id="killIcon"/> Will It Kill You Meter <BsSpeedometer2 id="killIcon"/></span>
                 <span id="willItKillYou">{info.willItKillYou}</span>
-                <span id="ratingLabel">Overall Rating</span>
-                <span id="rating">{info.rating}</span>
             </div>
         </div>
     ); 

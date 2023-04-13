@@ -97,7 +97,7 @@
     background-color: #F2EAC1;
     font-family: 'Book20';
     color: #1C2143; 
-    font-size: 1.2rem; 
+    font-size: 1rem; 
     padding-left: 6%;
     padding-right: 6%; 
     padding-bottom: 3%; 
@@ -109,7 +109,7 @@
     background-color: #F2EAC1;
     font-family: 'SemiBold15';
     color: #1C2143; 
-    font-size: 1.4rem; 
+    font-size: 1.2rem; 
     padding-left: 6%;
     padding-right: 6%; 
 }
@@ -118,7 +118,7 @@
     background-color: #F2EAC1;
     font-family: 'Book20';
     color: #1C2143; 
-    font-size: 1rem;
+    font-size: 0.8rem;
     padding-left: 6%; 
     padding-right: 6%; 
     padding-bottom: 3%; 
@@ -128,16 +128,17 @@
     background-color: #F2EAC1;
     font-family: 'SemiBold15';
     color: #1C2143; 
-    font-size: 1.4rem; 
+    font-size: 1.2rem; 
     padding-left: 6%;
     padding-right: 6%; 
+    padding-top: 3%; 
 }
 
 #willItKillYou {
     background-color: #F2EAC1;
     font-family: 'Book20';
     color: #1C2143; 
-    font-size: 1rem;
+    font-size: 0.8rem;
     padding-left: 6%; 
     padding-right: 6%; 
     padding-bottom: 3%; 
@@ -147,7 +148,7 @@
     background-color: #F2EAC1;
     font-family: 'SemiBold15';
     color: #1C2143; 
-    font-size: 1.4rem; 
+    font-size: 1.2rem; 
     padding-left: 6%;
     padding-right: 6%; 
 }
@@ -156,10 +157,10 @@
     background-color: #F2EAC1;
     font-family: 'Book20';
     color: #1C2143; 
-    font-size: 1rem;
+    font-size: 0.8rem;
     padding-left: 6%; 
     padding-right: 6%; 
-    padding-bottom: 2%; 
+    padding-bottom: 3%; 
 }
 
 #likeButton {
@@ -218,6 +219,48 @@ input[type="radio"] {
     cursor: pointer;
 }
 
+#ingredientsIcon {
+    background: none;
+    border: none; 
+}
+
+#killIcon {
+    background: none; 
+    border: none; 
+}
+
+#ratingIcon {
+    background: none; 
+    border: none; 
+}
+
+#nutritionLabel {
+    background-color: #F2EAC1;
+    font-family: 'SemiBold15';
+    color: #1C2143; 
+    font-size: 1.2rem; 
+    padding-left: 6%;
+    padding-right: 6%; 
+}
+
+#nutritionIcon {
+    background: none; 
+    border: none; 
+}
+
+.nutritionFacts {
+    background-color: #F2EAC1;
+    font-family: 'Book20';
+    color: #1C2143; 
+    font-size: 0.8rem;
+    padding-left: 6%; 
+    padding-right: 6%; 
+}
+
+#nameIcon {
+    background: none; 
+    border: none; 
+}
 
 
 
