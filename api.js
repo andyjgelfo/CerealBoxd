@@ -106,7 +106,7 @@ exports.setApp = function (app, client)
     try
     {
         const db = client.db("cerealbox");
-        dupe = await db.collection('user').find({"userName":{$regex:_search+'.*', $options:'ri'}}).toArray();
+        dupe = await db.collection('user').find({"userName":{$regex:_search+'.*', $options:'i'}}).toArray();
 
         i = 0;
         while (i < dupe.length)
@@ -144,7 +144,7 @@ exports.setApp = function (app, client)
     {
         const db = client.db("cerealbox");
         const userBase = db.collection('box');
-        dupe = await db.collection('box').find({"name":{$regex:_search+'.*', $options:'ri'}}).toArray();
+        dupe = await db.collection('box').find({"name":{$regex:_search+'.*', $options:'i'}}).toArray();
         
         if (dupe != '')
         {
@@ -381,7 +381,7 @@ exports.setApp = function (app, client)
     var _target = target.trim();
     
     const db = client.db("cerealbox");
-    const results = await db.collection(_collection).find({[_column]:{$regex:_target+'.*', $options:'ri'}}).toArray();
+    const results = await db.collection(_collection).find({[_column]:{$regex:_target+'.*', $options:'i'}}).toArray();
     
     var _ret = [];
     for( var i=0; i<results.length; i++ )
@@ -687,7 +687,7 @@ exports.setApp = function (app, client)
     var _target = target.trim();
     
     const db = client.db("cerealbox");
-    const results = await db.collection("box").find({"ingredients":{$not: {$regex:_target+'.*', $options:'ri'}}}).toArray();
+    const results = await db.collection("box").find({"ingredients":{$not: {$regex:_target+'.*', $options:'i'}}}).toArray();
     
     
     // var ret = {results:_ret, error:error};
