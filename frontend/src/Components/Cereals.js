@@ -3,7 +3,7 @@ import "../Styles/Cereals.css";
 import { useState, useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom"; 
-import { HiPlusCircle } from "react-icons/hi"; 
+// import { HiPlusCircle } from "react-icons/hi"; 
 
 function Cereals()
 {
@@ -70,6 +70,11 @@ function Cereals()
         sillyMessage = "Silly rabbit, Cerealboxd is for " + tokenResponse.id + "!";
 
 
+    const [isShown, setIsShown] = useState(true); 
+
+    const handleClick = event => {
+        setIsShown(true); 
+    }
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapper">
             <div className="title">
@@ -79,10 +84,14 @@ function Cereals()
             <div>
                 <input id="searchBar" placeholder="SEARCH..." onInput={filterCards} />
 
-                <button id="newCerealButton">
+                {/* <button id="newCerealButton" onClick={handleClick}>
                     <HiPlusCircle />
-                </button>
+                </button> */}
             </div>
+
+            {/* <div style={{display: isShown ? 'block' : 'none'}}>
+                <div>Some content here</div>
+            </div> */}
 
             <div id="cardContainer">
                 {cereal.map(cereal2 => {

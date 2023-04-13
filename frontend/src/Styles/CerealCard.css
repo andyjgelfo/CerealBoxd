@@ -69,7 +69,7 @@
     flex-wrap: wrap;
     margin-left: 2%; 
     margin-top: 3em; 
-    margin-bottom: 3em; 
+    margin-bottom: auto;
 }
 
 #name {
@@ -161,3 +161,63 @@
     padding-right: 6%; 
     padding-bottom: 2%; 
 }
+
+#likeButton {
+    border: none; 
+    background: none; 
+    color: white; 
+    font-size: 2.2rem; 
+    align-items: center;
+}
+
+#likeLabel {
+    font-family: 'SemiBold15';
+    color: white; 
+    font-size: 1.8rem; 
+    align-items: center;
+}
+
+#likeArea {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
+    margin-top: 1em; 
+    margin-right: 14em;
+    margin-bottom: 3em;
+}
+
+#rateLabel {
+    font-family: 'SemiBold15';
+    color: white; 
+    font-size: 1.8rem; 
+    align-items: center;
+    margin-top: -4.92em;
+    margin-left: 4em; 
+}
+
+#rateArea {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
+    margin-left: 7.4em; 
+    margin-top: 0.4em;
+    margin-bottom: 3em;  
+}
+
+input[type="radio"] {
+    display: none; 
+}
+
+.star {
+    padding-right: 0.1em; 
+    font-size: 2.2rem; 
+    cursor: pointer;
+}
+
+
+
+
