@@ -257,5 +257,10 @@ input[type="radio"] {
     padding-right: 6%; 
 }
 
+#nameIcon {
+    background: none; 
+    border: none; 
+}
+
 
 

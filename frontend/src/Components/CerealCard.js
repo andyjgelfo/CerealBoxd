@@ -103,10 +103,10 @@ const CerealCard = (_) => {
                 <span id="description">{info.description}</span>
                 <span id="ratingLabel"><BsStars id="ratingIcon"/> Overall Rating <BsStars id="ratingIcon"/></span>
                 <span id="rating">{info.rating} / 5</span>
-                <span id="ingredientsLabel">Ingredients <MdMenuBook id="ingredientsIcon"/></span>
+                <span id="ingredientsLabel"><MdMenuBook id="ingredientsIcon"/> Ingredients <MdMenuBook id="ingredientsIcon"/></span>
                 <span id="ingredients">{info.ingredients}</span>
 
-                <span id="nutritionLabel">Nutrition Facts <IoMdNutrition id="nutritionIcon"/></span>
+                <span id="nutritionLabel"><IoMdNutrition id="nutritionIcon"/> Nutrition Facts <IoMdNutrition id="nutritionIcon"/></span>
                 <span class="nutritionFacts">Serving Size: {nutrition.servingSize} g</span>
                 <span class="nutritionFacts">Calories: {nutrition.calories}</span>
                 <span class="nutritionFacts">Total Fat: {nutrition.totalFat} g</span>
@@ -139,7 +139,7 @@ const CerealCard = (_) => {
                 <span class="nutritionFacts">Folate: {nutrition.folate}</span>
                 <span class="nutritionFacts">Vitamin B12: {nutrition.vitaminB12}</span>
 
-                <span id="willItKillYouLabel">Will It Kill You Meter <BsSpeedometer2 id="killIcon"/></span>
+                <span id="willItKillYouLabel"><BsSpeedometer2 id="killIcon"/> Will It Kill You Meter <BsSpeedometer2 id="killIcon"/></span>
                 <span id="willItKillYou">{info.willItKillYou}</span>
             </div>
         </div>
