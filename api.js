@@ -537,8 +537,8 @@ exports.setApp = function (app, client)
     try
     {
         const box = client.db("cerealbox").collection('box');
-        // const cerID = new ObjectId(cerealID.trim());
-        const cerID = cerealID;
+        const cerID = new ObjectId(cerealID.trim());
+        // const cerID = cerealID;
         const resBox = await box.find({"_id":cerID}).toArray();
         let name = resBox[0].name;
         const newNutrition = {name:name, cerealID: new ObjectId(cerealID), image:image, servingSize:servingSize, calories:calories, 
