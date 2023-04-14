@@ -1,0 +1,64 @@
+/* Style the tab */
+.TabBox {
+    width: 50%;
+    margin: auto;
+    margin-top: 150px;
+    margin-bottom: 100px;
+    background-color: rgb(244, 220, 175);
+    max-width: 900px;
+    padding: 20px;
+    border-radius: 5px;
+    border-width: 5px;
+}
+
+ul.nav.nav-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: rgb(244, 220, 175);
+}
+
+.Info {
+    width: 50%;
+    margin: auto;
+    margin-top: 130px;
+    padding: 150px;
+    padding-right: 1000px;
+    background-color: rgba(127, 255, 212, 0);
+    border: solid;
+    border-radius: 5px;
+    border-width: 5px;
+    border-color: white;
+}
+
+Tab{
+    border: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    background-color: #2C3440;
+    text-align: center;
+    color: white;
+}
+
+p {
+    border: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    background-color: #2C3440;
+    text-align: center;
+    color: whitesmoke;
+    max-height: 100px;
+    padding-bottom: 100px;
+}
+
+.Hi{
+    border-radius: 5px;
+    background-color: rgb(244, 220, 175);
+}
+
+.mb-3 ul > li > a {
+    background-color: gray;
+    color: white;
+}
