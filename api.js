@@ -665,6 +665,7 @@ exports.setApp = function (app, client)
     const results = await db.collection(_collection).find({[_column]:new ObjectId(_target)}).toArray();
     
     var _ret = [];
+    // _ret[0] = null;
     for( var i=0; i<results.length; i++ )
     {
         _ret.push( results[i] );
@@ -692,6 +693,31 @@ exports.setApp = function (app, client)
     
     // var ret = {results:_ret, error:error};
     var ret = {results:results, error:error};
+    res.status(200).json(ret);
+    });
+
+    app.post('/api/addFavorite', async (req, res, next) =>
+    {
+
+    const { userID, cerealID } = req.body;
+
+    const favorite = {userID: new ObjectId(userID.trim()), cerealID: new ObjectId(cerealID.trim())};
+    var error = '';
+
+    try
+    {
+        const db = client.db("cerealbox");
+        const fav = db.collection('favorites');
+        
+        const result = fav.insertOne(favorite);
+    }
+    catch(e)
+    {
+        error = e.toString();
+    }
+    
+
+    var ret = { error: error };
     res.status(200).json(ret);
     });
 
