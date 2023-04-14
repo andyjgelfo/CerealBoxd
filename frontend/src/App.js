@@ -8,7 +8,8 @@ import About from "./Components/About";
 import Cereals from "./Components/Cereals"; 
 import Login from "./Components/Login"; 
 import Register from "./Components/Register"; 
-import CerealCard from "./Components/CerealCard"; 
+import CerealCard from "./Components/CerealCard";
+import Profile from "./Components/Profile";
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path="/RegisterPage" index element = {<React.Fragment><Navbar /><Register /></React.Fragment>}/>
             <Route path="/CerealDetails/:_id" element={<React.Fragment><Navbar /><CerealCard /></React.Fragment>}/>
             <Route path="/HomePage" index element = {<React.Fragment><Navbar /><Home /></React.Fragment>}/>
+            <Route path="/ProfilePage" index element = {<React.Fragment><Navbar /><Profile /></React.Fragment>}/>
           </Routes>
         </div>
       </BrowserRouter>
