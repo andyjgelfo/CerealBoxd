@@ -12,13 +12,21 @@
    url("../Fonts/SharpGroteskSemiBold15.otf") format("truetype");
 }
 
+:root {
+  --mainColor: #2C3440; 
+  --secondaryColor: #F2EAC1; 
+  --textColor1: white; 
+  --textColor2: #1C2143;
+  --hover: #40bcf4;  
+}
+
 .articles {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-evenly;
-  }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
 
 figure {
   border-radius: 10px;
@@ -89,11 +97,12 @@ figure {
 }
 
 h1 {
-  color: #ffffff;
+  color: white;
   font-family: "SemiBold15";
-  font-size: larger;
+  font-size: 1rem;
   padding-top: 5%;
   text-align: center;
+  background-color: transparent;
 }
 
 /*
@@ -107,22 +116,20 @@ hr {
 }
 */
   .article-wrapper {
-    max-width: 400px;
+    width: 400px;
     margin-bottom: 40px;
     padding: 20px;
-    background-color: #414D5E;
-    /*background-color: rgb(41, 73, 143);*/
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
-  .article-wrapper:hover {
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #F2EAC1;
+    border-color: #1C2143;
+    border-radius: 32px;
+    border-style: solid;
+    border-width: 0.6em; 
   }
   
   .article-wrapper h2 {
-    color: #ffffff;
+    color: #1C2143;
+    text-align: center;
+    background-color: #F2EAC1;
     font-family: "SemiBold15";
     margin-top: 0;
     margin-bottom: 20px;
@@ -131,40 +138,39 @@ hr {
   }
   
   .article-wrapper p {
-    color: #ffffff;
+    color: #1C2143;
+    background-color: #F2EAC1;
+    text-align: center;
     font-family: "Book20";
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     font-size: 1rem;
     line-height: 1.5;
+    border: none; 
   }
   
   .article-wrapper img {
     width: 100%;
-    height: auto;
+    height: 200px;
     border-radius: 10px;
   }
   
   .read-more {
+    font-family: 'SemiBold15';
+    background-color: #F2EAC1;
+    text-align: center;
     display: inline-block;
-    margin-top: 20px;
     font-family: "Book20";
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.2rem;
     text-decoration: none;
-    color: #96c3f3;
+    color: #1C2143;
     position: relative;
   }
   
   .read-more:hover {
-    color: #ff9b05;
+    color: #40bcf4;
   }
   
-  .read-more svg {
-    width: 14px;
-    height: 14px;
-    position: absolute;
-    top: 1px;
-    right: -20px;
-    fill: currentColor;
+  .article-body {
+    background-color: #F2EAC1;
   }
