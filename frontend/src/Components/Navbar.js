@@ -20,9 +20,15 @@ const Navbar = () =>{
             <nav ref={navRef}>
                 <a href="/AboutPage">ABOUT</a>
                 <a href="/CerealsPage">CEREALS</a>
-                <a href="/LoginPage">LOGIN</a>
-                <a href="/RegisterPage">REGISTER</a> 
-                <a href="/HomePage" onClick={logOut}>LOGOUT</a>
+
+                {/* Hide when user is logged in */}
+                {!localStorage.getItem('user_data') && (<a href="/LoginPage">LOGIN</a>)}
+                {!localStorage.getItem('user_data') && (<a href="/RegisterPage">REGISTER</a>)}
+
+                {/* Hide when user is logged out */}
+                {localStorage.getItem('user_data') && (<a href="/HomePage">MY BOX</a>)}
+                {localStorage.getItem('user_data') && (<a href="/HomePage" onClick={logOut}>LOGOUT</a>)}
+
                 <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                     <FaTimes/>
                 </button>
