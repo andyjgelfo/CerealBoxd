@@ -721,4 +721,73 @@ exports.setApp = function (app, client)
     res.status(200).json(ret);
     });
 
+    app.post('/api/searchByTwoID', async (req, res, next) => 
+    {
+    // incoming: userId, search
+    // outgoing: results[], error
+
+    var error = '';
+
+    const {collection, column1, column2, target1, target2} = req.body;
+
+    var _collection = collection.trim();
+    var _column1 = column1.trim();
+    var _column2 = column2.trim();
+    var _target1 = target1.trim();
+    var _target2 = target2.trim();
+    
+    const db = client.db("cerealbox");
+    const results = await db.collection(_collection).find({[_column1]:new ObjectId(_target1), [_column2]:new ObjectId(_target2)}).toArray();
+    
+    var _ret = [];
+    // _ret[0] = null;
+    for( var i=0; i<results.length; i++ )
+    {
+        _ret.push( results[i] );
+    }
+    
+    // var ret = {results:_ret, error:error};
+    var ret = {results:_ret[0], error:error};
+    res.status(200).json(ret);
+    });
+
+
+    app.post('/api/getFav', async (req, res, next) => 
+    {
+    // incoming: userId, search
+    // outgoing: results[], error
+
+    var error = '';
+
+    const {target} = req.body;
+
+    // var _collection = collection.trim();
+    // var _column = column.trim();
+    var _target = (target.trim());
+    
+    const db = client.db("cerealbox");
+    const results = await db.collection("favorites").find({"userID":new ObjectId(_target)}).toArray();
+    const cerealDB = db.collection("box");
+    var cereals;
+    var cer;
+    
+    var _ret = [];
+    // _ret[0] = null;
+    for( var i=0; i<results.length; i++ )
+    {
+        // _ret.push( results[i].cerealID);
+        cereals = await cerealDB.find({"_id":new ObjectId(results[i].cerealID)}).toArray();
+        cer = cereals[0];
+
+        _ret.push(cer);
+    }
+    
+    // var ret = {results:_ret, error:error};
+    var ret = {results:_ret, error:error};
+    res.status(200).json(ret);
+    });
+
+    
+
 }
+
