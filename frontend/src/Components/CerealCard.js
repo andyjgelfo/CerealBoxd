@@ -99,7 +99,7 @@ const CerealCard = (_) => {
 
             <div id="infoContainer">
                 <span id="name">{info.name}</span>
-                <span id="subtitle">{info.releaseDate}  |  Produced by {info.manufacturer}</span>
+                <span id="subtitle">Produced by {info.manufacturer}</span>
                 <span id="description">{info.description}</span>
                 <span id="ratingLabel"><BsStars id="ratingIcon"/> Overall Rating <BsStars id="ratingIcon"/></span>
                 <span id="rating">{info.rating} / 5</span>
