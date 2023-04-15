@@ -666,9 +666,16 @@ exports.setApp = function (app, client)
     
     var _ret = [];
     // _ret[0] = null;
-    for( var i=0; i<results.length; i++ )
+    if(results.length != 0)
     {
-        _ret.push( results[i] );
+        for( var i=0; i<results.length; i++ )
+        {
+            _ret.push( results[i] );
+        }
+    }
+    else 
+    {
+        _ret[0] = null;
     }
     
     // var ret = {results:_ret, error:error};
@@ -740,10 +747,16 @@ exports.setApp = function (app, client)
     const results = await db.collection(_collection).find({[_column1]:new ObjectId(_target1), [_column2]:new ObjectId(_target2)}).toArray();
     
     var _ret = [];
-    // _ret[0] = null;
-    for( var i=0; i<results.length; i++ )
+    if(results.length != 0)
     {
-        _ret.push( results[i] );
+        for( var i=0; i<results.length; i++ )
+        {
+            _ret.push( results[i] );
+        }
+    }
+    else 
+    {
+        _ret[0] = null;
     }
     
     // var ret = {results:_ret, error:error};
@@ -780,6 +793,34 @@ exports.setApp = function (app, client)
         cer = cereals[0];
 
         _ret.push(cer);
+    }
+    
+    // var ret = {results:_ret, error:error};
+    var ret = {results:_ret, error:error};
+    res.status(200).json(ret);
+    });
+
+    app.post('/api/searchByIDmulti', async (req, res, next) => 
+    {
+    // incoming: userId, search
+    // outgoing: results[], error
+
+    var error = '';
+
+    const {collection, column, target} = req.body;
+
+    var _collection = collection.trim();
+    var _column = column.trim();
+    var _target = (target.trim());
+    
+    const db = client.db("cerealbox");
+    const results = await db.collection(_collection).find({[_column]:new ObjectId(_target)}).toArray();
+    
+    var _ret = [];
+    // _ret[0] = null;
+    for( var i=0; i<results.length; i++ )
+    {
+        _ret.push( results[i] );
     }
     
     // var ret = {results:_ret, error:error};
