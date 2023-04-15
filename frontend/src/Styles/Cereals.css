@@ -59,25 +59,6 @@
     opacity: 70%; 
 }
 
-.searchIcon {
-    background-color: white;
-    opacity: 70%;
-    display: grid; 
-    place-items: center;
-}
-
-.searchInputs {
-    display: flex;
-}
-
-input:focus {
-    outline: none; 
-}
-
-.searchIcon svg {
-    font-size: 35px; 
-}
-
 #searchBar:focus {
     opacity: 100%; 
 }

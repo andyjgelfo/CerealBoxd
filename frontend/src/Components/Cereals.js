@@ -3,13 +3,15 @@ import "../Styles/Cereals.css";
 import { useState, useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom"; 
-import { FaSearch } from "react-icons/fa"; 
 // import { HiPlusCircle } from "react-icons/hi"; 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-function Cereals({data})
+function Cereals()
 {
     // Title of webpage
     useEffect(() => {
+        AOS.init({duration : 2000});
         document.title = 'Cereals';
     }, []);
 
@@ -77,7 +79,7 @@ function Cereals({data})
                 {sillyMessage}
             </div>
 
-            <div className="search">
+            <div className="search" data-aos="fade">
                  <input type="text" id="searchBar" placeholder="SEARCH..." onInput={filterCards} />
                 {/* <button id="newCerealButton" onClick={handleClick}>
                     <HiPlusCircle />
@@ -95,7 +97,7 @@ function Cereals({data})
                         to={{
                         pathname: `/CerealDetails/${cereal2._id}`, 
                         }}>
-                            <div id="card">
+                            <div id="card" data-aos="flip-right">
                                 <img src={cereal2.image}/>
                             </div>
                         </Link>
