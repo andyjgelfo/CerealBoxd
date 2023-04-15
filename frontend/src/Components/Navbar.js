@@ -10,6 +10,10 @@ const Navbar = () =>{
         navRef.current.classList.toggle("responsive_nav"); 
     }
 
+    const logOut=()=>{
+        window.localStorage.clear(); 
+    }
+
     return (
         <header>
             <a href="/"><img src={require('../Images/logo.png')} alt='logo' className="logo"/></a>
@@ -18,6 +22,7 @@ const Navbar = () =>{
                 <a href="/CerealsPage">CEREALS</a>
                 <a href="/LoginPage">LOGIN</a>
                 <a href="/RegisterPage">REGISTER</a> 
+                <a href="/HomePage" onClick={logOut}>LOGOUT</a>
                 <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                     <FaTimes/>
                 </button>

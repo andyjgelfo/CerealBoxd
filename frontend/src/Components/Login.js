@@ -76,7 +76,7 @@ function Login()
                 var user = {firstName:firstName,lastName:lastName,id:userId}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
-                window.location.href = '/AboutPage';
+                window.location.href = '/CerealsPage';
             }
         })
         .catch(function (error) 
