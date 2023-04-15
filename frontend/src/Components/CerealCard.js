@@ -8,6 +8,8 @@ import { MdMenuBook } from "react-icons/md";
 import { BsSpeedometer2 } from "react-icons/bs"; 
 import { BsStars } from "react-icons/bs"; 
 import { IoMdNutrition } from "react-icons/io"; 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const CerealCard = (_) => {
     // Obtains the ID of the cereal 
@@ -22,6 +24,8 @@ const CerealCard = (_) => {
     var bp = require('./Path.js');
     
     useEffect(() => {
+        AOS.init({duration : 2000});
+
         (async () => {
             var obj = {collection:"box",column:"_id",target:_id};
             var js = JSON.stringify(obj); 
@@ -64,7 +68,7 @@ const CerealCard = (_) => {
 
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapperCerealCard">
-            <div id="imageContainer">
+            <div id="imageContainer" data-aos="flip-right">
                 <img id="image" src={info.image}></img> 
                 <div id="likeArea">
                     <span id="likeLabel">Like</span>
@@ -97,9 +101,9 @@ const CerealCard = (_) => {
                 </div>   
             </div>
 
-            <div id="infoContainer">
+            <div id="infoContainer" data-aos="fade">
                 <span id="name">{info.name}</span>
-                <span id="subtitle">{info.releaseDate}  |  Produced by {info.manufacturer}</span>
+                <span id="subtitle">Produced by {info.manufacturer}</span>
                 <span id="description">{info.description}</span>
                 <span id="ratingLabel"><BsStars id="ratingIcon"/> Overall Rating <BsStars id="ratingIcon"/></span>
                 <span id="rating">{info.rating} / 5</span>

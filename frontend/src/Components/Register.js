@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import "../Styles/Register.css"
 import { useEffect } from 'react'; 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Register()
 {
     useEffect(() => {
+        AOS.init({duration : 2000});
         document.title = 'Register';
     }, []);
 
@@ -93,7 +96,7 @@ function Register()
 
     return (
         <div class='wrapper-register d-flex align-items-center justify-content-center'>
-            <div class='container align-items-center justify-content-center' id="registerDiv">
+            <div class='container align-items-center justify-content-center' id="registerDiv" data-aos="fade">
                 <form onSubmit={doRegister}>
                     <center><span id= "title">REGISTER</span></center>
                     <center><input type="text" id="registerFirstName" placeholder="FIRST NAME" ref={(c) => registerFirstName =c}/><br /></center>

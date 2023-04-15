@@ -80,7 +80,7 @@ function Cereals()
             </div>
 
             <div className="search" data-aos="fade">
-                 <input type="text" id="searchBar" placeholder="SEARCH..." onInput={filterCards} />
+                 <input type="text" id="searchBar" placeholder="SEARCH CEREALS..." onInput={filterCards} />
                 {/* <button id="newCerealButton" onClick={handleClick}>
                     <HiPlusCircle />
                 </button> */}

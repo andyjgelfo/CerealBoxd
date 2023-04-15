@@ -4,11 +4,14 @@ import "../Styles/Login.css";
 import { useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import axios from 'axios';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Login()
 {
     // Page Title
     useEffect(() => {
+        AOS.init({duration : 2000});
         document.title = 'Login';
     }, []);
 
@@ -88,7 +91,7 @@ function Login()
 
     return(
         <div class='wrapper-login d-flex align-items-center justify-content-center'>
-            <div class='container align-items-center justify-content-center' id="loginDiv">
+            <div class='container align-items-center justify-content-center' id="loginDiv" data-aos="fade">
                 <form onSubmit={doLogin}>
                     <center><span id= "title">LOGIN</span></center>
                     <center><input type="text" id="loginName" placeholder='USERNAME' ref={(c) => loginName = c} /><br /></center>
