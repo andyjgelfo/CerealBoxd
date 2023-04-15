@@ -4,7 +4,6 @@ import "../Styles/Home.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-
 function Home()
 {
     useEffect(() => {

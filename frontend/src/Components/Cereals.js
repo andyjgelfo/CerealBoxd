@@ -3,9 +3,10 @@ import "../Styles/Cereals.css";
 import { useState, useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom"; 
+import { FaSearch } from "react-icons/fa"; 
 // import { HiPlusCircle } from "react-icons/hi"; 
 
-function Cereals()
+function Cereals({data})
 {
     // Title of webpage
     useEffect(() => {
@@ -70,20 +71,14 @@ function Cereals()
         sillyMessage = "Silly rabbit, Cerealboxd is for " + tokenResponse.id + "!";
 
 
-    const [isShown, setIsShown] = useState(true); 
-
-    const handleClick = event => {
-        setIsShown(true); 
-    }
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapper">
             <div className="title">
                 {sillyMessage}
             </div>
 
-            <div>
-                <input id="searchBar" placeholder="SEARCH..." onInput={filterCards} />
-
+            <div className="search">
+                 <input type="text" id="searchBar" placeholder="SEARCH..." onInput={filterCards} />
                 {/* <button id="newCerealButton" onClick={handleClick}>
                     <HiPlusCircle />
                 </button> */}
@@ -112,4 +107,7 @@ function Cereals()
 }
 
 export default Cereals;
+
+  
+
 

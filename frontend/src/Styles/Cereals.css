@@ -50,11 +50,40 @@
     border-width: 0.3em; 
     border-style: solid;
     width: 30em; 
+    display: flex; 
     height: 2.4em; 
     margin-bottom: 1.4em;
     padding-top: 0.8em; 
     padding-bottom: 0.8em; 
     padding-left: 0.8em; 
+    opacity: 70%; 
+}
+
+.searchIcon {
+    background-color: white;
+    opacity: 70%;
+    display: grid; 
+    place-items: center;
+}
+
+.searchInputs {
+    display: flex;
+}
+
+input:focus {
+    outline: none; 
+}
+
+.searchIcon svg {
+    font-size: 35px; 
+}
+
+#searchBar:focus {
+    opacity: 100%; 
+}
+
+#searchBar:hover {
+    opacity: 100%; 
 }
 
 #cardContainer {
