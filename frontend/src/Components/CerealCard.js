@@ -99,7 +99,7 @@ const CerealCard = (_) => {
 
             <div id="infoContainer">
                 <span id="name">{info.name}</span>
-                <span id="subtitle">Produced by {info.manufacturer}</span>
+                <span id="subtitle">{info.releaseDate}  |  Produced by {info.manufacturer}</span>
                 <span id="description">{info.description}</span>
                 <span id="ratingLabel"><BsStars id="ratingIcon"/> Overall Rating <BsStars id="ratingIcon"/></span>
                 <span id="rating">{info.rating} / 5</span>
@@ -121,23 +121,23 @@ const CerealCard = (_) => {
                 <span class="nutritionFacts">Total Sugars: {nutrition.totalSugars} g</span>
                 <span class="nutritionFacts">Added Sugars: {nutrition.addedSugars} g</span>
                 <span class="nutritionFacts">Protein: {nutrition.protein} g</span>
-                <span class="nutritionFacts">Vitamin D: {nutrition.vitaminD}</span>
-                <span class="nutritionFacts">Calcium: {nutrition.calcium}</span>
-                <span class="nutritionFacts">Iron: {nutrition.iron}</span>
-                <span class="nutritionFacts">Potassium: {nutrition.potassium}</span>
-                <span class="nutritionFacts">Vitamin C: {nutrition.vitaminC}</span>
-                <span class="nutritionFacts">Thiamin: {nutrition.thiamin}</span>
-                <span class="nutritionFacts">Riboflavin: {nutrition.riboflavin}</span>
-                <span class="nutritionFacts">Niacin: {nutrition.niacin}</span>
-                <span class="nutritionFacts">Phosphorus: {nutrition.phosphorus}</span>
-                <span class="nutritionFacts">Magnesium: {nutrition.magnesium}</span>
-                <span class="nutritionFacts">Zinc: {nutrition.zinc}</span>
-                <span class="nutritionFacts">Selenium: {nutrition.selenium}</span>
-                <span class="nutritionFacts">Copper: {nutrition.copper}</span>
-                <span class="nutritionFacts">Manganese: {nutrition.manganese}</span>
-                <span class="nutritionFacts">Vitamin B6: {nutrition.vitaminB6}</span>
-                <span class="nutritionFacts">Folate: {nutrition.folate}</span>
-                <span class="nutritionFacts">Vitamin B12: {nutrition.vitaminB12}</span>
+                <span class="nutritionFacts">Vitamin D: {(nutrition.vitaminD * 100)}%</span>
+                <span class="nutritionFacts">Calcium: {(nutrition.calcium* 100)}%</span>
+                <span class="nutritionFacts">Iron: {(nutrition.iron * 100)}%</span>
+                <span class="nutritionFacts">Potassium: {(nutrition.potassium* 100)}%</span>
+                <span class="nutritionFacts">Vitamin C: {(nutrition.vitaminC* 100)}%</span>
+                <span class="nutritionFacts">Thiamin: {(nutrition.thiamin* 100)}%</span>
+                <span class="nutritionFacts">Riboflavin: {(nutrition.riboflavin* 100)}%</span>
+                <span class="nutritionFacts">Niacin: {(nutrition.niacin* 100)}%</span>
+                <span class="nutritionFacts">Phosphorus: {(nutrition.phosphorus* 100)}%</span>
+                <span class="nutritionFacts">Magnesium: {(nutrition.magnesium* 100)}%</span>
+                <span class="nutritionFacts">Zinc: {(nutrition.zinc* 100)}%</span>
+                <span class="nutritionFacts">Selenium: {(nutrition.selenium* 100)}%</span>
+                <span class="nutritionFacts">Copper: {(nutrition.copper* 100)}%</span>
+                <span class="nutritionFacts">Manganese: {(nutrition.manganese* 100)}%</span>
+                <span class="nutritionFacts">Vitamin B6: {(nutrition.vitaminB6* 100)}%</span>
+                <span class="nutritionFacts">Folate: {(nutrition.folate* 100)}%</span>
+                <span class="nutritionFacts">Vitamin B12: {(nutrition.vitaminB12* 100)}%</span>
 
                 <span id="willItKillYouLabel"><BsSpeedometer2 id="killIcon"/> Will It Kill You Meter <BsSpeedometer2 id="killIcon"/></span>
                 <span id="willItKillYou">{info.willItKillYou}</span>
