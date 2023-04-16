@@ -25,6 +25,7 @@ function Confirm()
             if (dataFetchedRef.current) return;
             dataFetchedRef.current = true;
             code = Math.floor(100000 + Math.random() * 900000);
+            alert(code);
             obj = {to:localStorage.getItem('email'), code};
             js = JSON.stringify(obj);
             response = fetch(bp.buildPath('api/sendEmail'),

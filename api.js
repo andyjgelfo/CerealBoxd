@@ -889,7 +889,31 @@ exports.setApp = function (app, client)
     res.status(200).json(ret);
     });
 
-    
+    app.post('/api/addSuggestion', async (req, res, next) =>
+    {
+
+        const { name, manufacturer } = req.body;
+
+        const newSuggestion = {name:name, manufacturer: manufacturer}
+        var error = '';
+        var result;
+
+
+        try
+        {
+            const db = client.db("cerealbox");
+            const userBase = db.collection('suggestions');
+        
+            result = userBase.insertOne(newSuggestion);
+            // }
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
+        var ret = {results:result, error:error};
+        res.status(200).json(ret);
+    });
 
 }
 
