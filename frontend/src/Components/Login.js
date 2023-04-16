@@ -75,11 +75,24 @@ function Login()
                 var userId = ud.payload.userId;
                 var firstName = ud.payload.firstName;
                 var lastName = ud.payload.lastName;
-                  
-                var user = {firstName:firstName,lastName:lastName,id:userId}
-                localStorage.setItem('user_data', JSON.stringify(user));
+                var email = ud.payload.email;
+                var verified = ud.payload.confirmed
+                var id = ud.payload.id;
+                if (verified === false)
+                {
+                    localStorage.setItem('email', email);
+                    localStorage.setItem("id", id);
+                    var user = {firstName:firstName,lastName:lastName,username:userId}
+                    localStorage.setItem('pre_user', JSON.stringify(user));
+                    window.location.href = '/ConfirmEmail';
+                }
+                else
+                {
+                    var user = {firstName:firstName,lastName:lastName,username:userId}
+                    localStorage.setItem('user_data', JSON.stringify(user));
 
-                window.location.href = '/CerealsPage';
+                    window.location.href = '/CerealsPage';
+                }
             }
         })
         .catch(function (error) 
@@ -98,7 +111,7 @@ function Login()
                     <center><input type="password" id="loginPassword" placeholder="PASSWORD" ref={(c) => loginPassword = c} /><br /></center>
                     <center><input type="submit" id="loginButton" class="buttons" value="SIGN IN" onClick={doLogin} /></center>
                     <center><a href="/RegisterPage"><span id="noAccount">Don't Have An Account? Register Here!</span></a></center>
-                    <span id="loginResult">{message}</span>
+                    <center><span id="loginResult">{message}</span></center>
                 </form>
             </div>
         </div>

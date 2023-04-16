@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "../Styles/Register.css"
 import { useEffect } from 'react'; 
+import axios from 'axios';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -70,22 +71,59 @@ function Register()
                 throw("User with this username already exists");
             }
 
-            const response = await fetch(bp.buildPath('api/register'),
+            var response = await fetch(bp.buildPath('api/register'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
             
-            // let txt = await response.text();
-            // let res = JSON.parse(txt);
+            // email start
+            obj = {login:registerUsername.value,password:registerPassword.value};
+            js = JSON.stringify(obj);
+    
+            var config = 
+            {
+                method: 'post',
+                url: bp.buildPath('api/login'),	
+                headers: 
+                {
+                    'Content-Type': 'application/json'
+                },
+                data: js
+            };
 
-            // if( res.error.length > 0 )
-            // {
-            //     setMessage( "API Error:" + res.error );
-            // }
-            // else
-            // {
-            //     setMessage('User has been added');
-            // }
+            axios(config)
+            .then(function (response) 
+        {
+            var storage = require('../tokenStorage.js');
+            var res = response.data;
+                storage.storeToken(res);
+                var jwt = require('jsonwebtoken');
+                var ud = jwt.decode(storage.retrieveToken(),{complete:true});
+   
+                var userId = ud.payload.userId;
+                var firstName = ud.payload.firstName;
+                var lastName = ud.payload.lastName;
+                var email = ud.payload.email;
+                var verified = ud.payload.confirmed
+                var id = ud.payload.id;
+                
+                // alert("email: " + email + ", verified: " + verified + "id: " + id);
+                if (verified === false)
+                {
+                    localStorage.setItem('email', email);
+                    localStorage.setItem("id", id);
+                    // var user = {firstName:firstName,lastName:lastName,username:userId}
+                    // localStorage.setItem('pre_user', JSON.stringify(user));
+                    // var user2 = JSON.parse(localStorage.getItem('pre_user'));
+                
+                    window.location.href = '/ConfirmEmail';
+                }
+          
+        })
+        .catch(function (error) 
+        {
+            console.log(error);
+        });
+        // window.location.href = '/LoginPage';
 
-            window.location.href = '/'
         }
         catch(e)
         {

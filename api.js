@@ -1,16 +1,55 @@
 require('express');
 const { ObjectId } = require('mongodb');
+const sendEmail = require("./util/sendEmail");
+
+//new
+// const nodemailer = require("nodemailer");
+// const sgTransport = require("nodemailer-sendgrid-transport");
+// const options = {
+// auth: {
+// api_user: 'cerealboxdd@outlook.com',
+// api_key: 'RaisinThebran17!'
+// }
+// };
+// const client2 = nodemailer.createTransport(sgTransport(options));
+
+// end new
 
 exports.setApp = function (app, client)
 {
     app.post('/api/addDB', async(req, res, next) =>
     {
     //   const db = client.db("cerealbox");
-    //   const results = db.collection('nutrition').updateMany({}, {$set:{"vitaminA":0
+    //   const results = db.collection('user').updateMany({}, {$set:{"confirmed":false
     // }});
-    //   res.status(200)
+      res.status(200)
     }
     );
+
+    app.post('/api/sendemail', (req, res) => {
+        const {to, code} = req.body;
+
+        var ret;
+
+        const from = "cerealboxdd@outlook.com";
+
+        const subject = "Confirm your email address";
+
+        const output =  'Your verification code is ' + code;
+
+        try
+        {
+            sendEmail(to, from, subject, output);
+        }
+        catch(e)
+        {
+        ret = {error:e.message};
+        
+        }
+
+        res.status(200).json(ret);
+
+    });
 
     app.post('/api/login', async (req, res, next) => 
     {
@@ -31,18 +70,24 @@ exports.setApp = function (app, client)
         var id = -1;
         var fn = '';
         var ln = '';
+        var confirm;
+        var userEmail;
 
         var ret;
         if( results.length > 0 )
         {
-            id = results[0].userName;
+            username = results[0].userName;
             fn = results[0].fName;
             ln = results[0].lName;
+            userEmail = results[0].email;
+            confirm = results[0].confirmed;
+            id = results[0]._id
+            // console.log(id);
 
             try
             {
             const token = require("./createJWT.js");
-            ret = token.createToken( fn, ln, id );
+            ret = token.createToken( fn, ln, username, userEmail, confirm, id );
             }
             catch(e)
             {
@@ -55,10 +100,39 @@ exports.setApp = function (app, client)
             ret = {error:"Login/Password incorrect"};
         }
 
+        console.log(ret);
+
+
         res.status(200).json(ret);
 
 
     });
+
+    app.post('/api/confirmEmail', async (req, res, next) =>
+    {
+    const {_id} = req.body;
+    var error = '';
+
+    try
+    {
+        const rev = client.db("cerealbox").collection('user');
+        const filter = {_id: new ObjectId(_id)};
+        const edit = {
+        $set: {
+            confirmed:true
+        },
+        };
+
+        const result = await rev.updateOne(filter, edit);
+    }
+    catch(e)
+    {
+        error = e.toString();
+    }
+
+    var ret = { error: error };
+    res.status(200).json(ret);
+    })
 
 
 
@@ -73,7 +147,7 @@ exports.setApp = function (app, client)
 
     const { fName, lName, userName, password, email } = req.body;
 
-    const newUser = {fName:fName, lName:lName, userName:userName, password: password, email: email};
+    const newUser = {fName:fName, lName:lName, userName:userName, password: password, email: email, confirmed: false};
     var error = '';
     var dupe = '';
     var _search = userName.trim();
@@ -144,16 +218,16 @@ exports.setApp = function (app, client)
     {
         const db = client.db("cerealbox");
         const userBase = db.collection('box');
-        dupe = await db.collection('box').find({"name":{$regex:_search+'.*', $options:'i'}}).toArray();
+        // dupe = await db.collection('box').find({"name":{$regex:_search+'.*', $options:'i'}}).toArray();
         
-        if (dupe != '')
-        {
-        e = "Cereal with this name already exist, please try again";
-        throw(e);
-        }
-        else {
+        // if (dupe != '')
+        // {
+        // e = "Cereal with this name already exist, please try again";
+        // throw(e);
+        // }
+        // else {
         const result = userBase.insertOne(newCereal);
-        }
+        // }
     }
     catch(e)
     {

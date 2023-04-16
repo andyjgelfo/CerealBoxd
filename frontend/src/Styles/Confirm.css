@@ -1,0 +1,106 @@
+/* Don't have an account? */ 
+@font-face {
+    font-family: "Book20";
+    src: local("SharpGroteskBook20"),
+     url("../Fonts/SharpGroteskBook20.otf") format("truetype");
+}
+
+/* Input field labels */ 
+@font-face {
+    font-family: "SemiBold15";
+    src: local("SharpGroteskSemiBold15"),
+     url("../Fonts/SharpGroteskSemiBold15.otf") format("truetype");
+}
+
+/* Title */ 
+@font-face {
+    font-family: "SemiBold20";
+    src: local("SharpGroteskSemiBold20"),
+     url("../Fonts/SharpGroteskSemiBold20.otf") format("truetype");
+}
+
+* {
+    margin: 0; 
+    box-sizing: border-box; 
+}
+
+:root {
+    --mainColor: #2C3440; 
+    --secondaryColor: #F2EAC1; 
+    --textColor1: white; 
+    --textColor2: #1C2143;
+    --hover: #40bcf4;  
+}
+
+#confirmDiv {
+    width: 45em; 
+    height: max-content;
+    border-color: #1C2143; 
+    border-radius: 32px; 
+    border-width: 0.6em; 
+    border-style: solid;
+    background-color: #F2EAC1;
+    padding-top: 2em;
+    padding-bottom: 3.2em; 
+}
+
+.wrapper-confirm {
+    margin-top: 6em; 
+}
+
+#title {
+    font-family: 'SemiBold20';
+    font-size: 3rem;
+    color: #1C2143;
+    background-color: #F2EAC1;
+}
+
+center {
+    background-color: #F2EAC1;
+}
+
+text {
+    background-color: #F2EAC1;
+}
+
+#codeBox {
+    width: 16em; 
+    font-family: 'SemiBold15';
+    font-size: 1.8rem;
+    text-align: center;
+    color: #1C2143; 
+    height: 3em; 
+    padding-top: 0.2em; 
+    padding-bottom: 0.2em; 
+    background-color: white;
+    border-radius: 50px; 
+    border: none; 
+    margin-top: 15px; 
+    margin-bottom: 18px; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#confirmButton {
+    font-family: 'SemiBold15';
+    font-size: 1.4rem; 
+    padding-top: 0.1em; 
+    padding-bottom: 0.1em; 
+    padding-right: 0.1em; 
+    padding-left: 0.1em; 
+    background-color: #1C2143;
+    color: white; 
+    cursor: pointer;
+    border-radius: 50px;
+    border-color: #1C2143;
+    border-width: 8px; 
+    border-style: solid;
+    width: 6.6em; 
+    height: 3em; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 40px; 
+}
+
+#confirmResult {
+    color: red;
+    background-color: #F2EAC1;
+}

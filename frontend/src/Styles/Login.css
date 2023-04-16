@@ -55,6 +55,11 @@
     background-color: #F2EAC1;
 }
 
+#loginResult {
+    color: red;
+    background-color: #F2EAC1;
+}
+
 center {
     background-color: #F2EAC1;
 }

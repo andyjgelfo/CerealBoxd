@@ -60,3 +60,22 @@ app.listen(PORT, () =>
   console.log('Server listening on port ' + PORT);
 });
 
+
+// const sgMail = require('@sendgrid/mail');
+// sgMail.setApiKey("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");
+
+// const msg = {
+//   to: "thomasnguyen3212@gmail.com",
+//   from: "cerealboxdd@outlook.com",
+//   subject: "test",
+//   text: "stan loona"
+// }
+
+// await sgMail.send(msg, function(err, info) {
+//   if (err) {
+//     console.log("email not sent 2");
+//   }
+//   else {
+//     console.log("email success 2");
+//   }
+// }); 

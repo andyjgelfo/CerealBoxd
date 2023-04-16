@@ -70,7 +70,7 @@ function Cereals()
     if (JSON.stringify(tokenResponse) === "null")
         sillyMessage = "Silly rabbit, you're not signed in!"
     else
-        sillyMessage = "Silly rabbit, Cerealboxd is for " + tokenResponse.id + "!";
+        sillyMessage = "Silly rabbit, Cerealboxd is for " + tokenResponse.username + "!";
 
 
     return(

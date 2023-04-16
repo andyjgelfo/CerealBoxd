@@ -10,6 +10,7 @@ import Login from "./Components/Login";
 import Register from "./Components/Register"; 
 import CerealCard from "./Components/CerealCard";
 import Profile from "./Components/Profile";
+import Confirm from "./Components/Confirm";
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
             <Route path="/CerealDetails/:_id" element={<React.Fragment><Navbar /><CerealCard /></React.Fragment>}/>
             <Route path="/HomePage" index element = {<React.Fragment><Navbar /><Home /></React.Fragment>}/>
             <Route path="/ProfilePage" index element = {<React.Fragment><Navbar /><Profile /></React.Fragment>}/>
+            <Route path="/ConfirmEmail" index element = {<React.Fragment><Navbar /><Confirm /></React.Fragment>}/>
           </Routes>
         </div>
       </BrowserRouter>
