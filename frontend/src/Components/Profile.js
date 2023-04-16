@@ -21,14 +21,14 @@ function Profile()
                     defaultActiveKey="profile"
                     id="uncontrolled-tab-example"
                     >
-                    <Tab eventKey="home" title="Home" className="Hi">
-                        <p>ahahaha</p>
+                    <Tab eventKey="home" title="Favorites" className="Hi">
+                        <div className="Favorites">ahahaha</div>
                     </Tab>
                     <Tab eventKey="profile" title="Profile">
-                        <p>Test test</p>
+                        <div className="textArea">Test test</div>
                     </Tab>
                     <Tab eventKey="contact" title="Contact">
-                        <p>Hi Thomas</p>
+                        <div className="textArea">Hi Thomas</div>
                     </Tab>
                 </Tabs>
             </div>
