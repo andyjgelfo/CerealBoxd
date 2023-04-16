@@ -2,18 +2,6 @@ require('express');
 const { ObjectId } = require('mongodb');
 const sendEmail = require("./util/sendEmail");
 
-//new
-// const nodemailer = require("nodemailer");
-// const sgTransport = require("nodemailer-sendgrid-transport");
-// const options = {
-// auth: {
-// api_user: 'cerealboxdd@outlook.com',
-// api_key: 'RaisinThebran17!'
-// }
-// };
-// const client2 = nodemailer.createTransport(sgTransport(options));
-
-// end new
 
 exports.setApp = function (app, client)
 {
@@ -31,7 +19,6 @@ exports.setApp = function (app, client)
 
         var ret;
 
-        const from = "cerealboxdd@outlook.com";
 
         const subject = "Confirm your email address";
 
