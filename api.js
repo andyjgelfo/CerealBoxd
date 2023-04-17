@@ -15,18 +15,14 @@ exports.setApp = function (app, client)
     );
 
     app.post('/api/sendemail', (req, res) => {
-        const {to, code} = req.body;
+        const {to, output} = req.body;
 
         var ret;
 
 
-        const subject = "Confirm your email address";
-
-        const output =  'Your verification code is ' + code;
-
         try
         {
-            sendEmail(to, from, subject, output);
+            sendEmail(to, output);
         }
         catch(e)
         {
@@ -87,40 +83,77 @@ exports.setApp = function (app, client)
             ret = {error:"Login/Password incorrect"};
         }
 
-        console.log(ret);
-
-
         res.status(200).json(ret);
 
 
     });
 
-    app.post('/api/confirmEmail', async (req, res, next) =>
+    app.post('/api/forgotPassword', async (req, res, next) =>
     {
-    const {_id} = req.body;
-    var error = '';
+        // most of forgot password will be done via frontend
+        const {username, password} = req.body;
+        var error = '';
+        var _id;
+        var email;
 
-    try
-    {
-        const rev = client.db("cerealbox").collection('user');
-        const filter = {_id: new ObjectId(_id)};
-        const edit = {
-        $set: {
-            confirmed:true
-        },
-        };
+        try
+        {
+            const db = client.db("cerealbox").collection('user');
+            const results = await db.find({userName:username}).toArray();
 
-        const result = await rev.updateOne(filter, edit);
-    }
-    catch(e)
-    {
-        error = e.toString();
-    }
+            if (results.length > 0)
+            {
+                _id = results[0]._id;
+                email = results[0].email;
+            }
+            else
+            {
+                throw("User not found");
+            }
 
-    var ret = { error: error };
-    res.status(200).json(ret);
+            const filter = {_id: new ObjectId(_id)};
+            const edit = {
+                $set: {
+                    password:password
+                },
+            };
+    
+            const result = await db.updateOne(filter, edit);
+
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
+        var ret = {email: email, error: error };
+        res.status(200).json(ret);
     })
 
+    app.post('/api/confirmEmail', async (req, res, next) =>
+    {
+        const {_id} = req.body;
+        var error = '';
+
+        try
+        {
+            const rev = client.db("cerealbox").collection('user');
+            const filter = {_id: new ObjectId(_id)};
+            const edit = {
+            $set: {
+                confirmed:true
+            },
+            };
+
+            const result = await rev.updateOne(filter, edit);
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
+
+        var ret = { error: error };
+        res.status(200).json(ret);
+    });
 
 
     app.post('/api/register', async (req, res, next) =>

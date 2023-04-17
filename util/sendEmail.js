@@ -1,23 +1,31 @@
 require("dotenv").config();
-const sgMail = require("@sendgrid/mail");
+const nodemailer = require("nodemailer");
 
-const sendEmail = (to, from, subject, text) => {
+const sendEmail = (to, text) => {
   const msg = {
+    name: "CerealBoxd",
+    from: process.env.EMAIL,
     to: to,
-    from: from,
-    subject: subject,
-    text: text
+    subject: "Confirm Your Email Address",
+    html: "<div><p>" + text + "</p></div>"
   };
 
-  sgMail.send(msg, function (err, result) {
-    if (err) {
-        
-      console.log("email faileed")
-      console.log(err);
-    } else {
-      console.log("Email was Sent");
-    }
-  });
+
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.zoho.com',
+        port: '465',
+        secure:true,
+        auth : {
+            user: process.env.EMAIL,
+            pass: process.env.EP
+        }
+    })
+    transporter.sendMail(msg, (error, info) =>{
+        if(error) console.log(error)
+        else console.log(info)
+    })
+
+
 };
 
 module.exports = sendEmail;

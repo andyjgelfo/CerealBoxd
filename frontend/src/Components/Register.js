@@ -98,9 +98,6 @@ function Register()
                 var jwt = require('jsonwebtoken');
                 var ud = jwt.decode(storage.retrieveToken(),{complete:true});
    
-                var userId = ud.payload.userId;
-                var firstName = ud.payload.firstName;
-                var lastName = ud.payload.lastName;
                 var email = ud.payload.email;
                 var verified = ud.payload.confirmed
                 var id = ud.payload.id;
@@ -110,9 +107,7 @@ function Register()
                 {
                     localStorage.setItem('email', email);
                     localStorage.setItem("id", id);
-                    // var user = {firstName:firstName,lastName:lastName,username:userId}
-                    // localStorage.setItem('pre_user', JSON.stringify(user));
-                    // var user2 = JSON.parse(localStorage.getItem('pre_user'));
+                
                 
                     window.location.href = '/ConfirmEmail';
                 }
