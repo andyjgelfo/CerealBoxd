@@ -25,14 +25,15 @@ function Confirm()
             if (dataFetchedRef.current) return;
             dataFetchedRef.current = true;
             code = Math.floor(100000 + Math.random() * 900000);
-            obj = {to:localStorage.getItem('email'), code};
+            var text = 'Your verification code is ' + code;
+            // alert(code);
+            obj = {to:localStorage.getItem('email'), output: text};
             js = JSON.stringify(obj);
             response = fetch(bp.buildPath('api/sendEmail'),
             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
         })();
     }, []);
 
-    // alert(localStorage.getItem('id'))
 
     const doConfirm = async event => {
         event.preventDefault();
@@ -43,11 +44,7 @@ function Confirm()
             response = fetch(bp.buildPath('api/confirmEmail'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
                 window.location.href = '/LoginPage';
-                // alert("ahh 1");
-                // var newUser = JSON.parse(localStorage.getItem('pre_user'));
-                // var user = {firstName:newUser.firstName,lastName:newUser.lastName,username:newUser.userId}
-                // localStorage.setItem('user_data', JSON.stringify(user));
-                // window.location.href = '/CerealsPage';
+
 
         }
         else
@@ -57,9 +54,7 @@ function Confirm()
 
     }
     return(
-        // <div>
-        //     <h1>Confirm</h1>
-        // </div>
+
         <div class='wrapper-confirm d-flex align-items-center justify-content-center'>
             <div class='container align-items-center justify-content-center' id="confirmDiv">
                 <form onSubmit={doConfirm}>

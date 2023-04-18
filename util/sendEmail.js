@@ -1,36 +1,31 @@
-// require("dotenv").config();
-// // const sgMail = require("@sendgrid/mail");
-// // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-// var nodemailer = require('nodemailer');
+require("dotenv").config();
+const nodemailer = require("nodemailer");
 
-// const sendEmail = (to, from, subject, text) => {
-//   const msg = {
-//     to: to,
-//     from: from,
-//     subject: subject,
-//     text: text
-//   };
+const sendEmail = (to, text) => {
+  const msg = {
+    name: "CerealBoxd",
+    from: process.env.EMAIL,
+    to: to,
+    subject: "Confirm Your Email Address",
+    html: "<div><p>" + text + "</p></div>"
+  };
 
-// //   sgMail.send(msg, function (err, result) {
-// //     if (err) {
-        
-// //       console.log("email faileed")
-// //       console.log(err);
-// //     } else {
-// //       console.log("Email was Sent");
-// //     }
-// //   });
 
-// // create reusable transporter object using the default SMTP transport
-// transport = nodemailer.createTransport({
-//   host: "smtp.ethereal.email",
-//   port: 587,
-//   secure: false, // true for 465, false for other ports
-//   auth: {
-//     user: testAccount.user, // generated ethereal user
-//     pass: testAccount.pass, // generated ethereal password
-//   },
-// });
-// };
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.zoho.com',
+        port: '465',
+        secure:true,
+        auth : {
+            user: process.env.EMAIL,
+            pass: process.env.EP
+        }
+    })
+    transporter.sendMail(msg, (error, info) =>{
+        if(error) console.log(error)
+        else console.log(info)
+    })
 
-// module.exports = sendEmail;
+
+};
+
+module.exports = sendEmail;

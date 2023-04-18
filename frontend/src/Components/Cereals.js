@@ -155,7 +155,7 @@ function Cereals()
                 <input type="text" id="searchBar" placeholder="SEARCH..." onInput={filterCards} />
             </div>
 
-            {/* Suggest new cereal button  */}
+            {/* Floating action button: suggest a new cereal */}
             <Container styles={{background:'none', border: 'none', left: '92%', top: '85%',}}>
                 <Button styles={{backgroundColor: '#F2EAC1', color:'#1C2143', fontSize: '2.4em', textAlign: 'center', paddingTop: '0.1em', position:'BottomRight'}} onClick={setModalIsOpenToTrue}>+</Button>
             </Container>
