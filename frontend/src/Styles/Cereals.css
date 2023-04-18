@@ -33,12 +33,13 @@
     font-family: 'SemiBold20';
     color: white; 
     font-size: 2.2rem;
-    margin-bottom: 1.4em;
+    margin-bottom: 1em;
     align-items: center;
     justify-content: center; 
     display: flex;
     flex-wrap: wrap;
     padding-top: 1.4em; 
+    text-align: center;
 }
 
 #searchBar {
@@ -49,14 +50,14 @@
     border-color: #1C2143; 
     border-width: 0.3em; 
     border-style: solid;
-    width: 30em; 
+    width: auto; 
     display: flex; 
     height: 2.4em; 
-    margin-bottom: 1.4em;
     padding-top: 0.8em; 
     padding-bottom: 0.8em; 
     padding-left: 0.8em; 
     opacity: 70%; 
+    margin-bottom: 1em;
 }
 
 #searchBar:focus {
@@ -100,14 +101,140 @@
     height: auto; 
 }
 
-#newCerealButton {
+/* #newCerealButton {
     background: none;
     border: none; 
     color: #F2EAC1; 
-    font-size: 3rem;
-    margin-left: 5px;
+    font-size: 6rem;
 }
 
 #newCerealButton:hover {
     color: #40bcf4; 
+} */
+
+#newCerealBox{
+    width: auto;
+    border: solid;
+    background-color: #F2EAC1;
+    border-radius: 32px;
+    border-width: 0.6em; 
+    border-color: #1C2143;
+    height: fit-content;
+    overflow: hidden;
 }
+
+#modalTitle {
+    font-family: 'SemiBold15';
+    color: #1C2143;
+    background-color: #F2EAC1;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 4em;
+
+}
+
+#modalSubtitle {
+    font-family: 'Book20';
+    color: #1C2143; 
+    background-color: #F2EAC1;
+    font-size: 1rem;
+}
+
+#modalSubmit {
+    font-family: 'SemiBold15';
+    font-size: 1.4rem; 
+    background-color: #1C2143;
+    color: white; 
+    cursor: pointer;
+    border-radius: 50px;
+    border-color: #1C2143;
+    border-width: 8px; 
+    border-style: solid;
+    width: 6em; 
+    height: 3em; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#modalSubmit:hover {
+    background-color: white; 
+    color: #1C2143; 
+}
+
+#login {
+    background-color: #F2EAC1;
+    color:#1C2143; 
+    text-decoration: underline;
+}
+
+#login:hover {
+    color: #40bcf4;
+}
+
+#register {
+    background-color: #F2EAC1;
+    color:#1C2143; 
+    text-decoration: underline;
+}
+
+#register:hover {
+    color: #40bcf4;
+}
+
+#modalIcon {
+    background-color: #F2EAC1;
+}
+
+#modalClose {
+    position: absolute; 
+    top: 1rem; 
+    right: 2rem; 
+    border: none; 
+    background-color:#F2EAC1;
+    color: #1C2143; 
+    font-size: 2rem;
+}
+
+#modalCloseIcon {
+    background-color: #F2EAC1;
+}
+
+#modalCloseIcon:hover {
+    color: #40bcf4; 
+}
+
+#suggestCerealName {
+    width: 12em; 
+    font-family: 'SemiBold15';
+    font-size: 1.6rem;
+    text-align: center;
+    color: #1C2143; 
+    height: 2.4em; 
+    padding-top: 0.2em; 
+    padding-bottom: 0.2em; 
+    background-color: white;
+    border-radius: 50px; 
+    border: none; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#suggestManufacturer {
+    width: 12em; 
+    font-family: 'SemiBold15';
+    font-size: 1.6rem;
+    text-align: center;
+    color: #1C2143; 
+    height: 2.4em; 
+    padding-top: 0.2em; 
+    padding-bottom: 0.2em; 
+    background-color: white;
+    border-radius: 50px; 
+    border: none; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#modalSubmitMessage {
+    font-size: 1.2rem;
+    color: #40bcf4; 
+    background-color: #F2EAC1;
+}
+
