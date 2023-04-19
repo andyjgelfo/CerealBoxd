@@ -30,7 +30,7 @@
 }
 
 #wrapperCerealCard {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -264,5 +264,79 @@ input[type="radio"] {
     border: none; 
 }
 
+#reviewsTitle {
+    background-color: transparent;
+    font-family: 'SemiBold15';
+    color: white; 
+    text-align: center;
+    font-size: 2.4rem; 
+    color: #1C2143; 
+} 
 
+#reviewsContainer {
+    width: 70em; 
+    height: max-content; 
+    border: none; 
+    background-color: #F2EAC1; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
+    margin-top: 3em; 
+    margin-bottom: 30em;
+    border-color: #1C2143; 
+    border-radius: 32px; 
+    border-width: 0.6em; 
+    border-style: solid; 
+    padding-top: 2em; 
+    padding-bottom: 3em; 
+}
+
+#reviewsBody {
+    width: 30em; 
+    color: #1C2143;
+    font-family: 'Book20';
+    background-color: white;
+    border: none; 
+    border-radius: 8px;
+    padding: 0.8em 0.8em 0.8em 0.8em;
+    align-items: center;
+    justify-content: center;
+}
+
+#reviewsIcon {
+    background-color: #F2EAC1;
+    color: #1C2143; 
+}
+
+#reviewsDropDown {
+    background-color: white;
+    border: none; 
+    height: 2em; 
+    text-align: center;
+    font-family: 'Book20';
+    padding: 0.8em 0.8em 0.8em 0.8em; 
+    cursor: pointer; 
+}
+
+#reviewsButton {
+    font-family: 'SemiBold15';
+    font-size: 1.4rem; 
+    background-color: #1C2143;
+    color: white; 
+    cursor: pointer;
+    border-radius: 50px;
+    border-color: #1C2143;
+    border-width: 8px; 
+    border-style: solid;
+    width: 6em; 
+    height: 3em; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#reviewsButton:hover {
+    background-color: white; 
+    color: #1C2143; 
+}
 
