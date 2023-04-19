@@ -66,12 +66,6 @@ const CerealCard = (_) => {
 
     const [rating, setRating] = useState(null); 
     const [hover, setHover] = useState(null);  
-    const [reviewRating, setReviewRating] = useState(null);
-
-    const handleReviewRating = (event) => {
-      setReviewRating(event.target.value);
-   
-    };
    
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapperCerealCard">
@@ -157,15 +151,6 @@ const CerealCard = (_) => {
             {/* Reviews Area  */}
             <div id="reviewsContainer" className='container d-flex align-items-center justify-content-center'>
                 <span id="reviewsTitle"><RiStarSmileLine id="reviewsIcon"/> REVIEWS <RiStarSmileLine id="reviewsIcon"/></span>
-                <br />
-                <select id="reviewsDropDown" onChange={handleReviewRating}>
-                    <option>Rating Given?</option>
-                    <option value="oneStar">1 Star</option>
-                    <option value="twoStars">2 Stars</option>
-                    <option value="threeStars">3 Stars</option>
-                    <option value="fourStars">4 Stars</option>
-                    <option value="fiveStars">5 Stars</option>
-                </select>
                 <br/>
                 <textarea className='container d-flex align-items-center justify-content-center' placeholder="Add Review..." id="reviewsBody" rows={4} cols={60} />
                 <br />

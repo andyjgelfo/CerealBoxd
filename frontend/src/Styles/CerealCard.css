@@ -310,16 +310,6 @@ input[type="radio"] {
     color: #1C2143; 
 }
 
-#reviewsDropDown {
-    background-color: white;
-    border: none; 
-    height: 2em; 
-    text-align: center;
-    font-family: 'Book20';
-    padding: 0.8em 0.8em 0.8em 0.8em; 
-    cursor: pointer; 
-}
-
 #reviewsButton {
     font-family: 'SemiBold15';
     font-size: 1.4rem; 
