@@ -13,6 +13,10 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const CerealCard = (_) => {
+    // Fixes scrolling issue when switching between the Cereals page and the information 
+    document.documentElement.scrollTop = 0; 
+    document.body.scrollTop = 0;
+
     // Obtains the ID of the cereal 
     const { _id } = useParams();
 

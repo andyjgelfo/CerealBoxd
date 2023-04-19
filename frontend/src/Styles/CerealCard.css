@@ -19,6 +19,7 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    overflow-anchor: none;  
 }
 
 :root {
@@ -34,6 +35,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    overflow-anchor: none;
 }
 
 #imageContainer {
