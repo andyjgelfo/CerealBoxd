@@ -33,16 +33,34 @@ function ForgotPass()
             if (data.error)
                 throw(data.error)
 
-            var to = data.email;
+            if (data.recover === '')
+                throw("recovery email was not found");
+            
+            
+                
+
+            var email = data.email;
+            var recoveryEmail = data.recover;
+            var to;
+
+            if (document.getElementById('emailtype').checked) {
+                to = recoveryEmail;
+            } else {
+                to = email;
+            }
+
+
+            var subject = "Temporary Password"
 
             var text = 'Your temporary password is: ' + password + "<br><br> Please be sure to change your password once logged in";
-            obj = {to: to, output: text};
+            obj = {to: to, subject: subject, output: text};
             js = JSON.stringify(obj);
             response = fetch(bp.buildPath('api/sendEmail'),
             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
             window.location.href = '/LoginPage';
             
+
             
         }
         catch(e)
@@ -66,6 +84,9 @@ function ForgotPass()
                     
                     {/* <input type="radio" id="emailtype" name="email" value="recovery"></input>
                     <label for="emailtype">Recovery Email</label> */}
+                    
+                    <input type="checkbox" id="emailtype" name="email" value="recovery"></input>
+                    <label for="emailtype">Send to recovery email instead?</label>
 
 
                     <center><input type="submit" id="submitButton" class="buttons" value="SUBMIT" onClick={doForgot}/></center>

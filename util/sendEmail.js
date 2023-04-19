@@ -1,12 +1,12 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 
-const sendEmail = (to, text) => {
+const sendEmail = (to, subject, text) => {
   const msg = {
     name: "CerealBoxd",
     from: process.env.EMAIL,
     to: to,
-    subject: "Confirm Your Email Address",
+    subject: subject,
     html: "<div><p>" + text + "</p></div>"
   };
 

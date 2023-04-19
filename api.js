@@ -7,22 +7,22 @@ exports.setApp = function (app, client)
 {
     app.post('/api/addDB', async(req, res, next) =>
     {
-    //   const db = client.db("cerealbox");
-    //   const results = db.collection('user').updateMany({}, {$set:{"confirmed":false
-    // }});
+      const db = client.db("cerealbox");
+      const results = db.collection('user').updateMany({}, {$set:{"recoveryEmail":''
+    }});
       res.status(200)
     }
     );
 
     app.post('/api/sendemail', (req, res) => {
-        const {to, output} = req.body;
+        const {to, subject, output} = req.body;
 
         var ret;
 
 
         try
         {
-            sendEmail(to, output);
+            sendEmail(to, subject, output);
         }
         catch(e)
         {
@@ -95,6 +95,7 @@ exports.setApp = function (app, client)
         var error = '';
         var _id;
         var email;
+        var recover;
 
         try
         {
@@ -105,6 +106,7 @@ exports.setApp = function (app, client)
             {
                 _id = results[0]._id;
                 email = results[0].email;
+                recover = results[0].recoveryEmail;
             }
             else
             {
@@ -125,7 +127,7 @@ exports.setApp = function (app, client)
         {
             error = e.toString();
         }
-        var ret = {email: email, error: error };
+        var ret = {email: email, recover: recover, error: error };
         res.status(200).json(ret);
     })
 

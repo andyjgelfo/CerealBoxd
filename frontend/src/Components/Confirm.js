@@ -26,8 +26,8 @@ function Confirm()
             dataFetchedRef.current = true;
             code = Math.floor(100000 + Math.random() * 900000);
             var text = 'Your verification code is ' + code;
-            // alert(code);
-            obj = {to:localStorage.getItem('email'), output: text};
+            var subject = "Confirm Your Email Address";
+            obj = {to:localStorage.getItem('email'), subject: subject, output: text};
             js = JSON.stringify(obj);
             response = fetch(bp.buildPath('api/sendEmail'),
             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
