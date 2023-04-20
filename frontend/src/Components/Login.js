@@ -82,13 +82,11 @@ function Login()
                 {
                     localStorage.setItem('email', email);
                     localStorage.setItem("id", id);
-                    var user = {firstName:firstName,lastName:lastName,username:userId}
-                    localStorage.setItem('pre_user', JSON.stringify(user));
                     window.location.href = '/ConfirmEmail';
                 }
                 else
                 {
-                    var user = {firstName:firstName,lastName:lastName,username:userId}
+                    var user = {firstName:firstName,lastName:lastName,username:userId, id:id}
                     localStorage.setItem('user_data', JSON.stringify(user));
 
                     window.location.href = '/CerealsPage';

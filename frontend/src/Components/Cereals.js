@@ -76,6 +76,8 @@ function Cereals()
     else
         sillyMessage = "Silly rabbit, Cerealboxd is for @" + tokenResponse.username + "!";
 
+
+
     
     // Modal: Pop-up message for requesting a new cereal
     const [modalIsOpen, setModalIsOpen] = useState(false); 

@@ -8,7 +8,7 @@ exports.setApp = function (app, client)
     app.post('/api/addDB', async(req, res, next) =>
     {
       const db = client.db("cerealbox");
-      const results = db.collection('user').updateMany({}, {$set:{"recoveryEmail":''
+      const results = db.collection('reviews').updateMany({}, {$set:{"cerealID":null
     }});
       res.status(200)
     }
