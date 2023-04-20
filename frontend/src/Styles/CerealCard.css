@@ -19,7 +19,6 @@
 * {
     margin: 0;
     box-sizing: border-box;
-    overflow-anchor: none;  
 }
 
 :root {
@@ -35,7 +34,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    overflow-anchor: none;
 }
 
 #imageContainer {
@@ -285,8 +283,8 @@ input[type="radio"] {
     justify-content: center;
     display: flex; 
     flex-wrap: wrap;
-    margin-top: 3em; 
-    margin-bottom: 30em;
+    margin-top: 2em; 
+    margin-bottom: 1.2em; 
     border-color: #1C2143; 
     border-radius: 32px; 
     border-width: 0.6em; 
@@ -318,6 +316,7 @@ input[type="radio"] {
     background-color: #1C2143;
     color: white; 
     cursor: pointer;
+    margin-top: 0.4em; 
     border-radius: 50px;
     border-color: #1C2143;
     border-width: 8px; 
@@ -325,6 +324,25 @@ input[type="radio"] {
     width: 6em; 
     height: 3em; 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#reviewsForm {
+    background-color: #F2EAC1;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#addButton:hover {
+    color: #1C2143; 
+    background-color: white;
+}
+
+#editButton:hover {
+    color: #1C2143; 
+    background-color: white;
 }
 
 #editButton {
@@ -346,4 +364,46 @@ input[type="radio"] {
     background-color: white; 
     color: #1C2143; 
 }
+
+#everyonesReviews {
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
+    margin-bottom: 100px; 
+}
+
+#reviewCard {
+    background-color: transparent;
+    width: 85%; 
+    height: auto; 
+    border-radius: 12px; 
+    font-size: 1rem;
+    padding: 0.6em 0.8em 0 0.8em; 
+}
+
+#firstLineReviewCard1 {
+    font-family: 'SemiBold15';
+    color:white; 
+    font-size: 1.3rem; 
+}
+
+#firstLineReviewCard2 {
+    font-family: 'SemiBold15';
+    color:white; 
+    font-size: 1.3rem; 
+    float: right; 
+}
+
+#bodyReviewCard {
+    font-family: 'Book20';
+    color: white; 
+    font-size: 1.5rem;
+}
+
+#horizontalLine {
+    color: #40bcf4; 
+}
+
 

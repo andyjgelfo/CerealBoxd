@@ -15,7 +15,6 @@ import 'aos/dist/aos.css';
 const CerealCard = (_) => {
     // Fixes scrolling issue when switching between the Cereals page and the information 
     document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0; 
 
     // Obtains the ID of the cereal 
     const { _id } = useParams();
@@ -91,7 +90,9 @@ const CerealCard = (_) => {
         fetch(bp.buildPath('api/addReview'), 
         {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
      
-        event.target.reset(); 
+        event.target.reset();
+        
+        window.location.reload(false);
     }
 
     // Text Area Review 
@@ -113,9 +114,8 @@ const CerealCard = (_) => {
         })(); 
     }, []); 
 
-    const [reviewReview, setReviewReview] = useState([]); 
-
-    // Getting everyone's reviews to display together 
+    // Getting everyone's reviews to display together
+    const [reviewReview, setReviewReview] = useState([]);  
     useEffect(() => {
         (async () => {
             var obj = {collection:"reviews", column:"cerealID", target:_id};
@@ -210,16 +210,31 @@ const CerealCard = (_) => {
                     <span id="willItKillYou">{info.willItKillYou}</span>
                 </div>
             
-            {/* Reviews Area  */}
+            {/* Adding or editing a review  */}
             <div id="reviewsContainer" className='container d-flex align-items-center justify-content-center'>
                 <span id="reviewsTitle"><RiStarSmileLine id="reviewsIcon"/> REVIEWS <RiStarSmileLine id="reviewsIcon"/></span>
                 <br/>
-                <form onSubmit={handleSubmit}>
+                <form id="reviewsForm" onSubmit={handleSubmit}>
                     <textarea id="reviewsContent" placeholder="Add Review..." class="reviewsBody" rows={4} cols={60} />
                     <br />
                     <button type="submit" id="addButton">ADD</button>
-                    <button type="reset" id="editButton">EDIT</button>
+                    {/* <button type="reset" id="editButton">EDIT</button> */}
                 </form>
+            </div>
+
+            {/* Displays  all users' reviews  */}
+            <div id="everyonesReviews" className='container d-flex align-items-center justify-content-center'>
+                {reviewReview.map(reviewReview2 => {
+                    return(
+                        <div id="reviewCard" data-aos="fade">
+                            <span id="firstLineReviewCard1">Rating Given: {reviewReview2.rating}/5</span>
+                            <span id="firstLineReviewCard2">@{reviewReview2.reviewerName}</span>
+                            <br />
+                            <span id="bodyReviewCard">{reviewReview2.body}</span>
+                            <hr id="horizontalLine"/>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     ); 
