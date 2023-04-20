@@ -26,7 +26,8 @@ const Navbar = () =>{
                 {!localStorage.getItem('user_data') && (<a href="/RegisterPage">REGISTER</a>)}
 
                 {/* Hide when user is logged out */}
-                {localStorage.getItem('user_data') && (<a href="/HomePage">MY BOX</a>)}
+                {/* {localStorage.getItem('user_data') && (<a href="/HomePage">MY BOX</a>)} */}
+                {localStorage.getItem('user_data') && (<a href="/ProfilePage">MY BOX</a>)}
                 {localStorage.getItem('user_data') && (<a href="/HomePage" onClick={logOut}>LOGOUT</a>)}
 
                 <button className="nav-btn nav-close-btn" onClick={showNavbar}>

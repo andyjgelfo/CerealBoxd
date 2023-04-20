@@ -94,3 +94,10 @@ li.nav-item {
     border-radius: 5px;
 }
 
+#cardContainer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
+}

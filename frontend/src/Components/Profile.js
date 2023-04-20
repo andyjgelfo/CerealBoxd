@@ -1,6 +1,9 @@
 import React from 'react'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom"; 
 import { useState, useEffect } from 'react'; 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import "../Styles/Profile.css";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -10,20 +13,22 @@ import Tabs from 'react-bootstrap/Tabs';
 function Profile()
 {
     useEffect(() => {
+        AOS.init({duration : 2000});
         document.title = 'Cerealboxd';
     }, []);
 
     const [allCereals, setAllCereals] = useState([]); 
     const [cereal, setCereal] = useState([]); 
     const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
-    let userid = tokenResponse.username;
-    alert(userid);
+    let userid = tokenResponse.id;
+    // alert(userid);
     let cerealData; 
 
     var bp = require('./Path.js');
 
     useEffect(() => {
         (async () => {
+            // alert(userid)
             var obj = {target:userid};
             var js = JSON.stringify(obj); 
 
@@ -32,6 +37,7 @@ function Profile()
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
                 cerealData = JSON.parse(await response.text()); 
+                // alert(JSON.stringify(cerealData.results));
 
             } catch (error) {
                 cerealData = []; 
@@ -60,7 +66,7 @@ function Profile()
                                     return (
                                         <Link 
                                             to={{
-                                            pathname: `/CerealDetails/${cereal2._id}`, 
+                                            pathname:`/CerealDetails/${cereal2._id}`, 
                                             }}>
                                             <div id="card" data-aos="flip-right">
                                                 <img src={cereal2.image}/>
@@ -68,7 +74,7 @@ function Profile()
                                         </Link>
                                     ); 
                                 })}
-            </div>
+                            </div>
                         </div>
                     </Tab>
                     <Tab eventKey="profile" title="Profile">
