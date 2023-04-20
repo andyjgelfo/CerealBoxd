@@ -1,25 +1,63 @@
 /* Style the tab */
+
+/*This is for the whole tab box*/
 .TabBox {
-    width: 50%;
+    width: 75%;
     margin: auto;
     margin-top: 150px;
     margin-bottom: 100px;
     background-color: rgb(244, 220, 175);
-    max-width: 900px;
+    max-width: 1000px;
     padding: 20px;
     border-radius: 5px;
     border-width: 5px;
 }
 
-ul.nav.nav-tabs {
+/*For the tab text area*/
+.tab-content{
+    border-radius: 5px;
+    border:solid;
+}
+
+.tab-content>.active {
+    display: block;
+    border-radius: 5px;
+    border: solid;
+}
+
+/*For the Favorites tab */
+.Favorites {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    border: solid;
+    color: whitesmoke;
+    padding-bottom: 100px;
+}
+
+/*For the entire section with the tabs in it*/
+ul.nav.nav-tabs {
+    /*display: flex;*/
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     padding: 10px;
+    border: none;
     background-color: rgb(244, 220, 175);
+    transition: none;
 }
 
+/*For the tab borders*/
+.nav-tabs .nav-link {
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+/*For the account info section at the top*/
 .Info {
     width: 50%;
     margin: auto;
@@ -33,15 +71,7 @@ ul.nav.nav-tabs {
     border-color: white;
 }
 
-Tab{
-    border: solid;
-    border-radius: 5px;
-    border-width: 1px;
-    background-color: #2C3440;
-    text-align: center;
-    color: white;
-}
-
+/*For the text areas of the second two tabs*/
 .textArea {
     border: solid;
     border-radius: 5px;
@@ -53,18 +83,14 @@ Tab{
     padding-bottom: 100px;
 }
 
-.Favorites {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    color: whitesmoke;
-    max-height: 100px;
-    padding-bottom: 100px;
+/*To set the tab borders to none from default*/
+li.nav-item {
+    border-radius: 5px;
+    border: none;
 }
 
-.mb-3 ul > li > a {
-    background-color: gray;
-    color: white;
+/*To set bottom of tabs to rounded when selected instead of flat bottom*/
+.nav-link{
+    border-radius: 5px;
 }
+
