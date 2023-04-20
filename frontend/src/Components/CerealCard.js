@@ -14,20 +14,26 @@ import 'aos/dist/aos.css';
 
 const CerealCard = (_) => {
     // Fixes scrolling issue when switching between the Cereals page and the information 
-    document.documentElement.scrollTop = 0; 
     document.body.scrollTop = 0;
 
     // Obtains the ID of the cereal 
     const { _id } = useParams();
 
+    // For obtaining cereal details 
     const [info, setInfo] = useState([]); 
     let infoData; 
 
+    // For obtaining nutrition facts 
     const [nutrition, setNutrition] = useState([]); 
     let nutritionData; 
 
+    // For the star rating values
+    const [rating, setRating] = useState(null); 
+    const [hover, setHover] = useState(null);  
+
     var bp = require('./Path.js');
     
+    // Cereal Details 
     useEffect(() => {
         AOS.init({duration : 2000});
 
@@ -49,6 +55,7 @@ const CerealCard = (_) => {
         })(); 
     }, []); 
 
+    // Nutrition Facts
     useEffect(() => {
         (async () => {
             var obj = {collection:"nutrition",column:"cerealID",target:_id};
@@ -68,9 +75,59 @@ const CerealCard = (_) => {
         })(); 
     }, []); 
 
-    const [rating, setRating] = useState(null); 
-    const [hover, setHover] = useState(null);  
-   
+    // Sends the review data over to the database
+    const handleSubmit = (event) => {
+        event.preventDefault();         
+
+        const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+        var idReviewer = tokenResponse.id;
+        var ratingScore = rating; 
+        var reviewsContent = event.target.reviewsContent.value; 
+
+        var obj = {reviewerID:idReviewer, cerealID:_id, rating:ratingScore, body:reviewsContent};
+        var js = JSON.stringify(obj); 
+
+        fetch(bp.buildPath('api/addReview'), 
+        {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
+     
+        event.target.reset(); 
+    }
+
+    // Text Area Review 
+    let textBoxContent; 
+    useEffect(() => {
+        (async () => {
+            const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+            var idReviewer = tokenResponse.id;
+
+            var obj = {collection:"reviews", column1:"cerealID", column2:"reviewerID", target1:_id, target2:idReviewer};
+            var js = JSON.stringify(obj); 
+
+            const response = await fetch(bp.buildPath('api/searchByTwoID'),
+            {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            const middleTextBox = JSON.parse(await response.text()).results; 
+
+            textBoxContent = JSON.stringify(middleTextBox);
+        })(); 
+    }, []); 
+
+    const [reviewReview, setReviewReview] = useState([]); 
+
+    // Getting everyone's reviews to display together 
+    useEffect(() => {
+        (async () => {
+            var obj = {collection:"reviews", column:"cerealID", target:_id};
+            var js = JSON.stringify(obj); 
+
+            const response = await fetch(bp.buildPath('api/searchByIDmulti'),
+            {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            let tooManyReviews = JSON.parse(await response.text()).results; 
+            setReviewReview(tooManyReviews); 
+        })(); 
+    }, []); 
+
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapperCerealCard">
                 {/* Image, Like Button, Rate Buttons */}
@@ -82,8 +139,8 @@ const CerealCard = (_) => {
                             <VscHeartFilled />
                         </button>   
                     </div>    
-
                     <span id="rateLabel">Rate</span>
+
                     <div id="rateArea">
                         {[...Array(5)].map((star,i) => {
                             const ratingValue = i + 1; 
@@ -156,9 +213,12 @@ const CerealCard = (_) => {
             <div id="reviewsContainer" className='container d-flex align-items-center justify-content-center'>
                 <span id="reviewsTitle"><RiStarSmileLine id="reviewsIcon"/> REVIEWS <RiStarSmileLine id="reviewsIcon"/></span>
                 <br/>
-                <textarea className='container d-flex align-items-center justify-content-center' placeholder="Add Review..." id="reviewsBody" rows={4} cols={60} />
-                <br />
-                <button id="reviewsButton">ADD</button>
+                <form onSubmit={handleSubmit}>
+                    <textarea id="reviewsContent" placeholder="Add Review..." class="reviewsBody" rows={4} cols={60} />
+                    <br />
+                    <button type="submit" id="addButton">ADD</button>
+                    <button type="reset" id="editButton">EDIT</button>
+                </form>
             </div>
         </div>
     ); 

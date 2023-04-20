@@ -210,7 +210,8 @@
     flex-wrap: wrap;
     margin-left: 7.4em; 
     margin-top: 0.4em;
-    margin-bottom: 3em;  
+    margin-bottom: 3em; 
+    overflow-anchor: none; 
 }
 
 input[type="radio"] {
@@ -295,7 +296,7 @@ input[type="radio"] {
     padding-bottom: 3em; 
 }
 
-#reviewsBody {
+.reviewsBody {
     width: 30em; 
     color: #1C2143;
     font-family: 'Book20';
@@ -312,7 +313,22 @@ input[type="radio"] {
     color: #1C2143; 
 }
 
-#reviewsButton {
+#addButton {
+    font-family: 'SemiBold15';
+    font-size: 1.4rem; 
+    background-color: #1C2143;
+    color: white; 
+    cursor: pointer;
+    border-radius: 50px;
+    border-color: #1C2143;
+    border-width: 8px; 
+    border-style: solid;
+    width: 6em; 
+    height: 3em; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#editButton {
     font-family: 'SemiBold15';
     font-size: 1.4rem; 
     background-color: #1C2143;
