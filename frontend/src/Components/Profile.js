@@ -16,35 +16,53 @@ function Profile()
         AOS.init({duration : 2000});
         document.title = 'Cerealboxd';
     }, []);
-
+    
+    //Favorites data
     const [allCereals, setAllCereals] = useState([]); 
     const [cereal, setCereal] = useState([]); 
+
+    //Review Data
+    const [review, setReview] = useState([]);
+
     const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
     let userid = tokenResponse.id;
     // alert(userid);
-    let cerealData; 
+    let cerealData;
+    let reviewData;
 
     var bp = require('./Path.js');
 
     useEffect(() => {
         (async () => {
-            // alert(userid)
+            //For cereals
             var obj = {target:userid};
-            var js = JSON.stringify(obj); 
+            var js = JSON.stringify(obj);
+
+            //For reviews
+            var obj2 = {collection:"reviews",column:"reviewerID",target:userid};
+            var js2 = JSON.stringify(obj2);
 
             try {
+                //Gather favorites data
                 const response = await fetch(bp.buildPath('api/getFav'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
                 cerealData = JSON.parse(await response.text()); 
-                // alert(JSON.stringify(cerealData.results));
+
+                //Gathering review data
+                const response2 = await fetch(bp.buildPath('api/searchByIDmulti'),
+                {method:'POST',body:js2,headers:{'Content-Type': 'application/json'}});
+
+                reviewData = JSON.parse(await response2.text());
 
             } catch (error) {
-                cerealData = []; 
+                cerealData = [];
+                reviewData = [];
             }
 
             setAllCereals(cerealData.results); 
-            setCereal(cerealData.results); 
+            setCereal(cerealData.results);
+            setReview(reviewData.results);
         })(); 
     }, []); 
 
@@ -77,8 +95,16 @@ function Profile()
                             </div>
                         </div>
                     </Tab>
-                    <Tab eventKey="profile" title="Profile">
-                        <div className="textArea">Test test</div>
+                    <Tab eventKey="review" title="Review">
+                        <div className="Reviews">
+                            {reviewData.map(reviewData2 => {
+                                return(
+                                    <div id="reviewCard">
+                                        <span id="bodyReviewCard">{reviewData2.body}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </Tab>
                     <Tab eventKey="contact" title="Contact">
                         <div className="textArea">Hi Thomas</div>
