@@ -30,11 +30,10 @@ function ForgotPass()
                     {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
             var data = JSON.parse(await response.text());
+            alert(JSON.stringify(data));
             if (data.error)
                 throw(data.error)
-
-            if (data.recover === '')
-                throw("recovery email was not found");
+            
             
             
                 
@@ -44,6 +43,8 @@ function ForgotPass()
             var to;
 
             if (document.getElementById('emailtype').checked) {
+                if (data.recover === '')
+                throw("recovery email was not found");
                 to = recoveryEmail;
             } else {
                 to = email;

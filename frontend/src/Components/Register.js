@@ -101,12 +101,16 @@ function Register()
                 var email = ud.payload.email;
                 var verified = ud.payload.confirmed
                 var id = ud.payload.id;
+                var userId = ud.payload.userId;
                 
                 // alert("email: " + email + ", verified: " + verified + "id: " + id);
                 if (verified === false)
                 {
                     localStorage.setItem('email', email);
                     localStorage.setItem("id", id);
+                    // var user = {firstName:firstName,lastName:lastName,username:userId, id:id}
+                    // localStorage.setItem('user_data', JSON.stringify(user));
+
                 
                 
                     window.location.href = '/ConfirmEmail';

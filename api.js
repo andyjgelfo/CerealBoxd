@@ -291,7 +291,7 @@ exports.setApp = function (app, client)
     app.post('/api/addReview', async (req, res, next) =>
     {
 
-    const {reviewerID, cerealID, rating, body,} = req.body;
+    const {reviewerID, cerealID, rating, body} = req.body;
 
     var error = '';
     var reviewerName;
@@ -651,34 +651,6 @@ exports.setApp = function (app, client)
         const nutrition = client.db("cerealbox").collection('nutrition')
         const db = nutrition.insertOne(newNutrition);
 
-        // var maxSugars = await nutrition.aggregate(
-        //     [
-        //         {$project: {_id: 1, ratio: {$divide: ["$addedSugars", "$servingSize"]}}}, 
-        //         {$sort: {ratio: -1}}
-        //     ]
-        //   ).toArray();
-        // var maxSugar = maxSugars[0].ratio;
-
-        // var cereals = await nutrition.find({"cerealID":cerID}).toArray();
-        //     var cereal = cereals[0]
-        //     if (cereal.addedSugars !== 0)
-        //     {
-        //         var killBefore = (cereal.addedSugars/cereal.servingSize) / maxSugar;
-                
-        //         kill = Math.round(killBefore * 1e2 * 10) / 1e2;
-        //     }
-        //     else
-        //         kill = 0;
-
-        // // editing kill score
-        // let filter = {_id: cerID};
-        // let edit = {
-        // $set: {
-        //     willItKillYou: kill
-        // },
-        // };
-
-        // let edited = await box.updateOne(filter, edit);
     }
     catch(e)
     {
@@ -941,6 +913,25 @@ exports.setApp = function (app, client)
         
             result = userBase.insertOne(newSuggestion);
             // }
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
+        var ret = {results:result, error:error};
+        res.status(200).json(ret);
+    });
+
+    app.post('/api/getKeys', async (req, res, next) =>
+    {
+
+        const {} = req.body;
+        var result;
+        var error = '';
+
+        try
+        {
+            result = {YOUR_SERVICE_ID:process.env.YOUR_SERVICE_ID, YOUR_TEMPLATE_ID:process.env.YOUR_TEMPLATE_ID, YOUR_PUBLIC_KEY:process.env.YOUR_PUBLIC_KEY}
         }
         catch(e)
         {

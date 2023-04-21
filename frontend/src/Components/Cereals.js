@@ -10,6 +10,8 @@ import { MdNotifications } from "react-icons/md";
 import { BsFillBrightnessAltHighFill } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa"; 
 import { Container, Button} from 'react-floating-action-button'; 
+import emailjs from '@emailjs/browser';
+
 
 function Cereals()
 {
@@ -143,6 +145,22 @@ function Cereals()
         }
     };
 
+    // get api keys for emailJS
+    const [serviceID, setService] = useState(null); 
+    const [templateID, setTemplate] = useState(null); 
+    const [publicKey, setPublicKey] = useState(null); 
+    useEffect(() => {
+        (async () => {
+        var res = await fetch(bp.buildPath('api/getKeys'), 
+            {method:'POST', body:'{}', headers:{'Content-Type': 'application/json'}});
+
+        var keys = JSON.parse(await res.text()); 
+        setService(keys.results.YOUR_SERVICE_ID);
+        setTemplate(keys.results.YOUR_TEMPLATE_ID);
+        setPublicKey(keys.results.YOUR_PUBLIC_KEY);
+        })(); 
+    }, []); 
+
     let suggestCerealName; 
     let suggestManufacturer; 
 
@@ -155,6 +173,25 @@ function Cereals()
 
         fetch(bp.buildPath('api/addSuggestion'), 
         {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
+
+        const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+        const tokenName = tokenResponse.username;
+        
+        var templateParams = {
+            from_name: tokenName,
+            cerealName: suggestCerealName.value,
+            manufacturer:suggestManufacturer.value
+        };
+     
+        emailjs.send(serviceID, templateID, templateParams, publicKey)
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+
+        setModalIsOpenToFalse();
+
     }
 
     return(

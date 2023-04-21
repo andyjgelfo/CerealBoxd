@@ -12,7 +12,6 @@ _createToken = function ( fn, ln, username, email, confirm, id )
     {
       const expiration = new Date();
       const user = {userId:username,firstName:fn,lastName:ln, email:email, confirmed:confirm, id:id};
-
       const accessToken =  jwt.sign( user, process.env.ACCESS_TOKEN_SECRET);
 
       // In order to exoire with a value other than the default, use the 
