@@ -83,6 +83,23 @@ ul.nav.nav-tabs {
     padding-bottom: 100px;
 }
 
+/*For the Reviews tab*/
+.Reviews {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    border: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    background-color: #2C3440;
+    text-align: center;
+    color: whitesmoke;
+    max-height: 100px;
+    padding-bottom: 100px;
+}
+
 /*To set the tab borders to none from default*/
 li.nav-item {
     border-radius: 5px;
