@@ -97,7 +97,7 @@ function Profile()
                     </Tab>
                     <Tab eventKey="review" title="Review">
                         <div className="Reviews">
-                            {reviewData.map(reviewData2 => {
+                            {review.map(reviewData2 => {
                                 return(
                                     <div id="reviewCard">
                                         <span id="bodyReviewCard">{reviewData2.body}</span>
