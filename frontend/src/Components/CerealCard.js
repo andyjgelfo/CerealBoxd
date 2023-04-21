@@ -202,6 +202,9 @@ const CerealCard = (_) => {
         {
             buttonChange = "ADD"; 
             labelChange = "ADD REVIEW..."; 
+
+            setPosts(buttonChange); 
+            setPosts2(labelChange); 
         }
         
         // User is logged in 
