@@ -76,8 +76,6 @@ function Cereals()
     else
         sillyMessage = "Silly rabbit, Cerealboxd is for @" + tokenResponse.username + "!";
 
-
-
     
     // Modal: Pop-up message for requesting a new cereal
     const [modalIsOpen, setModalIsOpen] = useState(false); 
@@ -145,6 +143,20 @@ function Cereals()
         }
     };
 
+    let suggestCerealName; 
+    let suggestManufacturer; 
+
+    // Suggest a new cereal feature
+    const sendSuggestion = (event) => {
+        event.preventDefault(); 
+
+        var obj = {name: suggestCerealName.value,manufacturer:suggestManufacturer.value};
+        var js = JSON.stringify(obj); 
+
+        fetch(bp.buildPath('api/addSuggestion'), 
+        {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
+    }
+
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapper">
             {/* Title */}
@@ -169,12 +181,12 @@ function Cereals()
                     <center><span id="modalSubtitle">Send in the details below and we'll do our research!</span></center>
                     <br />
                     <br />
-                    <center><input type="text" id="suggestCerealName" placeholder='CEREAL NAME'/><br /></center>
+                    <center><input type="text" id="suggestCerealName" placeholder='CEREAL NAME' ref={(c) => suggestCerealName = c}/><br /></center>
                     <br />
-                    <center><input type="text" id="suggestManufacturer" placeholder='MANUFACTURER'/><br /></center>
+                    <center><input type="text" id="suggestManufacturer" placeholder='MANUFACTURER' ref={(c) => suggestManufacturer = c}/><br /></center>
                     <br />
                     <br />
-                    <center><button id="modalSubmit">SUBMIT</button></center>
+                    <center><button id="modalSubmit" onClick={sendSuggestion}>SUBMIT</button></center>
                     <button id="modalClose" onClick={setModalIsOpenToFalse}>
                         <FaTimes id="modalCloseIcon" />
                     </button>

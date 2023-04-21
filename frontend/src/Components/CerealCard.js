@@ -1,6 +1,6 @@
 import React from 'react'; 
 import { useParams } from "react-router-dom"; 
-import { useState, useEffect } from 'react'; 
+import { useState, useEffect, useRef } from 'react'; 
 import "../Styles/CerealCard.css"; 
 import { VscHeartFilled } from "react-icons/vsc"; 
 import { BsFillStarFill } from "react-icons/bs"; 
@@ -13,9 +13,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const CerealCard = (_) => {
-    // Fixes scrolling issue when switching between the Cereals page and the information 
-    document.body.scrollTop = 0;
-
     // Obtains the ID of the cereal 
     const { _id } = useParams();
 
@@ -58,6 +55,8 @@ const CerealCard = (_) => {
     // Nutrition Facts
     useEffect(() => {
         (async () => {
+            window.scrollTo(0,0); 
+
             var obj = {collection:"nutrition",column:"cerealID",target:_id};
             var js = JSON.stringify(obj); 
 
@@ -76,23 +75,61 @@ const CerealCard = (_) => {
     }, []); 
 
     // Sends the review data over to the database
-    const handleSubmit = (event) => {
-        event.preventDefault();         
+    const handleAdd = (event) => {
+        event.preventDefault();   
 
-        const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
-        var idReviewer = tokenResponse.id;
-        var ratingScore = rating; 
-        var reviewsContent = event.target.reviewsContent.value; 
+        if (JSON.parse(localStorage.getItem('user_data') == null))
+        {
+            alert("Login or register for an account in order to add a review!"); 
+        }
 
-        var obj = {reviewerID:idReviewer, cerealID:_id, rating:ratingScore, body:reviewsContent};
-        var js = JSON.stringify(obj); 
+        else
+        {
+            const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+            var idReviewer = tokenResponse.id;
 
-        fetch(bp.buildPath('api/addReview'), 
-        {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
-     
-        event.target.reset();
+            var ratingScore = rating; 
+            var reviewsContent = event.target.reviewsContent.value; 
+
+            var obj = {reviewerID:idReviewer, cerealID:_id, rating:ratingScore, body:reviewsContent};
+            var js = JSON.stringify(obj); 
+
+            fetch(bp.buildPath('api/addReview'), 
+            {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
         
-        window.location.reload(false);
+            event.target.reset();
+
+            window.location.reload(false); 
+        }
+    }
+
+    // Edits the review data and sends to the database
+    const handleEdit = (event) => {
+        event.preventDefault();   
+
+        if (JSON.parse(localStorage.getItem('user_data') == null))
+        {
+            alert("Login or register for an account in order to add a review!"); 
+        }
+
+        else
+        {
+            const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+            var idReviewer = tokenResponse.id;
+
+            var ratingScore = rating; 
+            var reviewsContent = event.target.reviewsContent.value; 
+
+            var obj = {reviewerID:idReviewer, cerealID:_id, rating:ratingScore, body:reviewsContent};
+            var js = JSON.stringify(obj); 
+
+            fetch(bp.buildPath('api/addReview'), 
+            {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
+        
+            event.target.reset();
+
+            window.location.reload(false);
+        }
     }
 
     // Text Area Review 
@@ -128,6 +165,79 @@ const CerealCard = (_) => {
             setReviewReview(tooManyReviews); 
         })(); 
     }, []); 
+ 
+    // Like Cereal
+    const handleLike = (event) => {
+        event.preventDefault();   
+
+        if (JSON.parse(localStorage.getItem('user_data') == null))
+        {
+            alert("Login or register for an account in order to save this to your favorites!"); 
+        }
+
+        else
+        {
+            const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+            var idReviewer = tokenResponse.id;
+
+            var obj = {userID:idReviewer, cerealID:_id};
+            var js = JSON.stringify(obj); 
+
+            fetch(bp.buildPath('api/addFavorite'), 
+            {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
+        }
+    }
+
+    var labelChange = ""; 
+    var buttonChange = ""; 
+    var valueChange = ""; 
+    const [posts, setPosts] = useState(null); 
+    const [posts2, setPosts2] = useState(null); 
+    const [posts3, setPosts3] = useState(null); 
+
+    useEffect(() => {
+        (async () => {
+        // User is not logged in
+        if (JSON.parse(localStorage.getItem('user_data') == null))
+        {
+            buttonChange = "ADD"; 
+            labelChange = "ADD REVIEW..."; 
+        }
+        
+        // User is logged in 
+        else 
+        {
+            const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+            var idReviewer = tokenResponse.id;
+
+            var obj = {collection:"reviews", column1:"cerealID", column2:"reviewerID", target1:_id, target2:idReviewer};
+            var js = JSON.stringify(obj); 
+            
+            const response = await fetch(bp.buildPath('api/searchByTwoID'),
+            {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            let response1 = JSON.parse(await response.text()).results; 
+
+            // User didn't leave a review
+            if (response1 == null)
+            {
+                buttonChange = "ADD"; 
+                labelChange = "ADD REVIEW...";  
+            }
+            // User did leave a review previously
+            else 
+            {
+                buttonChange = "EDIT"; 
+                labelChange = "EDIT REVIEW..."; 
+                valueChange = response1.body; 
+            }
+            setPosts(buttonChange);
+            setPosts2(labelChange); 
+            setPosts3(valueChange); 
+        }
+        }
+            )(); 
+    }, []); 
 
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapperCerealCard">
@@ -136,8 +246,8 @@ const CerealCard = (_) => {
                     <img id="image" src={info.image}></img> 
                     <div id="likeArea">
                         <span id="likeLabel">Like</span>
-                        <button id="likeButton">
-                            <VscHeartFilled />
+                        <button id="likeButton" onClick={handleLike}>
+                            <VscHeartFilled id="heart"/>
                         </button>   
                     </div>    
                     <span id="rateLabel">Rate</span>
@@ -210,17 +320,15 @@ const CerealCard = (_) => {
                     <span id="willItKillYou">{info.willItKillYou}</span>
                 </div>
             
-            {/* Adding or editing a review  */}
-            <div id="reviewsContainer" className='container d-flex align-items-center justify-content-center'>
-                <span id="reviewsTitle"><RiStarSmileLine id="reviewsIcon"/> REVIEWS <RiStarSmileLine id="reviewsIcon"/></span>
-                <br/>
-                <form id="reviewsForm" onSubmit={handleSubmit}>
-                    <textarea id="reviewsContent" placeholder="Add Review..." class="reviewsBody" rows={4} cols={60} />
-                    <br />
-                    <button type="submit" id="addButton">ADD</button>
-                    {/* <button type="reset" id="editButton">EDIT</button> */}
-                </form>
-            </div>
+                <div id="reviewsContainer" className='container d-flex align-items-center justify-content-center'>
+                    <span id="reviewsTitle"><RiStarSmileLine id="reviewsIcon"/> REVIEWS <RiStarSmileLine id="reviewsIcon"/></span>
+                        <br/>
+                        <form id="reviewsForm" onSubmit={handleAdd}>
+                            <textarea id="reviewsContent" placeholder={posts2} defaultValue={posts3} class="reviewsBody" rows={4} cols={60} />
+                            <br />
+                            <button type="submit" id="addButton">{posts}</button>
+                        </form>
+                </div>
 
             {/* Displays  all users' reviews  */}
             <div id="everyonesReviews" className='container d-flex align-items-center justify-content-center'>

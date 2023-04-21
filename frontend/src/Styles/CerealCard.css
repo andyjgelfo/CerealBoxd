@@ -406,4 +406,14 @@ input[type="radio"] {
     color: #40bcf4; 
 }
 
+#addForm {
+    visibility: visible;
+}
+
+#heart:hover {
+    color: red; 
+}
+
+
+
 
