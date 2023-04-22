@@ -102,10 +102,15 @@ center {
 }
 
 
-/* input[type="checkbox"] {
+/* label {
     background-color: #F2EAC1;
-    padding-left: 16.5em;
-    padding-top: 0.1em; 
-    padding-bottom: 0.1em; 
+   
+}
+
+input[name="emailtype"] {
+    background: #F2EAC1;
+    color: #F2EAC1;
+    content: "\2713";
+    text-align: center;
 } */
 

@@ -30,7 +30,6 @@ function ForgotPass()
                     {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
             var data = JSON.parse(await response.text());
-            alert(JSON.stringify(data));
             if (data.error)
                 throw(data.error)
             
@@ -40,24 +39,33 @@ function ForgotPass()
 
             var email = data.email;
             var recoveryEmail = data.recover;
-            var to;
+            // var to;
 
-            if (document.getElementById('emailtype').checked) {
-                if (data.recover === '')
-                throw("recovery email was not found");
-                to = recoveryEmail;
-            } else {
-                to = email;
-            }
+            // if (document.getElementById('emailtype').checked) {
+            //     if (data.recover === '')
+            //     throw("recovery email was not found");
+            //     to = recoveryEmail;
+            // } else {
+            //     to = email;
+            // }
 
 
             var subject = "Temporary Password"
 
             var text = 'Your temporary password is: ' + password + "<br><br> Please be sure to change your password once logged in";
-            obj = {to: to, subject: subject, output: text};
+            obj = {to: email, subject: subject, output: text};
+           
             js = JSON.stringify(obj);
             response = fetch(bp.buildPath('api/sendEmail'),
             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            if (recoveryEmail!=null)
+            {
+                obj = {to: recoveryEmail, subject: subject, output: text};
+                js = JSON.stringify(obj);
+                response = fetch(bp.buildPath('api/sendEmail'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+            }
 
             window.location.href = '/LoginPage';
             
@@ -81,13 +89,13 @@ function ForgotPass()
                     <center><input type="text" id="usernameBox" placeholder='USERNAME' ref={(c) => username = c} /><br /></center>
                     
                     {/* <input type="radio" id="emailtype" name="email" value="primary"></input>
-                    <label for="emailtype">Primary Email</label> */}
+                    <label for="emailtype">Primary Email</label><br/>
                     
-                    {/* <input type="radio" id="emailtype" name="email" value="recovery"></input>
+                    <input type="radio" id="emailtype" name="email" value="recovery"></input>
                     <label for="emailtype">Recovery Email</label> */}
                     
-                    <input type="checkbox" id="emailtype" name="email" value="recovery"></input>
-                    <label for="emailtype">Send to recovery email instead?</label>
+                    {/* <label><input type="checkbox" id="emailtype" name="email" value="recovery"/>
+                    Send to recovery email instead?</label> */}
 
 
                     <center><input type="submit" id="submitButton" class="buttons" value="SUBMIT" onClick={doForgot}/></center>

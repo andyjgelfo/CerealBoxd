@@ -169,7 +169,7 @@ exports.setApp = function (app, client)
 
     const { fName, lName, userName, password, email } = req.body;
 
-    const newUser = {fName:fName, lName:lName, userName:userName, password: password, email: email, confirmed: false};
+    const newUser = {fName:fName, lName:lName, userName:userName, password: password, email: email, recoveryEmail:'', confirmed: false};
     var error = '';
     var dupe = '';
     var _search = userName.trim();
