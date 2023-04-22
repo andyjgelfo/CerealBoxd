@@ -47,7 +47,6 @@ function Register()
         event.preventDefault();
 
         var obj = {fName:registerFirstName.value,lName:registerLastName.value,userName:registerUsername.value,password:registerPassword.value,email:registerEmail.value};
-
         var js = JSON.stringify(obj);
 
         var obj2 = {username:registerUsername.value};
