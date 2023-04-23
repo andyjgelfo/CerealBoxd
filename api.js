@@ -941,5 +941,28 @@ exports.setApp = function (app, client)
         res.status(200).json(ret);
     });
 
+    app.post('/api/deleteReview', async (req, res, next) => 
+    {
+        
+        var error = '';
+
+        const {reviewerID, cerealID} = req.body;
+        
+
+        try
+        {
+            const db = client.db("cerealbox").collection("reviews").deleteOne({reviewerID: new ObjectId(reviewerID), cerealID: new ObjectId(cerealID)});
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
+
+        var ret = { error: error };
+        res.status(200).json(ret);
+    });
+
+
+
 }
 

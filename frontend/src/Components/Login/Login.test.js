@@ -11,6 +11,6 @@ afterEach(() => {
 describe('renders login page', () => {
     render(<Login />)
 
-    expect(screen.getByRole("span")).toNotBeDisabled();
+    expect(screen.getByText("LOGIN")).toBe()
     
 })
