@@ -50,8 +50,6 @@ function Confirm()
         else
             setMessage("Code entered is incorrect");
 
-        
-
     }
     return(
 

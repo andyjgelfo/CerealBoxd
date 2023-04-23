@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@sendgrid/mail": "^7.7.0",
     "aos": "^2.3.4",
     "body-parser": "^1.20.2",

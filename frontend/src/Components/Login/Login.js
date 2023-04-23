@@ -47,7 +47,7 @@ function Login()
             var res = response.data;
             if (res.error) 
             {
-                setMessage('User/Password combination incorrect');
+                setMessage('Username and/or password combination is incorrect!');
             }
             else 
             {	
@@ -88,12 +88,12 @@ function Login()
             <div class='container align-items-center justify-content-center' id="loginDiv" data-aos="fade">
                 <form onSubmit={doLogin}>
                     <center><span id= "title">LOGIN</span></center>
+                    <center><span id="loginResult">{message}</span></center>
                     <center><input type="text" id="loginName" placeholder='USERNAME' ref={(c) => loginName = c} /><br /></center>
                     <center><input type="password" id="loginPassword" placeholder="PASSWORD" ref={(c) => loginPassword = c} /><br /></center>
                     <center><input type="submit" id="loginButton" class="buttons" value="SIGN IN" onClick={doLogin} /></center>
                     <center><a href="/RegisterPage"><span id="noAccount">Don't Have An Account? Register Here!</span></a></center>
                     <center><a href="/ForgotPass"><span id="noAccount">Forgot Your Password?</span></a></center>
-                    <center><span id="loginResult">{message}</span></center>
                 </form>
             </div>
         </div>

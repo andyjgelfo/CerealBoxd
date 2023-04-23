@@ -93,7 +93,7 @@
 }
 
 #messageResult {
-    color: red;
+    color: #C41E3A;
     background-color: #F2EAC1;
 }
 
@@ -113,4 +113,8 @@ input[name="emailtype"] {
     content: "\2713";
     text-align: center;
 } */
+
+#confirmResult {
+    color: #C41E3A; 
+}
 

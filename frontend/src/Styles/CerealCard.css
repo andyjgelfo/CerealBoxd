@@ -303,6 +303,8 @@ input[type="radio"] {
     padding: 0.8em 0.8em 0.8em 0.8em;
     align-items: center;
     justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
 }
 
 #reviewsIcon {
@@ -310,7 +312,7 @@ input[type="radio"] {
     color: #1C2143; 
 }
 
-#addButton {
+#reviewsButton {
     font-family: 'SemiBold15';
     font-size: 1.4rem; 
     background-color: #1C2143;
@@ -326,6 +328,11 @@ input[type="radio"] {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+#reviewsButton:hover {
+    color: #1C2143; 
+    background-color: white;
+}
+
 #reviewsForm {
     background-color: #F2EAC1;
     align-items: center;
@@ -333,36 +340,6 @@ input[type="radio"] {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-}
-
-#addButton:hover {
-    color: #1C2143; 
-    background-color: white;
-}
-
-#editButton:hover {
-    color: #1C2143; 
-    background-color: white;
-}
-
-#editButton {
-    font-family: 'SemiBold15';
-    font-size: 1.4rem; 
-    background-color: #1C2143;
-    color: white; 
-    cursor: pointer;
-    border-radius: 50px;
-    border-color: #1C2143;
-    border-width: 8px; 
-    border-style: solid;
-    width: 6em; 
-    height: 3em; 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-#reviewsButton:hover {
-    background-color: white; 
-    color: #1C2143; 
 }
 
 #everyonesReviews {
@@ -411,7 +388,48 @@ input[type="radio"] {
 }
 
 #heart:hover {
-    color: red; 
+    color: #C41E3A; 
+}
+
+#leftRatingMessage {
+    color: #C41E3A; 
+    background-color: #F2EAC1; 
+}
+
+#buttonsArea {
+    flex-direction: row;
+    background-color: #F2EAC1;
+}
+
+#deleteButton {
+    font-family: 'SemiBold15';
+    font-size: 1.4rem; 
+    background-color: #1C2143;
+    color: white; 
+    cursor: pointer;
+    margin-top: 0.4em; 
+    border-radius: 50px;
+    margin-left: 0.4em; 
+    border-color: #1C2143;
+    border-width: 8px; 
+    border-style: solid;
+    width: 6em; 
+    height: 3em; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#deleteButton:hover {
+    color: #1C2143; 
+    background-color: white;
+}
+
+#deleteIcon {
+    background-color: transparent;
+}
+
+#deleteIcon:hover {
+    color: #1C2143; 
+    background-color: white;
 }
 
 

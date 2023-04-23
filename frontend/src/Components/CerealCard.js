@@ -9,6 +9,7 @@ import { BsSpeedometer2 } from "react-icons/bs";
 import { BsStars } from "react-icons/bs"; 
 import { IoMdNutrition } from "react-icons/io"; 
 import { RiStarSmileLine } from "react-icons/ri"; 
+import { BsEmojiSmile } from "react-icons/bs"; 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -74,61 +75,122 @@ const CerealCard = (_) => {
         })(); 
     }, []); 
 
-    // Sends the review data over to the database
-    const handleAdd = (event) => {
+    // Checking to see if a review was left previously or not 
+    const [reviewLeft, setReviewLeft] = useState(null); 
+    useEffect(() => {
+        (async () => {
+            const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+            var idReviewer = tokenResponse.id;
+
+            var obj = {collection:"reviews", column1:"cerealID", column2:"reviewerID", target1:_id, target2:idReviewer};
+            var js = JSON.stringify(obj); 
+            
+            const response = await fetch(bp.buildPath('api/searchByTwoID'),
+            {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            let response1 = JSON.parse(await response.text()).results;
+
+            setReviewLeft(response1);
+        })(); 
+    }, []); 
+
+    const [leftRating, setLeftRating] = useState(''); 
+
+    // Adds or edits the review data and sends to the database
+    const handleAddOrEdit = async event => {
         event.preventDefault();   
 
+        // User is not logged in 
         if (JSON.parse(localStorage.getItem('user_data') == null))
         {
             alert("Login or register for an account in order to add a review!"); 
         }
 
+        // User is logged in 
         else
         {
-            const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
-            var idReviewer = tokenResponse.id;
+            // Review was not left previously: ADD 
+            if (reviewLeft == null)
+            {
+                const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+                var idReviewer = tokenResponse.id;
 
-            var ratingScore = rating; 
-            var reviewsContent = event.target.reviewsContent.value; 
+                var ratingScore = rating; 
 
-            var obj = {reviewerID:idReviewer, cerealID:_id, rating:ratingScore, body:reviewsContent};
-            var js = JSON.stringify(obj); 
+                // User forgot to leave a rating before leaving a review 
+                if (ratingScore == null)
+                {
+                    setLeftRating("You forgot to leave a rating above!"); 
+                }
 
-            fetch(bp.buildPath('api/addReview'), 
-            {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
-        
-            event.target.reset();
+                // User left a rating first 
+                else 
+                {
+                    var reviewsContent = event.target.reviewsContent.value; 
 
-            window.location.reload(false); 
+                    var obj = {reviewerID:idReviewer, cerealID:_id, rating:ratingScore, body:reviewsContent};
+                    var js = JSON.stringify(obj); 
+
+                    await fetch(bp.buildPath('api/addReview'), 
+                    {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
+                
+                    window.location.reload(false);
+                }
+            }
+
+            // Review was left previously: EDIT 
+            else
+            {
+                const tokenResponse1 = JSON.parse(localStorage.getItem('user_data'));
+                var idReviewer1 = tokenResponse1.id;
+
+                var ratingScore1 = rating; 
+                var reviewsContent1 = event.target.reviewsContent.value; 
+
+                var obj1 = {reviewerID:idReviewer1, cerealID:_id, rating:ratingScore1, body:reviewsContent1};
+                var js1 = JSON.stringify(obj1); 
+
+                await fetch(bp.buildPath('api/editReview'), 
+                {method:'POST', body:js1, headers:{'Content-Type': 'application/json'}}); 
+            
+                window.location.reload(false);
+            }
         }
     }
 
-    // Edits the review data and sends to the database
-    const handleEdit = (event) => {
-        event.preventDefault();   
+    // Deleting reviews
+    const handleDelete = async event => {
+        event.preventDefault(); 
 
+        // User is not logged in 
         if (JSON.parse(localStorage.getItem('user_data') == null))
         {
-            alert("Login or register for an account in order to add a review!"); 
+            alert("Surprises are only for our supporters!"); 
         }
 
+        // User is logged in 
         else
         {
-            const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
-            var idReviewer = tokenResponse.id;
+            // Review was not left previously: SURPRISE 
+            if (reviewLeft == null)
+            {
+                return; 
+            }
 
-            var ratingScore = rating; 
-            var reviewsContent = event.target.reviewsContent.value; 
+            // Review was left previously: DELETE 
+            else
+            {
+                const tokenResponse1 = JSON.parse(localStorage.getItem('user_data'));
+                var idReviewer1 = tokenResponse1.id;
 
-            var obj = {reviewerID:idReviewer, cerealID:_id, rating:ratingScore, body:reviewsContent};
-            var js = JSON.stringify(obj); 
+                var obj1 = {reviewerID:idReviewer1, cerealID:_id};
+                var js1 = JSON.stringify(obj1); 
 
-            fetch(bp.buildPath('api/addReview'), 
-            {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
-        
-            event.target.reset();
-
-            window.location.reload(false);
+                await fetch(bp.buildPath('api/deleteReview'), 
+                {method:'POST', body:js1, headers:{'Content-Type': 'application/json'}}); 
+            
+                window.location.reload(false);
+            }
         }
     }
 
@@ -191,20 +253,26 @@ const CerealCard = (_) => {
     var labelChange = ""; 
     var buttonChange = ""; 
     var valueChange = ""; 
+    var deleteChange = " ";
     const [posts, setPosts] = useState(null); 
     const [posts2, setPosts2] = useState(null); 
     const [posts3, setPosts3] = useState(null); 
+    const [deleteBtn, setDeleteBtn] = useState(null); 
 
+    // Dynamic add/edit buttons, dynamic text area 
     useEffect(() => {
         (async () => {
+
         // User is not logged in
         if (JSON.parse(localStorage.getItem('user_data') == null))
         {
             buttonChange = "ADD"; 
             labelChange = "ADD REVIEW..."; 
+            deleteChange = <BsEmojiSmile id="deleteIcon"/>; 
 
             setPosts(buttonChange); 
             setPosts2(labelChange); 
+            setDeleteBtn(deleteChange); 
         }
         
         // User is logged in 
@@ -226,6 +294,7 @@ const CerealCard = (_) => {
             {
                 buttonChange = "ADD"; 
                 labelChange = "ADD REVIEW...";  
+                deleteChange = <BsEmojiSmile id="deleteIcon"/>; 
             }
             // User did leave a review previously
             else 
@@ -233,10 +302,12 @@ const CerealCard = (_) => {
                 buttonChange = "EDIT"; 
                 labelChange = "EDIT REVIEW..."; 
                 valueChange = response1.body; 
+                deleteChange = "DELETE"; 
             }
             setPosts(buttonChange);
             setPosts2(labelChange); 
             setPosts3(valueChange); 
+            setDeleteBtn(deleteChange); 
         }
         }
             )(); 
@@ -325,11 +396,17 @@ const CerealCard = (_) => {
             
                 <div id="reviewsContainer" className='container d-flex align-items-center justify-content-center'>
                     <span id="reviewsTitle"><RiStarSmileLine id="reviewsIcon"/> REVIEWS <RiStarSmileLine id="reviewsIcon"/></span>
-                        <br/>
-                        <form id="reviewsForm" onSubmit={handleAdd}>
+                        <div id="leftRatingMessage">
+                            {leftRating}
+                        </div>
+                        <br />
+                        <form id="reviewsForm" onSubmit={handleAddOrEdit}>
                             <textarea id="reviewsContent" placeholder={posts2} defaultValue={posts3} class="reviewsBody" rows={4} cols={60} />
                             <br />
-                            <button type="submit" id="addButton">{posts}</button>
+                            <div id="buttonsArea">
+                                <button type="submit" id="reviewsButton">{posts}</button>
+                                <button id="deleteButton" onClick={handleDelete}>{deleteBtn}</button>
+                            </div>
                         </form>
                 </div>
 
@@ -352,6 +429,3 @@ const CerealCard = (_) => {
 }; 
 
 export default CerealCard; 
-
-
-
