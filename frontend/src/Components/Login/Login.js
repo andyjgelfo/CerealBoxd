@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useJwt } from "react-jwt";
-import "../Styles/Login.css"; 
+import "../../Styles/Login.css"; 
 import { useEffect } from 'react'; 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import axios from 'axios';
@@ -15,31 +15,14 @@ function Login()
         document.title = 'Login';
     }, []);
 
-    var storage = require('../tokenStorage.js');
+    var storage = require('../../tokenStorage.js');
 
     let loginName;
     let loginPassword;
 
     const [message,setMessage] = useState('');
 
-    var bp = require('./Path.js');
-
-    // const app_name = 'cerealboxd'
-    // function buildPath(route, type)
-    // {
-    //     if (process.env.NODE_ENV === 'production') 
-    //     {
-    //         return 'https://' + app_name +  '.herokuapp.com/' + route;
-    //     }
-    //     else
-    //     {        
-    //         // return 'http://127.0.0.1:6000/' + route;
-    //         if (type === 0)
-    //             return 'http://localhost:5050/' + route;
-    //         else
-    //             return 'http://localhost:3000/' + route;
-    //     }
-    // }
+    var bp = require('../Path.js');
 
     const doLogin = async event =>
     {

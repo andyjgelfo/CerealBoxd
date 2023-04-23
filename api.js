@@ -5,14 +5,14 @@ const sendEmail = require("./util/sendEmail");
 
 exports.setApp = function (app, client)
 {
-    app.post('/api/addDB', async(req, res, next) =>
-    {
-      const db = client.db("cerealbox");
-      const results = db.collection('reviews').updateMany({}, {$set:{"cerealID":null
-    }});
-      res.status(200)
-    }
-    );
+    // app.post('/api/addDB', async(req, res, next) =>
+    // {
+    //   const db = client.db("cerealbox");
+    //   const results = db.collection('reviews').updateMany({}, {$set:{"cerealID":null
+    // }});
+    //   res.status(200)
+    // }
+    // );
 
     app.post('/api/sendemail', (req, res) => {
         const {to, subject, output} = req.body;
@@ -353,7 +353,7 @@ exports.setApp = function (app, client)
 
     app.post('/api/editReview', async (req, res, next) =>
     {
-    const {reviewID, cerealID, rating, body} = req.body;
+    const {reviewerID, cerealID, rating, body} = req.body;
     // var ObjectId = require('mongodb').ObjectId;
     var error = '';
     var result;
@@ -363,7 +363,7 @@ exports.setApp = function (app, client)
         const rev = client.db("cerealbox").collection('reviews')
         const box = client.db("cerealbox").collection('box');
         let cerID = new ObjectId(cerealID.trim());
-        var filter = {_id: new ObjectId(reviewID)};
+        var filter = {reviewerID: new ObjectId(reviewerID), cerealID: cerID};
         var edit = {
         $set: {
             'rating':rating, 'body':body

@@ -6,7 +6,7 @@ import Navbar from "./Components/Navbar";
 import Home from "./Components/Home"; 
 import About from "./Components/About"; 
 import Cereals from "./Components/Cereals"; 
-import Login from "./Components/Login"; 
+import Login from "./Components/Login/Login"; 
 import Register from "./Components/Register"; 
 import CerealCard from "./Components/CerealCard";
 import Profile from "./Components/Profile";
