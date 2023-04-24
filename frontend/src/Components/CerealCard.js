@@ -178,7 +178,7 @@ const CerealCard = (_) => {
             // Review was not left previously: SURPRISE 
             if (reviewLeft == null)
             {
-                return; 
+                window.location.href = "https://www.capncrunchbday.com";
             }
 
             // Review was left previously: DELETE 
