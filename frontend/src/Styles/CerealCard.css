@@ -434,4 +434,42 @@ input[type="radio"] {
 
 
 
+#modalAddReviewTitle {
+    font-family: 'SemiBold15';
+    color: #1C2143;
+    background-color: #F2EAC1;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 4em;
+
+}
+
+#modalAddReviewSubtitle {
+    font-family: 'Book20';
+    color: #1C2143; 
+    background-color: #F2EAC1;
+    font-size: 1rem;
+}
+
+#modalAddReviewClose {
+    position: absolute; 
+    top: 1rem; 
+    right: 2rem; 
+    border: none; 
+    background-color:#F2EAC1;
+    color: #1C2143; 
+    font-size: 2rem;
+}
+
+#modalAddReviewCloseIcon {
+    background-color: #F2EAC1;
+}
+
+#modalAddReviewCloseIcon:hover {
+    color: #40bcf4; 
+}
+
+#modalAddReviewIcon {
+    background-color: #F2EAC1;
+}
 

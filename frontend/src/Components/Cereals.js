@@ -12,7 +12,6 @@ import { FaTimes } from "react-icons/fa";
 import { Container, Button} from 'react-floating-action-button'; 
 import emailjs from '@emailjs/browser';
 
-
 function Cereals()
 {
     // Title of webpage
@@ -236,7 +235,7 @@ function Cereals()
             {!localStorage.getItem('user_data') && (<Modal style={customStyles2} isOpen={modalIsOpen} onRequestClose={setModalIsOpenToFalse}>
                     <center><span id="modalTitle"><MdNotifications id="modalIcon"/> No Milk Before Cereal <MdNotifications id="modalIcon"/></span></center>
                     <br />
-                    <center><span id="modalSubtitle"><a id="login" href="/LoginPage">Login</a> or <a id="register" href="/RegisterPage">register</a> for an account in order to suggest a cereal to be added!</span></center>
+                    <center><span id="modalSubtitle"><a id="login" href="/LoginPage">Login</a> or <a id="register" href="/RegisterPage">register</a> for an account in order to use this feature!</span></center>
                     <button id="modalClose" onClick={setModalIsOpenToFalse}>
                         <FaTimes id="modalCloseIcon" />
                     </button>

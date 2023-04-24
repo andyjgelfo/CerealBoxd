@@ -10,8 +10,11 @@ import { BsStars } from "react-icons/bs";
 import { IoMdNutrition } from "react-icons/io"; 
 import { RiStarSmileLine } from "react-icons/ri"; 
 import { BsEmojiSmile } from "react-icons/bs"; 
+import { FaTimes } from "react-icons/fa"; 
+import { MdNotifications } from "react-icons/md"; 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Modal from 'react-modal'; 
 
 const CerealCard = (_) => {
     // Obtains the ID of the cereal 
@@ -94,6 +97,7 @@ const CerealCard = (_) => {
         })(); 
     }, []); 
 
+    // Used to help check to see if a review was left previously by the user 
     const [leftRating, setLeftRating] = useState(''); 
 
     // Adds or edits the review data and sends to the database
@@ -103,7 +107,7 @@ const CerealCard = (_) => {
         // User is not logged in 
         if (JSON.parse(localStorage.getItem('user_data') == null))
         {
-            alert("Login or register for an account in order to add a review!"); 
+            setModalIsOpenToTrue(); 
         }
 
         // User is logged in 
@@ -158,14 +162,14 @@ const CerealCard = (_) => {
         }
     }
 
-    // Deleting reviews
+    // Deleting reviews from the database
     const handleDelete = async event => {
         event.preventDefault(); 
 
         // User is not logged in 
         if (JSON.parse(localStorage.getItem('user_data') == null))
         {
-            alert("Surprises are only for our supporters!"); 
+            setModalIsOpenToTrue(); 
         }
 
         // User is logged in 
@@ -234,7 +238,7 @@ const CerealCard = (_) => {
 
         if (JSON.parse(localStorage.getItem('user_data') == null))
         {
-            alert("Login or register for an account in order to save this to your favorites!"); 
+            setModalIsOpenToTrue(); 
         }
 
         else
@@ -313,6 +317,54 @@ const CerealCard = (_) => {
             )(); 
     }, []); 
 
+    // Modal: Pop-up message for requesting a new cereal
+    const [modalIsOpen, setModalIsOpen] = useState(false); 
+    const setModalIsOpenToTrue = () => {
+        setModalIsOpen(true); 
+        document.body.style.overflow = 'hidden';
+    }
+    
+    const setModalIsOpenToFalse = () => {
+        setModalIsOpen(false); 
+        document.body.style.overflow = 'unset';
+    }
+
+    const modalStyles = {
+        content : {
+          top: '28%',
+          left: '50%',
+          right: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor:'#F2EAC1' , 
+          borderStyle: 'solid', 
+          borderColor: '#1C2143',
+          borderWidth: '0.6em',
+          borderRadius: '32px',
+          width: '50em',
+          height: 'max-content',
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          alignItems: 'center', 
+          justifyItems: 'center', 
+          flexDirection: 'column',
+          paddingLeft: '4em', 
+          paddingRight: '4em',
+          paddingTop: '4em', 
+          paddingBottom: '4em',
+          textAlign: 'center',  
+        }
+    };
+
+    // User has to be logged in to leave a rating on a cereal 
+    const restrictStarsClick = () => {
+        // User is not logged in 
+        if (JSON.parse(localStorage.getItem('user_data') == null))
+        {
+            setModalIsOpenToTrue(); 
+        }
+    }
+
     return(
         <div className='container d-flex align-items-center justify-content-center' id="wrapperCerealCard">
                 {/* Image, Like Button, Rate Buttons */}
@@ -326,7 +378,7 @@ const CerealCard = (_) => {
                     </div>    
                     <span id="rateLabel">Rate</span>
 
-                    <div id="rateArea">
+                    <div id="rateArea" onClick={restrictStarsClick}>
                         {[...Array(5)].map((star,i) => {
                             const ratingValue = i + 1; 
                             return (
@@ -424,6 +476,17 @@ const CerealCard = (_) => {
                     );
                 })}
             </div>
+
+            {/* Modal: user has to be logged in to add a review or see the surprise */}
+            {!localStorage.getItem('user_data') && 
+            (<Modal style={modalStyles} isOpen={modalIsOpen} onRequestClose={setModalIsOpenToFalse}>
+                <center><span id="modalAddReviewTitle"><MdNotifications id="modalAddReviewIcon"/> No Milk Before Cereal <MdNotifications id="modalAddReviewIcon"/></span></center>
+                <br />
+                <center><span id="modalAddReviewSubtitle"><a id="login" href="/LoginPage">Login</a> or <a id="register" href="/RegisterPage">register</a> for an account in order to use this feature!</span></center>
+                <button id="modalAddReviewClose" onClick={setModalIsOpenToFalse}>
+                    <FaTimes id="modalAddReviewCloseIcon" />
+                </button>
+            </Modal>)}
         </div>
     ); 
 }; 
