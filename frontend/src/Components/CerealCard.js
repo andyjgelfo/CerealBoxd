@@ -31,6 +31,7 @@ const CerealCard = (_) => {
     // For the star rating values
     const [rating, setRating] = useState(null); 
     const [hover, setHover] = useState(null);  
+    const [fHover, setfHover] = useState(null);  
 
     var bp = require('./Path.js');
     
@@ -100,6 +101,8 @@ const CerealCard = (_) => {
     // Used to help check to see if a review was left previously by the user 
     const [leftRating, setLeftRating] = useState(''); 
 
+ 
+
     // Adds or edits the review data and sends to the database
     const handleAddOrEdit = async event => {
         event.preventDefault();   
@@ -136,7 +139,13 @@ const CerealCard = (_) => {
                     var js = JSON.stringify(obj); 
 
                     await fetch(bp.buildPath('api/addReview'), 
-                    {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
+                    {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
+                    
+                    obj = {cerealID:_id};
+                    js = JSON.stringify(obj);
+
+                    await fetch(bp.buildPath('api/updateRating'), 
+                    {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
                 
                     window.location.reload(false);
                 }
@@ -156,6 +165,11 @@ const CerealCard = (_) => {
 
                 await fetch(bp.buildPath('api/editReview'), 
                 {method:'POST', body:js1, headers:{'Content-Type': 'application/json'}}); 
+
+                obj1 = {cerealID:_id};
+                js1 = JSON.stringify(obj1);
+                await fetch(bp.buildPath('api/updateRating'), 
+                    {method:'POST', body:js1, headers:{'Content-Type': 'application/json'}});
             
                 window.location.reload(false);
             }
@@ -192,6 +206,12 @@ const CerealCard = (_) => {
 
                 await fetch(bp.buildPath('api/deleteReview'), 
                 {method:'POST', body:js1, headers:{'Content-Type': 'application/json'}}); 
+
+                obj1 = {cerealID:_id};
+                js1 = JSON.stringify(obj1);
+
+                await fetch(bp.buildPath('api/updateRating'), 
+                {method:'POST', body:js1, headers:{'Content-Type': 'application/json'}});
             
                 window.location.reload(false);
             }
@@ -231,10 +251,36 @@ const CerealCard = (_) => {
             setReviewReview(tooManyReviews); 
         })(); 
     }, []); 
+
+    // Checking to see if cereal has been favorited
+    const [favoritedLeft, setFavoritedLeft] = useState(null); 
+    useEffect(() => {
+        (async () => {
+            const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
+            var idReviewer = tokenResponse.id;
+
+            var obj = {collection:"favorites", column1:"cerealID", column2:"userID", target1:_id, target2:idReviewer};
+            var js = JSON.stringify(obj); 
+            
+            const response = await fetch(bp.buildPath('api/searchByTwoID'),
+            {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            let response1 = JSON.parse(await response.text()).results;
+
+            if (response1 == null)
+                setFavoritedLeft(false)
+            else
+                setFavoritedLeft(true)
+
+
+
+        })(); 
+    }, []); 
  
     // Like Cereal
     const handleLike = (event) => {
         event.preventDefault();   
+
 
         if (JSON.parse(localStorage.getItem('user_data') == null))
         {
@@ -249,9 +295,19 @@ const CerealCard = (_) => {
             var obj = {userID:idReviewer, cerealID:_id};
             var js = JSON.stringify(obj); 
 
-            fetch(bp.buildPath('api/addFavorite'), 
-            {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
+            if (favoritedLeft == false)
+            {
+                fetch(bp.buildPath('api/addFavorite'), 
+                {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
+            }
+            else
+            {
+                fetch(bp.buildPath('api/deleteFavorite'), 
+                {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
+            }
         }
+
+        window.location.reload(false);
     }
 
     var labelChange = ""; 
@@ -262,6 +318,9 @@ const CerealCard = (_) => {
     const [posts2, setPosts2] = useState(null); 
     const [posts3, setPosts3] = useState(null); 
     const [deleteBtn, setDeleteBtn] = useState(null); 
+
+    // used to keep stars colored once a user changes pages and goes back
+    const [reviewLeftScore, setReviewLeftScore] = useState(0);
 
     // Dynamic add/edit buttons, dynamic text area 
     useEffect(() => {
@@ -292,6 +351,7 @@ const CerealCard = (_) => {
             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
             let response1 = JSON.parse(await response.text()).results; 
+            
 
             // User didn't leave a review
             if (response1 == null)
@@ -307,6 +367,9 @@ const CerealCard = (_) => {
                 labelChange = "EDIT REVIEW..."; 
                 valueChange = response1.body; 
                 deleteChange = "DELETE"; 
+                // alert(response1.rating)
+                setReviewLeftScore(response1.rating);
+
             }
             setPosts(buttonChange);
             setPosts2(labelChange); 
@@ -316,6 +379,7 @@ const CerealCard = (_) => {
         }
             )(); 
     }, []); 
+
 
     // Modal: Pop-up message for requesting a new cereal
     const [modalIsOpen, setModalIsOpen] = useState(false); 
@@ -373,7 +437,11 @@ const CerealCard = (_) => {
                     <div id="likeArea">
                         <span id="likeLabel">Like</span>
                         <button id="likeButton" onClick={handleLike}>
-                            <VscHeartFilled id="heart"/>
+                            <VscHeartFilled id="heart"
+                                color={(fHover || favoritedLeft) ? "#C41E3A": "#ffffff"}
+                                onMouseEnter={() => setfHover(true)}
+                                onMouseLeave={() => setfHover(null)}
+                            />
                         </button>   
                     </div>    
                     <span id="rateLabel">Rate</span>
@@ -387,11 +455,12 @@ const CerealCard = (_) => {
                                         type="radio"
                                         name="rating"
                                         value={ratingValue}
+                                        id="stars"
                                         onClick={() => setRating(ratingValue)}
                                     />
                                     <BsFillStarFill
                                         className="star"
-                                        color={ratingValue <= (hover || rating) ? "#40bcf4" : "#ffffff"}
+                                        color={ratingValue <= (hover || rating || reviewLeftScore) ? "#40bcf4" : "#ffffff"}
                                         onMouseEnter={() => setHover(ratingValue)}
                                         onMouseLeave={() => setHover(null)}
                                     />

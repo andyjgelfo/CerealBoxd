@@ -85,9 +85,9 @@ function ForgotPass()
     return(
         <div class='wrapper-forgot d-flex align-items-center justify-content-center'>
             <div class='container align-items-center justify-content-center' id="forgotDiv">
+                <center><span id= "title">Forgot Password?</span></center>
+                <center><p>Enter your username and your temporary password will be sent to your main email and your recovery email if applicable</p></center>
                 <form onSubmit={doForgot}>
-                    <center><span id= "title">Forgot Password?</span></center>
-                    <center><text>Enter your username and choose which email option to send to</text></center>
                     <center><input type="text" id="usernameBox" placeholder='USERNAME' ref={(c) => username = c} /><br /></center>
                     
                     {/* <input type="radio" id="emailtype" name="email" value="primary"></input>

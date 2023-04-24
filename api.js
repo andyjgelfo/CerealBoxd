@@ -313,33 +313,6 @@ exports.setApp = function (app, client)
 
         newReview = {cerealName:cerealName, cerealID: new ObjectId(cerealID), reviewerName:reviewerName, reviewerID: new ObjectId(reviewerID), rating:rating, body:body};
         const db = client.db("cerealbox").collection('reviews').insertOne(newReview);
-
-        result = await client.db("cerealbox").collection('reviews').aggregate([
-            {
-            $group: {
-                _id: "$cerealID",
-                avgReview: {$avg: "$rating"}
-            }
-            },
-            {
-                $match: {_id: {$eq: cerID}}
-            }
-        ]).toArray();
-
-        let id = result[0]._id;
-        let average = Math.round(result[0].avgReview * 1e2 ) / 1e2;
-        // let average = result[i].avgReview
-
-        let filter = {_id: cerID};
-        let edit = {
-        $set: {
-            rating: average
-        },
-        };
-
-        let edited = await box.updateOne(filter, edit);
-
-
         
     }
     catch(e)
@@ -361,7 +334,6 @@ exports.setApp = function (app, client)
     try
     {
         const rev = client.db("cerealbox").collection('reviews')
-        const box = client.db("cerealbox").collection('box');
         let cerID = new ObjectId(cerealID.trim());
         var filter = {reviewerID: new ObjectId(reviewerID), cerealID: cerID};
         var edit = {
@@ -371,30 +343,6 @@ exports.setApp = function (app, client)
         };
 
         result = await rev.updateOne(filter, edit);
-        result = await client.db("cerealbox").collection('reviews').aggregate([
-            {
-            $group: {
-                _id: "$cerealID",
-                avgReview: {$avg: "$rating"}
-            }
-            },
-            {
-                $match: {_id: {$eq: cerID}}
-            }
-        ]).toArray();
-
-        // let resID = result[0]._id;
-        let average = Math.round(result[0].avgReview * 1e2 ) / 1e2;
-        // let average = result[i].avgReview
-
-        filter = {_id: cerID};
-        edit = {
-        $set: {
-            rating: average
-        },
-        };
-
-        let edited = await box.updateOne(filter, edit);
     }
     catch(e)
     {
@@ -951,7 +899,7 @@ exports.setApp = function (app, client)
 
         try
         {
-            const db = client.db("cerealbox").collection("reviews").deleteOne({reviewerID: new ObjectId(reviewerID), cerealID: new ObjectId(cerealID)});
+            const db = await client.db("cerealbox").collection("reviews").deleteOne({reviewerID: new ObjectId(reviewerID), cerealID: new ObjectId(cerealID)});
         }
         catch(e)
         {
@@ -962,6 +910,77 @@ exports.setApp = function (app, client)
         res.status(200).json(ret);
     });
 
+    app.post('/api/updateRating', async (req, res, next) => 
+    {
+        var error = '';
+        const {cerealID} = req.body;
+        let cerID = new ObjectId(cerealID.trim());
+        let average;
+
+
+        try
+        {
+            const box = await client.db("cerealbox").collection('box');
+            const result = await client.db("cerealbox").collection('reviews').aggregate([
+                {
+                $group: {
+                    _id: "$cerealID",
+                    avgReview: {$avg: "$rating"}
+                }
+                },
+                {
+                    $match: {_id: {$eq: cerID}}
+                }
+            ]).toArray();
+
+            if (result[0] != null)
+            {
+                average = Math.round(result[0].avgReview * 1e2 ) / 1e2;
+            }
+            else
+            {
+                average = 0;
+            }
+
+            let filter = {_id: cerID};
+            let edit = {
+            $set: {
+                rating: average
+            },
+            };
+
+            let edited = await box.updateOne(filter, edit);
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
+
+        var ret = { error: error };
+        res.status(200).json(ret);
+
+    });
+
+    app.post('/api/deleteFavorite', async (req, res, next) => 
+    {
+        
+        var error = '';
+
+        const {userID, cerealID} = req.body;
+        
+
+        try
+        {
+            const db = await client.db("cerealbox").collection("favorites").deleteOne({userID: new ObjectId(userID), cerealID: new ObjectId(cerealID)});
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
+
+        var ret = { error: error };
+        res.status(200).json(ret);
+    });
 
 
 }
