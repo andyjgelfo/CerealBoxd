@@ -26,6 +26,7 @@ function Profile()
 
     const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
     let userid = tokenResponse.id;
+    let thisUser = tokenResponse.username;
     // alert(userid);
     let cerealData;
     let reviewData;
@@ -70,7 +71,9 @@ function Profile()
     return(
         <div>
             <div className='Info'>
-                blah
+                <div class='InfoText'>
+                    {thisUser}'s Box!
+                </div>
             </div>
             <div className='TabBox'>
                 <Tabs
@@ -82,7 +85,7 @@ function Profile()
                             <div id="cardContainer">
                                 {cereal.map(cereal2 => {
                                     return (
-                                        <Link 
+                                        <Link  
                                             to={{
                                             pathname:`/CerealDetails/${cereal2._id}`, 
                                             }}>
@@ -97,10 +100,16 @@ function Profile()
                     </Tab>
                     <Tab eventKey="review" title="Review">
                         <div className="Reviews">
-                            {review.map(reviewData2 => {
+                            {review.map(review2 => {
                                 return(
                                     <div id="reviewCard">
-                                        <span id="bodyReviewCard">{reviewData2.body}</span>
+                                        <Link 
+                                            to={{
+                                            pathname:`/CerealDetails/${review2.cerealID}`, 
+                                            }}>
+                                            <div>{review2.cerealName}</div>
+                                        </Link>
+                                        <span id="bodyReviewCard">{review2.body}</span>
                                     </div>
                                 );
                             })}
@@ -111,6 +120,7 @@ function Profile()
                     </Tab>
                 </Tabs>
             </div>
+
         </div>
         
     );
