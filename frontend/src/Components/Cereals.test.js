@@ -11,7 +11,7 @@ afterEach(() => {
 
 test('renders Cereals page', () => {
     render(<Cereals />)
-
+    
     expect(screen.getByRole('textbox')).toHaveDisplayValue("");
     expect(screen.getByRole("button")).toBeDefined();
     

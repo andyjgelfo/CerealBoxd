@@ -233,23 +233,13 @@ exports.setApp = function (app, client)
 
     const newCereal = {name:name, description:description, releaseDate:releaseDate, willItKillYou: willItKillYou, manufacturer: manufacturer, rating:rating, image:image, ingredients: ingredients};
     var error = '';
-    var dupe = '';
-    var _search = name.trim();
 
     try
     {
         const db = client.db("cerealbox");
         const userBase = db.collection('box');
-        // dupe = await db.collection('box').find({"name":{$regex:_search+'.*', $options:'i'}}).toArray();
-        
-        // if (dupe != '')
-        // {
-        // e = "Cereal with this name already exist, please try again";
-        // throw(e);
-        // }
-        // else {
         const result = userBase.insertOne(newCereal);
-        // }
+
     }
     catch(e)
     {
@@ -355,29 +345,30 @@ exports.setApp = function (app, client)
 
     app.post('/api/editUser', async (req, res, next) =>
     {
-    const {_id, fName, lName, userName, password} = req.body;
-    var ObjectId = require('mongodb').ObjectId;
-    var error = '';
+        const {_id, fName, lName, userName, email, recoveryEmail} = req.body;
+        var ObjectId = require('mongodb').ObjectId;
+        var error = '';
+        var result;
 
-    try
-    {
-        const rev = client.db("cerealbox").collection('user');
-        const filter = {_id: new ObjectId(_id)};
-        const edit = {
-        $set: {
-            fName:fName, lName:lName, userName:userName, password: password
-        },
-        };
+        try
+        {
+            const rev = client.db("cerealbox").collection('user');
+            const filter = {_id: new ObjectId(_id)};
+            const edit = {
+            $set: {
+                fName:fName, lName:lName, userName:userName, email: email, recoveryEmail: recoveryEmail
+            },
+            };
 
-        const result = await rev.updateOne(filter, edit);
-    }
-    catch(e)
-    {
-        error = e.toString();
-    }
+            result = await rev.updateOne(filter, edit);
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
 
-    var ret = { error: error };
-    res.status(200).json(ret);
+        var ret = { result: result, error: error };
+        res.status(200).json(ret);
     })
 
     app.post('/api/sort', async (req, res, next) => 
@@ -576,7 +567,6 @@ exports.setApp = function (app, client)
 
     
     var error = '';
-    var kill;
 
     try
     {

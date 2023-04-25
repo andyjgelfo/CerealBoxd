@@ -387,9 +387,9 @@ input[type="radio"] {
     visibility: visible;
 }
 
-/* #heart:hover {
+#heart:hover {
     color: #C41E3A; 
-} */
+}
 
 #leftRatingMessage {
     color: #C41E3A; 

@@ -18,6 +18,5 @@ test('renders Register page', () => {
     expect(screen.getByPlaceholderText("PASSWORD")).toHaveDisplayValue("");
     expect(screen.getByPlaceholderText("RETYPE PASSWORD")).toHaveDisplayValue("");
     expect(screen.getByRole("button")).toHaveDisplayValue("SIGN UP");
-
     
 })

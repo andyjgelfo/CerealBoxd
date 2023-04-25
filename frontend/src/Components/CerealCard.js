@@ -515,6 +515,7 @@ const CerealCard = (_) => {
                     <span id="willItKillYou">{info.willItKillYou}</span>
                 </div>
             
+            
                 <div id="reviewsContainer" className='container d-flex align-items-center justify-content-center'>
                     <span id="reviewsTitle"><RiStarSmileLine id="reviewsIcon"/> REVIEWS <RiStarSmileLine id="reviewsIcon"/></span>
                         <div id="leftRatingMessage">

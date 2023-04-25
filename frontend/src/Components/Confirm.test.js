@@ -13,5 +13,4 @@ test('renders confirm page', () => {
 
     expect(screen.getByPlaceholderText("CODE")).toHaveDisplayValue("");
     expect(screen.getByRole("button")).toHaveDisplayValue("SUBMIT");
-    
 })
