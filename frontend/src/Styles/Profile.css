@@ -63,8 +63,9 @@ ul.nav.nav-tabs {
     max-width: 900px;
     margin: auto;
     margin-top: 130px;
-    padding-bottom: 150px;
-    padding-right: 300px;
+    padding-bottom: 50px;
+    padding-right: 100px;
+    padding-left: 100px;
     background-color: rgba(127, 255, 212, 0);
     border: solid;
     border-radius: 5px;
@@ -77,10 +78,100 @@ ul.nav.nav-tabs {
 .Info .InfoText{
     color:rgb(255, 255, 255);
     position: relative;
-    text-align: end;
+    text-align: center;
     padding-top:30px;
     font-size:x-large;
+    padding-bottom: 10px;
 }
+
+.Info .EditUser{
+    position: relative;
+  top:50%;
+  left:40%;
+  background-color: #ef0b0b00;
+  color: rgb(255, 255, 255);
+  font-family: "SemiBold15";
+  font-size: 1vw;
+  padding: 1% 2.5%;
+  border-color: #ffffff;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  max-width: 85%;
+  max-height: 100%;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+}
+
+.Info .EditUser:hover{
+    background-color: #f89521;
+    box-shadow: 0px 15px 20px #f89521;
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.Info .RecoveryEmail{
+    position: relative;
+  top:50%;
+  left:40%;
+  background-color: #ef0b0b00;
+  color: rgb(255, 255, 255);
+  font-family: "SemiBold15";
+  font-size: 1vw;
+  padding: 1% 2.5%;
+  border-color: #ffffff;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  max-width: 85%;
+  max-height: 100%;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  padding-bottom: 50px;
+  margin-top: 5px;
+}
+
+.Info .RecoveryEmail:hover{
+    background-color: #764ca2;
+    box-shadow: 0px 15px 20px #764ca2;
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.Info .DeleteAcc{
+    position: relative;
+  top:50%;
+  left:40%;
+  background-color: #ef0b0b;
+  color: rgb(255, 255, 255);
+  font-family: "SemiBold15";
+  font-size: 1vw;
+  padding: 1% 2.5%;
+  border-color: #ffffff;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  max-width: 85%;
+  max-height: 100%;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  padding-bottom: 50px;
+  margin-top: 5px;
+}
+
+.Info .DeleteAcc:hover{
+    background-color: #ef0b0b;
+    box-shadow: 0px 15px 20px #000000;
+    color: #fff;
+    transform: translateY(-7px);
+}
+
 
 /*For the text areas of the second two tabs*/
 .textArea {
