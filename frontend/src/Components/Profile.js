@@ -74,6 +74,9 @@ function Profile()
                 <div class='InfoText'>
                     {thisUser}'s Box!
                 </div>
+                <button class = "EditUser">Edit User</button>
+                <button class = "RecoveryEmail">Recovery Email</button>
+                <button class = "DeleteAcc">Delete Account</button>
             </div>
             <div className='TabBox'>
                 <Tabs
