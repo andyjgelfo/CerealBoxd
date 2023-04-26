@@ -105,7 +105,7 @@ function Profile()
                         <div className="Reviews">
                             {review.map(review2 => {
                                 return(
-                                    <div id="reviewCard">
+                                    <div id="reviewCardPage">
                                         <Link 
                                             to={{
                                             pathname:`/CerealDetails/${review2.cerealID}`, 
