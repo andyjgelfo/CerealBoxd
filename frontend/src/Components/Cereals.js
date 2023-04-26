@@ -11,7 +11,6 @@ import { BsFillBrightnessAltHighFill } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa"; 
 import { Container, Button} from 'react-floating-action-button'; 
 import emailjs from '@emailjs/browser';
-import { RxMagnifyingGlass } from "react-icons/rx"; 
 
 function Cereals()
 {

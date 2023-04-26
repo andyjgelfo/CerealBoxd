@@ -1,0 +1,119 @@
+@font-face {
+    font-family: "Book20";
+    src: local("SharpGroteskBook20"),
+     url("../Fonts/SharpGroteskBook20.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "SemiBold15";
+    src: local("SharpGroteskSemiBold15"),
+     url("../Fonts/SharpGroteskSemiBold15.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "SemiBold20";
+    src: local("SharpGroteskSemiBold20"),
+     url("../Fonts/SharpGroteskSemiBold20.otf") format("truetype");
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    overflow-anchor: none;
+}
+
+:root {
+    --mainColor: #2C3440; 
+    --secondaryColor: #F2EAC1; 
+    --textColor1: white; 
+    --textColor2: #1C2143;
+    --hover: #40bcf4;  
+}
+
+#teamTitle {
+    font-family: 'SemiBold20';
+    color: white;
+    font-size: 2.4rem;
+    padding-top: 1.4em; 
+    padding-bottom: 1.4rem; 
+}
+
+#teamSubtitle {
+    font-family: 'Book20';
+    color: white; 
+    font-size: 1.2rem; 
+    margin-bottom: 1.4rem; 
+}
+
+#teamContainer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+#teamCard {
+    margin: 1.2rem 1.2rem 0.4rem 0; 
+    width: 380px; 
+    height: 400px; 
+    overflow: hidden; 
+    border-radius: 12px; 
+    background-color: #F2EAC1;
+    border-style: solid;
+    border-color: #1C2143;
+    border-width: 0.6em;
+}
+
+#teamWrapper {
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+
+#github {
+    width: 3em; 
+    height: 3em; 
+    margin-bottom: 1.4rem;
+}
+
+#github:hover {
+    cursor: pointer;
+}
+
+#teamName {
+    font-family: 'SemiBold15';
+    font-size: 1.8rem; 
+    color: #1C2143; 
+    text-align: center;
+    background-color: #F2EAC1;
+}
+
+#teamRole {
+    font-family: 'Book20';
+    font-size: 1rem; 
+    color: #1C2143; 
+    background-color: #F2EAC1;
+}
+
+#teamFavorite {
+    font-family: 'Book20';
+    font-size: 0.8rem; 
+    color: #1C2143; 
+    background-color: #F2EAC1;
+}
+
+#teamPhoto {
+    margin-top: 1.2em; 
+    width: 15em; 
+    height: 15em; 
+    border-radius: 180px;
+    margin-bottom: 0.8em; 
+}
+
+#teamIcon {
+    background-color: #F2EAC1;
+}
+
+#subtitleIcon {
+    font-size: 1.6rem;
+}
