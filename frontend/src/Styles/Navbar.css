@@ -17,7 +17,7 @@
 }
 
 .logo { 
-    margin-top: 30px;
+    margin-top: 26px;
     height: 280px; 
     width: 280px; 
     box-sizing: border-box; 
@@ -76,7 +76,8 @@ header .nav-btn {
     header .nav-btn {
         visibility: visible; 
         opacity: 1; 
-        margin-top: 15px;
+        margin-top: 0.1rem;
+        margin-right: 0.4em;
         font-size: 1.8rem; 
     }
 

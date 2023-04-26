@@ -13,17 +13,14 @@ function Home()
 
     return(
         <div> 
-            <div class = "BannerNButton">
-                <img src={require('../Images/BannerFade2Text.png')} alt='banner' className="banner"/>
-                <a href="LoginPage">
-                    <button class = "logBut">LOGIN</button>
-                </a>
-                <a href="RegisterPage">
-                    <button class = "regBut">REGISTER</button>
-                </a>
+            <div data-aos="zoom-in" className='container d-flex align-items-center justify-content-center'  id="homeContainer">
+                <div id="homeSubtitle">
+                    A Cereal-ously Powerful<br />Breakfast Site.
+                </div>
             </div>
-            <h1 data-aos = "fade-up">Featured Articles</h1>
-            <br></br>
+
+            <h1 data-aos="fade-up">Featured Articles</h1>
+            <br />
 
            <section data-aos = "fade-up" class="articles">
                 <article>

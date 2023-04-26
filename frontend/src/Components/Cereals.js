@@ -11,6 +11,7 @@ import { BsFillBrightnessAltHighFill } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa"; 
 import { Container, Button} from 'react-floating-action-button'; 
 import emailjs from '@emailjs/browser';
+import { RxMagnifyingGlass } from "react-icons/rx"; 
 
 function Cereals()
 {
@@ -213,7 +214,7 @@ function Cereals()
             {/* Logged in  */}
             {localStorage.getItem('user_data') && (<Modal style={customStyles1} isOpen={modalIsOpen} onRequestClose={setModalIsOpenToFalse}>
                     <center><span id="modalTitle"><BsFillBrightnessAltHighFill id="modalIcon"/> Suggest A New Cereal <BsFillBrightnessAltHighFill id="modalIcon"/></span></center>
-                    <center><span id="modalSubtitle">Don't see your favorite cereal? Thinking outside of the (cereal) box?</span></center>
+                    <center><span id="modalSubtitle">Don't see your favorite cereal? Want to contribute?</span></center>
                     <center><span id="modalSubtitle">Send in the details below and we'll do our research!</span></center>
                     <br />
                     <br />
