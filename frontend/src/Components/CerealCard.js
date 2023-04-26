@@ -278,7 +278,7 @@ const CerealCard = (_) => {
     }, []); 
  
     // Like Cereal
-    const handleLike = (event) => {
+    const handleLike = async event => {
         event.preventDefault();   
 
 
@@ -297,12 +297,12 @@ const CerealCard = (_) => {
 
             if (favoritedLeft == false)
             {
-                fetch(bp.buildPath('api/addFavorite'), 
+                await fetch(bp.buildPath('api/addFavorite'), 
                 {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
             }
             else
             {
-                fetch(bp.buildPath('api/deleteFavorite'), 
+                await fetch(bp.buildPath('api/deleteFavorite'), 
                 {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
             }
             window.location.reload(false);
