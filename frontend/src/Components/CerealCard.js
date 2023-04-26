@@ -305,9 +305,9 @@ const CerealCard = (_) => {
                 fetch(bp.buildPath('api/deleteFavorite'), 
                 {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
             }
+            window.location.reload(false);
         }
 
-        window.location.reload(false);
     }
 
     var labelChange = ""; 
