@@ -420,6 +420,15 @@ const CerealCard = (_) => {
         }
     };
 
+    // User has to be logged in to like a cereal 
+    const restrictLikeClick = () => {
+        // User is not logged in 
+        if (JSON.parse(localStorage.getItem('user_data') == null))
+        {
+            setModalIsOpenToTrue(); 
+        }
+     }
+
     // User has to be logged in to leave a rating on a cereal 
     const restrictStarsClick = () => {
         // User is not logged in 
@@ -434,7 +443,7 @@ const CerealCard = (_) => {
                 {/* Image, Like Button, Rate Buttons */}
                 <div id="imageContainer" data-aos="flip-right">
                     <img id="image" src={info.image}></img> 
-                    <div id="likeArea">
+                    <div id="likeArea" onClick={restrictLikeClick}>
                         <span id="likeLabel">Like</span>
                         <button id="likeButton" onClick={handleLike}>
                             <VscHeartFilled id="heart"
