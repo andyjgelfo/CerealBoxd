@@ -159,12 +159,12 @@ function Profile()
                             </div>
                         </div>
                     </Tab>
-                    <Tab eventKey="review" title="Review">
+                    <Tab eventKey="review" title="Reviews">
                         <div className="Reviews">
                             {review.map(review2 => {
                                 return(
                                     <div id="reviewCardPage">
-                                        <Link 
+                                        <Link class = "Link"
                                             to={{
                                             pathname:`/CerealDetails/${review2.cerealID}`, 
                                             }}>
