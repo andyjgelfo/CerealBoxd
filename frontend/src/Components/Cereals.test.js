@@ -14,6 +14,5 @@ test('renders Cereals page', () => {
     
     expect(screen.getByRole('textbox')).toHaveDisplayValue("");
     expect(screen.getByRole("button")).toBeDefined();
-    
 })
 

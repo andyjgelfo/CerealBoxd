@@ -17,5 +17,4 @@ test('renders login page', () => {
     expect(screen.getByRole("link", {name:"Don't Have An Account? Register Here!"})).toHaveAttribute('href')
     expect(screen.getByRole("link", {name:"Forgot Your Password?"})).toHaveAttribute('href')
     
-    
 })

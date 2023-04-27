@@ -10,7 +10,6 @@ afterEach(() => {
 
 test('renders confirm page', () => {
     render(<Confirm />)
-
     expect(screen.getByPlaceholderText("CODE")).toHaveDisplayValue("");
     expect(screen.getByRole("button")).toHaveDisplayValue("SUBMIT");
 })

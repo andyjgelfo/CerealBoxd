@@ -103,6 +103,13 @@ function Profile()
                 js = JSON.stringify(obj);
                 await fetch(bp.buildPath('api/remove'),
                     {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+                // updates rating on cereals
+                obj = {cerealID:reviews[i].cerealID};
+                js = JSON.stringify(obj);
+
+                    await fetch(bp.buildPath('api/updateRating'), 
+                    {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
             }
 
             // finally deletes user

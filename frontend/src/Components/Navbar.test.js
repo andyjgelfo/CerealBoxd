@@ -17,5 +17,4 @@ test('renders Navbar', () => {
     expect(screen.getByRole("link", {name:"LOGIN"})).toHaveAttribute('href');
     expect(screen.getByRole("link", {name:"REGISTER"})).toHaveAttribute('href');
     
-    
 })
