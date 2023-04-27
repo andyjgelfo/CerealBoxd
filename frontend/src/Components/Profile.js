@@ -67,6 +67,57 @@ function Profile()
         })(); 
     }, []); 
 
+    const deleteAccount = async event => 
+    {
+        if (window.confirm("Are you sure you want to delete your account? This action is irreversable uwu!!"))
+        {
+            // starts by deleting all favorites
+            var obj = {collection:"favorites",column:"userID",target:userid};
+            var js = JSON.stringify(obj);
+
+            var response = await fetch(bp.buildPath('api/searchByIDmulti'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            const favorites = (JSON.parse(await response.text()).results);
+            for (let i = 0; i < favorites.length; i++)
+            {
+                // alert(favorites[i]._id)
+                obj = {collection:"favorites",_id:favorites[i]._id};
+                js = JSON.stringify(obj);
+                await fetch(bp.buildPath('api/remove'),
+                    {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+            }
+
+            // deleting all reviews
+            obj = {collection:"reviews",column:"reviewerID",target:userid};
+            js = JSON.stringify(obj);
+
+            response = await fetch(bp.buildPath('api/searchByIDmulti'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            const reviews = (JSON.parse(await response.text()).results);
+            for (let i = 0; i < reviews.length; i++)
+            {
+                // alert(reviews[i].cerealName)
+                obj = {collection:"reviews",_id:reviews[i]._id};
+                js = JSON.stringify(obj);
+                await fetch(bp.buildPath('api/remove'),
+                    {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+            }
+
+            // finally deletes user
+            obj = {collection:"user",_id:userid};
+            js = JSON.stringify(obj);
+            await fetch(bp.buildPath('api/remove'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            localStorage.clear(); 
+            window.location.href = '/HomePage';
+        }
+
+
+    }
+
 
     return(
         <div>
@@ -76,7 +127,7 @@ function Profile()
                 </div>
                 <button class = "EditUser">Edit User</button>
                 <button class = "RecoveryEmail">Recovery Email</button>
-                <button class = "DeleteAcc">Delete Account</button>
+                <button class = "DeleteAcc" onClick={deleteAccount}>Delete Account</button>
             </div>
             <div className='TabBox'>
                 <Tabs
