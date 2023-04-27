@@ -6,11 +6,13 @@
     margin: auto;
     margin-top: 50px;
     margin-bottom: 100px;
-    background-color: rgb(244, 220, 175);
+    background-color: #F2EAC1;
     max-width: 1200px;
     padding: 20px;
+    border: solid;
     border-radius: 5px;
-    border-width: 5px;
+    border-width: 10px;
+    border-color: #1C2143;
 }
 
 /*For the tab text area*/
@@ -46,7 +48,7 @@ ul.nav.nav-tabs {
     flex-wrap: wrap;
     padding: 10px;
     border: none;
-    background-color: rgb(244, 220, 175);
+    background-color: #F2EAC1;
     transition: none;
 }
 
@@ -64,32 +66,32 @@ ul.nav.nav-tabs {
     margin: auto;
     margin-top: 130px;
     padding-bottom: 50px;
-    padding-right: 100px;
-    padding-left: 100px;
-    background-color: rgba(127, 255, 212, 0);
+    align-items: center;
+    background-color: #F2EAC1;
     border: solid;
     border-radius: 5px;
-    border-width: 5px;
-    border-color:rgb(244, 220, 175);
+    border-width: 10px;
+    border-color: #1C2143;
     display: flex;
     flex-direction: column;
 }
 
 .Info .InfoText{
-    color:rgb(255, 255, 255);
+    background-color: #F2EAC1;
+    font-family: 'SemiBold20';
+    color:#1C2143;
     position: relative;
     text-align: center;
     padding-top:30px;
-    font-size:x-large;
+    font-size:xx-large;
     padding-bottom: 10px;
 }
 
 .Info .EditUser{
     position: relative;
   top:50%;
-  left:40%;
   background-color: #ef0b0b00;
-  color: rgb(255, 255, 255);
+  color: #1C2143;
   font-family: "SemiBold15";
   font-size: 1vw;
   padding: 1% 2.5%;
@@ -97,10 +99,10 @@ ul.nav.nav-tabs {
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
-  width: 100px;
-  height: 40px;
-  max-width: 85%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  max-width: 200px;
+  max-height: 40px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
 }
@@ -109,15 +111,14 @@ ul.nav.nav-tabs {
     background-color: #f89521;
     box-shadow: 0px 15px 20px #f89521;
     color: #fff;
-    transform: translateY(-7px);
+    transform: translateY(-5px);
 }
 
 .Info .RecoveryEmail{
     position: relative;
   top:50%;
-  left:40%;
   background-color: #ef0b0b00;
-  color: rgb(255, 255, 255);
+  color: #1C2143;
   font-family: "SemiBold15";
   font-size: 1vw;
   padding: 1% 2.5%;
@@ -125,13 +126,12 @@ ul.nav.nav-tabs {
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
-  width: 100px;
-  height: 40px;
-  max-width: 85%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  max-width: 200px;
+  max-height: 40px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
-  padding-bottom: 50px;
   margin-top: 5px;
 }
 
@@ -139,13 +139,12 @@ ul.nav.nav-tabs {
     background-color: #764ca2;
     box-shadow: 0px 15px 20px #764ca2;
     color: #fff;
-    transform: translateY(-7px);
+    transform: translateY(-5px);
 }
 
 .Info .DeleteAcc{
     position: relative;
   top:50%;
-  left:40%;
   background-color: #ef0b0b;
   color: rgb(255, 255, 255);
   font-family: "SemiBold15";
@@ -155,13 +154,12 @@ ul.nav.nav-tabs {
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
-  width: 100px;
-  height: 40px;
-  max-width: 85%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  max-width: 200px;
+  max-height: 40px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
-  padding-bottom: 50px;
   margin-top: 5px;
 }
 
@@ -169,7 +167,7 @@ ul.nav.nav-tabs {
     background-color: #ef0b0b;
     box-shadow: 0px 15px 20px #000000;
     color: #fff;
-    transform: translateY(-7px);
+    transform: translateY(-5px);
 }
 
 
@@ -196,7 +194,7 @@ ul.nav.nav-tabs {
     border-radius: 5px;
     border-width: 1px;
     background-color: #2C3440;
-    text-align: center;
+    text-align: left;
     color: whitesmoke;
     padding-bottom: 30px;
 }
@@ -225,12 +223,18 @@ li.nav-item {
 #reviewCardPage{
     border: solid;
     border-radius: 5px;
-    border-width: 4px;
+    border-width: 3px;
     color:beige;
     /* this was needed from cerealCard css, there was overlap */
     background-color: transparent;
     width: 85%; 
     height: auto; 
     font-size: 1rem;
-    padding: 0.6em 0.8em 0 0.8em; 
+    padding: 0.6em 0.8em 0.8em 0.8em;
+    margin-top: 10px;
+}
+
+.Link:hover{
+    color: bisque;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
