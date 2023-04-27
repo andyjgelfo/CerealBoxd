@@ -972,6 +972,28 @@ exports.setApp = function (app, client)
         res.status(200).json(ret);
     });
 
+    app.post('/api/getRandom', async (req, res, next) => 
+    {
+        
+        var error = '';
+
+        const {collection} = req.body;
+
+        var result;
+
+        try
+        {
+            result = await client.db("cerealbox").collection(collection.trim()).aggregate([{$sample:{size:1}}]).toArray();
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
+
+        var ret = { result: result[0], error: error };
+        res.status(200).json(ret);
+    });
+
 
 }
 
