@@ -34,7 +34,6 @@ function Home()
             } catch (error) {
                 randomCereal = []; 
             }
-
         })(); 
     }, []); 
 
@@ -62,7 +61,7 @@ function Home()
             }
 
         })(); 
-    }, []); 
+    }, []);  
 
     return(
         <div> 
@@ -119,7 +118,7 @@ function Home()
                             <img src={random.image} className="cards" />
                         </figure>
                         <div class="article-body">
-                            <center><span id="cerealOfTheDayTitle">Cereal of the Day!</span></center>
+                            <center><span id="cerealOfTheDayTitle">Random Cereal Generator!</span></center>
                             <Link 
                             to={{
                             pathname: `/CerealDetails/${random._id}`, 
