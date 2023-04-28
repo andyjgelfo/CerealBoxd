@@ -105,20 +105,11 @@ h1 {
   background-color: transparent;
 }
 
-/*
-Busted ass divider line
-hr {
-  background-color: #0a5ffc;
-  height: 10px;
-  width:50%;
-  padding-left: 30px;
-  text-align: center;
-}
-*/
   .article-wrapper {
     width: 400px;
     margin-bottom: 40px;
     padding: 20px;
+    height: 360px; 
     background-color: #F2EAC1;
     border-color: #1C2143;
     border-radius: 32px;
@@ -132,9 +123,8 @@ hr {
     background-color: #F2EAC1;
     font-family: "SemiBold15";
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-size: 1.5rem;
-    font-weight: 700;
   }
   
   .article-wrapper p {
@@ -142,20 +132,23 @@ hr {
     background-color: #F2EAC1;
     text-align: center;
     font-family: "Book20";
-    margin-top: 0;
-    margin-bottom: 24px;
+    margin-top: 1.1em;
     font-size: 1rem;
-    line-height: 1.5;
     border: none; 
+  }
+
+  .article-wrapper p:hover {
+    color: #40bcf4; 
   }
   
   .article-wrapper img {
     width: 100%;
     height: 200px;
+    object-fit: cover;
     border-radius: 10px;
   }
   
-  .read-more {
+.read-more {
     font-family: 'SemiBold15';
     background-color: #F2EAC1;
     text-align: center;
@@ -165,15 +158,15 @@ hr {
     text-decoration: none;
     color: #1C2143;
     position: relative;
-  }
+}
   
-  .read-more:hover {
-    color: #40bcf4;
-  }
+.read-more:hover {
+  color: #40bcf4;
+}
   
-  .article-body {
-    background-color: #F2EAC1;
-  }
+.article-body {
+  background-color: #F2EAC1;
+}
 
 #homeImage {
   align-items: center;
@@ -182,6 +175,7 @@ hr {
   max-height: 100vh;
   margin: auto; 
   display: flex; 
+  background-color: transparent;
 }
 
 #homeSubtitle {
@@ -221,4 +215,38 @@ hr {
   flex-wrap: nowrap;
   flex-direction: column;
 }
+
+#cerealOfTheDayTitle {
+  font-family: 'SemiBold15';
+  color: #1C2143; 
+  font-size: 2.4rem;
+  background-color: #F2EAC1;
+}
+
+#cerealOfTheDay:hover {
+  color: #40bcf4; 
+}
+
+#cerealOfTheDay {
+  font-family: 'Book20';
+  color: #1C2143; 
+  font-size: 1rem;
+  background-color: #F2EAC1;
+}
+
+#currentTop5Title {
+  font-family: 'SemiBold15';
+  color: #1C2143; 
+  font-size: 2rem;
+  background-color: #F2EAC1;
+  padding-bottom: 50%;
+}
+
+.numberedList {
+  font-family: 'Book20'; 
+  color: #1C2143; 
+  font-size: 1rem; 
+  background-color: #F2EAC1;
+}
+
 

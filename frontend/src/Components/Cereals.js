@@ -73,9 +73,9 @@ function Cereals()
 
     var sillyMessage = '';
     if (JSON.stringify(tokenResponse) === "null")
-        sillyMessage = "Silly rabbit, you're not signed in!"
+        sillyMessage = "Silly Rabbit, you're not signed in!"
     else
-        sillyMessage = "Silly rabbit, Cerealboxd is for @" + tokenResponse.username + "!";
+        sillyMessage = "Silly Rabbit, Cerealboxd is for @" + tokenResponse.username + "!";
 
     
     // Modal: Pop-up message for requesting a new cereal

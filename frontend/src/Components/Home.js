@@ -1,8 +1,9 @@
 import React from 'react'; 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import "../Styles/Home.css"; 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Link } from "react-router-dom"; 
 
 function Home()
 {
@@ -10,6 +11,58 @@ function Home()
         AOS.init({duration : 2000});
         document.title = 'Cerealboxd';
     }, []);
+
+    var bp = require('./Path.js');
+
+    const [random, setRandom] = useState([]); 
+    let randomCereal; 
+
+    // Obtains the cereal of the day 
+    useEffect(() => {
+        (async () => {
+            var obj = {collection:"box"};
+            var js = JSON.stringify(obj); 
+
+            try {
+                const response = await fetch(bp.buildPath('api/getRandom'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+                randomCereal = JSON.parse(await response.text()); 
+
+                setRandom(randomCereal.result); 
+
+            } catch (error) {
+                randomCereal = []; 
+            }
+
+        })(); 
+    }, []); 
+
+    const [top5, setTop5] = useState([]); 
+    let top5Cereals;  
+    let sortData; 
+
+    // Obtains the top 5 cereals rated on Cerealboxd
+    useEffect(() => {
+        (async () => {
+            var obj = {collection:"box",column:"rating",order:-1};
+            var js = JSON.stringify(obj); 
+
+            try {
+                const response = await fetch(bp.buildPath('api/sort'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+                top5Cereals = JSON.parse(await response.text()); 
+
+                sortData = top5Cereals.results.splice(0, 5); 
+
+                setTop5(sortData); 
+            } catch (error) {
+                top5Cereals = []; 
+            }
+
+        })(); 
+    }, []); 
 
     return(
         <div> 
@@ -19,7 +72,7 @@ function Home()
                 </div>
             </div>
 
-            <h1 data-aos="fade-up">Featured Articles</h1>
+            <h1 data-aos="fade-up">Featured</h1>
             <br />
 
            <section data-aos = "fade-up" class="articles">
@@ -29,8 +82,7 @@ function Home()
                             <img src={require('../Images/SadCereal.png')} className="cards" />
                         </figure>
                         <div class="article-body">
-                            <h2>Top 10 Cereals For A Rainy Day</h2>
-                            <p>Enter Description Here.</p>
+                            <h2>Cereals For A Rainy Day</h2>
                             <center><a href="#" class="read-more">Read More</a></center>
                         </div>
                     </div>
@@ -43,7 +95,6 @@ function Home()
                         </figure>
                         <div class="article-body">
                             <h2>Editor's Choice: Raisin Bran</h2>
-                            <p>Enter Description Here.</p>
                             <center><a href="#" class="read-more">Read More</a></center>
                         </div>
                     </div>
@@ -55,9 +106,46 @@ function Home()
                             <img src={require('../Images/SugarFree.png')} className="cards" />
                         </figure>
                         <div class="article-body">
-                            <h2>Top 5 Low-Sugar Cereals</h2>
-                            <p>Enter Description Here.</p>
+                            <h2>Low-Sugar Cereals</h2>
                             <center><a href="#" class="read-more">Read More</a></center>
+                        </div>
+                    </div>
+                </article>
+
+                {/* Cereal of the Day */}
+                <article>
+                    <div class="article-wrapper" id="cerealOfTheDayRedirect">
+                        <figure>
+                            <img src={random.image} className="cards" />
+                        </figure>
+                        <div class="article-body">
+                            <center><span id="cerealOfTheDayTitle">Cereal of the Day!</span></center>
+                            <Link 
+                            to={{
+                            pathname: `/CerealDetails/${random._id}`, 
+                            }}>
+                                <center><span id="cerealOfTheDay">{random.name}</span></center>
+                            </Link>
+                        </div>
+                    </div>
+                </article>
+
+                {/* Current Top 5 Rated Cereals */}
+                <article>
+                    <div class="article-wrapper">
+                        <div class="article-body">
+                            <center><span id="currentTop5Title">Current Top 5 Rated Cereals</span><br /></center>
+                            {top5.map((topFive, index) => {
+                                const indexTracker = index + 1; 
+                                return (
+                                    <Link 
+                                    to={{
+                                    pathname: `/CerealDetails/${topFive._id}`, 
+                                    }}>
+                                        <p>{index + 1}. {topFive.name}</p>
+                                    </Link>
+                                ); 
+                            })}
                         </div>
                     </div>
                 </article>
