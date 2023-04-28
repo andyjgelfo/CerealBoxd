@@ -114,7 +114,6 @@ function Register()
                 
                     window.location.href = '/ConfirmEmail';
                 }
-          
         })
         .catch(function (error) 
         {
