@@ -666,22 +666,32 @@ exports.setApp = function (app, client)
     var _collection = collection.trim();
     var _column = column.trim();
     var _target = (target.trim());
-    
-    const db = client.db("cerealbox");
-    const results = await db.collection(_collection).find({[_column]:new ObjectId(_target)}).toArray();
-    
     var _ret = [];
-    // _ret[0] = null;
-    if(results.length != 0)
+
+    try
     {
-        for( var i=0; i<results.length; i++ )
+    
+        const db = client.db("cerealbox");
+        const results = await db.collection(_collection).find({[_column]:new ObjectId(_target)}).toArray();
+        
+      
+    // _ret[0] = null;
+    
+        if(results.length != 0)
         {
-            _ret.push( results[i] );
+            for( var i=0; i<results.length; i++ )
+            {
+                _ret.push( results[i] );
+            }
+        }
+        else 
+        {
+            _ret[0] = null;
         }
     }
-    else 
+    catch(e)
     {
-        _ret[0] = null;
+        error = e.toString();
     }
     
     // var ret = {results:_ret, error:error};
@@ -748,21 +758,29 @@ exports.setApp = function (app, client)
     var _column2 = column2.trim();
     var _target1 = target1.trim();
     var _target2 = target2.trim();
-    
-    const db = client.db("cerealbox");
-    const results = await db.collection(_collection).find({[_column1]:new ObjectId(_target1), [_column2]:new ObjectId(_target2)}).toArray();
-    
     var _ret = [];
-    if(results.length != 0)
+
+    try
     {
-        for( var i=0; i<results.length; i++ )
+        const db = client.db("cerealbox");
+        const results = await db.collection(_collection).find({[_column1]:new ObjectId(_target1), [_column2]:new ObjectId(_target2)}).toArray();
+        
+        
+        if(results.length != 0)
         {
-            _ret.push( results[i] );
+            for( var i=0; i<results.length; i++ )
+            {
+                _ret.push( results[i] );
+            }
+        }
+        else 
+        {
+            _ret[0] = null;
         }
     }
-    else 
+    catch(e)
     {
-        _ret[0] = null;
+        error = e.toString();
     }
     
     // var ret = {results:_ret, error:error};
@@ -820,13 +838,21 @@ exports.setApp = function (app, client)
     var _target = (target.trim());
     
     const db = client.db("cerealbox");
-    const results = await db.collection(_collection).find({[_column]:new ObjectId(_target)}).toArray();
-    
     var _ret = [];
-    // _ret[0] = null;
-    for( var i=0; i<results.length; i++ )
+    try
     {
-        _ret.push( results[i] );
+        const results = await db.collection(_collection).find({[_column]:new ObjectId(_target)}).toArray();
+        
+        
+        // _ret[0] = null;
+        for( var i=0; i<results.length; i++ )
+        {
+            _ret.push( results[i] );
+        }
+    }
+    catch(e)
+    {
+        error = e.toString();
     }
     
     // var ret = {results:_ret, error:error};
