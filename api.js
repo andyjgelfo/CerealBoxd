@@ -195,6 +195,7 @@ exports.setApp = function (app, client)
     var error = '';
     var dupe = '';
     var results = 0;
+    var copy;
 
     try
     {
@@ -343,7 +344,7 @@ exports.setApp = function (app, client)
 
     app.post('/api/editUser', async (req, res, next) =>
     {
-        const {_id, fName, lName, userName, email, recoveryEmail} = req.body;
+        const {_id, fName, lName, userName, email, recoveryEmail, password} = req.body;
         var ObjectId = require('mongodb').ObjectId;
         var error = '';
         var result;
@@ -354,7 +355,7 @@ exports.setApp = function (app, client)
             const filter = {_id: new ObjectId(_id)};
             const edit = {
             $set: {
-                fName:fName, lName:lName, userName:userName, email: email, recoveryEmail: recoveryEmail
+                fName:fName, lName:lName, userName:userName, email: email, recoveryEmail: recoveryEmail, password: password
             },
             };
 
