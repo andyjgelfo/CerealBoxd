@@ -174,10 +174,10 @@ function Profile()
 
             <div className='TabBox' data-aos="fade">
                 <Tabs
-                    defaultActiveKey="profile"
+                    defaultActiveKey="favorites"
                     id="uncontrolled-tab-example"
                     >
-                    <Tab eventKey="home" title="FAVORITES" className="tester">
+                    <Tab eventKey="favorites" title="FAVORITES" className="tester">
                         <div className="Favorites">
                             <div id="cardContainer">
                                 {cereal.map(cereal2 => {
