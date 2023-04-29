@@ -8,8 +8,6 @@ import "../Styles/Profile.css";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-
-
 function Profile()
 {
     useEffect(() => {
@@ -69,7 +67,7 @@ function Profile()
 
     const deleteAccount = async event => 
     {
-        if (window.confirm("Are you sure you want to delete your account? This action is irreversable uwu!!"))
+        if (window.confirm("Are you sure you want to delete this account?"))
         {
             // starts by deleting all favorites
             var obj = {collection:"favorites",column:"userID",target:userid};
@@ -121,27 +119,65 @@ function Profile()
             localStorage.clear(); 
             window.location.href = '/HomePage';
         }
-
-
     }
 
+    // Obtains the user's details to load up into the input fields 
+    const [userDetails, setUserDetails] = useState([]); 
+    let userHi; 
+    useEffect(() => {
+        (async () => {
+            var obj = {collection:"user",column:"_id",target:userid};
+            var js = JSON.stringify(obj); 
+    
+            try {
+                const response = await fetch(bp.buildPath('api/searchByID'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+    
+                userHi = JSON.parse(await response.text()); 
+
+                setUserDetails(userHi.results); 
+            } catch (error) {
+                userHi = []; 
+            }
+            })(); 
+    }, []); 
+
+    let profileFirstName;
+    let profileLastName;
+    let profileUsername;
+    let profilePassword; 
+    let profileEmail;
+    let profileRecoveryEmail; 
+
+    // Edits the user's details
+    const handleEditUser = async event => {
+        event.preventDefault();   
+
+        var obj = {_id:userid,fName:profileFirstName.value,lName:profileLastName.value,userName:profileUsername.value,
+            password:profilePassword.value,email:profileEmail.value,recoveryEmail:profileRecoveryEmail.value};
+        var js = JSON.stringify(obj); 
+
+        await fetch(bp.buildPath('api/editUser'), 
+        {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
+            
+        window.location.reload(false);   
+    }
 
     return(
         <div>
+            {/* Welcome Message  */}
             <div className='Info'>
                 <div class='InfoText'>
-                    {thisUser}'s Box!
+                    Welcome To {thisUser}'s Box!
                 </div>
-                <button class = "EditUser">Edit User</button>
-                <button class = "RecoveryEmail">Recovery Email</button>
-                <button class = "DeleteAcc" onClick={deleteAccount}>Delete Account</button>
             </div>
-            <div className='TabBox'>
+
+            <div className='TabBox' data-aos="fade">
                 <Tabs
                     defaultActiveKey="profile"
                     id="uncontrolled-tab-example"
                     >
-                    <Tab eventKey="home" title="Favorites" className="tester">
+                    <Tab eventKey="home" title="FAVORITES" className="tester">
                         <div className="Favorites">
                             <div id="cardContainer">
                                 {cereal.map(cereal2 => {
@@ -155,11 +191,12 @@ function Profile()
                                             </div>
                                         </Link>
                                     ); 
-                                })}
+                                })}; 
                             </div>
                         </div>
                     </Tab>
-                    <Tab eventKey="review" title="Reviews">
+
+                    <Tab eventKey="review" title="REVIEWS">
                         <div className="Reviews">
                             {review.map(review2 => {
                                 return(
@@ -171,24 +208,37 @@ function Profile()
                                             <div>{review2.cerealName}</div>
                                         </Link>
                                         <span id="bodyReviewCard">{review2.body}</span>
+                                        <hr id="horizontalLine"/>
                                     </div>
                                 );
                             })}
                         </div>
                     </Tab>
-                    <Tab eventKey="contact" title="Contact">
-                        <div className="textArea">Hi Thomas</div>
+
+                    <Tab eventKey="contact" title="EDIT PROFILE">
+                        <div className="textArea">
+                            <span class="profileLabels">First Name</span><br />
+                            <input type="text" class="profileInput" id="profileFirstName" placeholder="First Name" defaultValue={userDetails.fName} ref={(c) => profileFirstName =c}/><br />
+                            <span class="profileLabels">Last Name</span><br />
+                            <input type="text" class="profileInput" id="profileLastName" placeholder="Last Name" defaultValue={userDetails.lName} ref={(c) => profileLastName =c}/><br />
+                            <span class="profileLabels">Username</span><br />
+                            <input type="text" class="profileInput" id="profileUsername" placeholder="Username" defaultValue={userDetails.userName} ref={(c) => profileUsername =c}/><br />
+                            <span class="profileLabels">Email</span><br />
+                            <input type="text" class="profileInput" id="profileEmail" placeholder="Email" defaultValue={userDetails.email} ref={(c) => profileEmail =c}/><br />
+                            <span class="profileLabels">Recovery Email</span><br />
+                            <input type="text" class="profileInput" id="profileRecoveryEmail" placeholder="Recovery Email" defaultValue={userDetails.recoveryEmail} ref={(c) => profileRecoveryEmail =c}/><br />
+                            <span class="profileLabels">Password</span><br />
+                            <input type="password" class="profileInput" id="profilePassword" placeholder="Password" defaultValue={userDetails.password} ref={(c) => profilePassword =c}/><br />
+                            <button id="saveProfileButton" onClick={handleEditUser}>SAVE</button>
+                            <button id="deleteProfileButton" onClick={deleteAccount}>DELETE ACCOUNT</button> 
+                        </div>
                     </Tab>
                 </Tabs>
             </div>
-
         </div>
-        
     );
 
 };
-
-
 
 export default Profile;
 

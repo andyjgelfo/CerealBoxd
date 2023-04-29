@@ -261,11 +261,3 @@ function Cereals()
 }
 
 export default Cereals;
-
-
-
-
-
-  
-
-

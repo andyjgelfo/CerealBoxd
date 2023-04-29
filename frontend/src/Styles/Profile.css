@@ -2,29 +2,31 @@
 
 /*This is for the whole tab box*/
 .TabBox {
-    width: 75%;
+    width: 100%;
     margin: auto;
-    margin-top: 50px;
     margin-bottom: 100px;
     background-color: #F2EAC1;
     max-width: 1200px;
-    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px; 
+    padding-bottom: 60px; 
+    padding-top: 20px; 
     border: solid;
-    border-radius: 5px;
-    border-width: 10px;
+    border-radius: 32px;
+    border-width: 0.6em;
     border-color: #1C2143;
 }
 
 /*For the tab text area*/
 .tab-content{
-    border-radius: 5px;
-    border:solid;
+    border-radius: 12px;
+    border: solid;
+    border-color: transparent;
 }
 
 .tab-content>.active {
     display: block;
-    border-radius: 5px;
-    border: solid;
+    border: none;
 }
 
 /*For the Favorites tab */
@@ -32,12 +34,13 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-evenly;
     border-radius: 5px;
     border: solid;
-    color: whitesmoke;
-    padding-bottom: 100px;
+    color: transparent;
+    padding-top: 20px; 
+    padding-bottom: 35px; 
 }
 
 /*For the entire section with the tabs in it*/
@@ -49,42 +52,40 @@ ul.nav.nav-tabs {
     padding: 10px;
     border: none;
     background-color: #F2EAC1;
-    transition: none;
+    padding-bottom: 20px;
 }
 
 /*For the tab borders*/
 .nav-tabs .nav-link {
     border: none;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-radius: 12px; 
+    border-color: #1C2143; 
+    border-width: 0.6em;
+    color: white;  
 }
 
 /*For the account info section at the top*/
 .Info {
-    width: 50%;
-    max-width: 900px;
     margin: auto;
-    margin-top: 130px;
-    padding-bottom: 50px;
+    margin-top: 3em; 
     align-items: center;
-    background-color: #F2EAC1;
-    border: solid;
-    border-radius: 5px;
-    border-width: 10px;
-    border-color: #1C2143;
+    background: none;
+    border: none; 
     display: flex;
     flex-direction: column;
 }
 
 .Info .InfoText{
-    background-color: #F2EAC1;
+    background-color: transparent;
     font-family: 'SemiBold20';
-    color:#1C2143;
-    position: relative;
+    color: white;
+    font-size: 2.2rem;
+    margin-bottom: 1em; 
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    flex-wrap: wrap;
     text-align: center;
-    padding-top:30px;
-    font-size:xx-large;
-    padding-bottom: 10px;
 }
 
 .Info .EditUser{
@@ -170,17 +171,11 @@ ul.nav.nav-tabs {
     transform: translateY(-5px);
 }
 
-
 /*For the text areas of the second two tabs*/
 .textArea {
-    border: solid;
-    border-radius: 5px;
-    border-width: 1px;
     background-color: #2C3440;
     text-align: center;
-    color: whitesmoke;
-    max-height: 100px;
-    padding-bottom: 100px;
+    padding-top: 40px; 
 }
 
 /*For the Reviews tab*/
@@ -188,53 +183,126 @@ ul.nav.nav-tabs {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-evenly;
+    align-items: center;
+    justify-content: center;
     border: solid;
     border-radius: 5px;
-    border-width: 1px;
     background-color: #2C3440;
     text-align: left;
-    color: whitesmoke;
-    padding-bottom: 30px;
+    color: transparent;
+    padding-top: 30px; 
+    padding-bottom: 35px;
 }
 
-/*To set the tab borders to none from default*/
+/* To set the tab borders to none from default */
 li.nav-item {
-    border-radius: 5px;
+    border-radius: 12px;
     border: none;
-    color:rgb(244, 220, 175);
+    background-color:#1C2143; 
+    color: white; 
+    font-family: 'SemiBold15';
+    font-size: 1.4rem; 
+    margin: auto; 
 }
 
 /*To set bottom of tabs to rounded when selected instead of flat bottom*/
-.nav-link{
-    border-radius: 5px;
-    color:rgb(244, 220, 175);
+.nav-link {
+    border-radius: 12px;
 }
 
-/*#cardContainer {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    display: flex; 
-    flex-wrap: wrap;
-}*/
-
 #reviewCardPage{
-    border: solid;
-    border-radius: 5px;
-    border-width: 3px;
-    color:beige;
-    /* this was needed from cerealCard css, there was overlap */
     background-color: transparent;
     width: 85%; 
     height: auto; 
     font-size: 1rem;
-    padding: 0.6em 0.8em 0.8em 0.8em;
-    margin-top: 10px;
+    padding: 0.6em 0.8em 0 0.8em;
+}
+
+.Link {
+    color: #40bcf4; 
 }
 
 .Link:hover{
-    color: bisque;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    color: white; 
 }
+
+#horizontalLine {
+    color: #40bcf4; 
+}
+
+.profileLabels {
+    color: white; 
+    font-size: 1.4rem; 
+    font-family: "Book20";
+}
+
+#saveProfileButton {
+    font-family: 'SemiBold15';
+    font-size: 1.4rem; 
+    padding-top: 0.1em; 
+    padding-bottom: 0.1em; 
+    padding-right: 0.1em; 
+    padding-left: 0.1em; 
+    background-color: #1C2143;
+    color: white; 
+    cursor: pointer;
+    border-radius: 50px;
+    border-color: #1C2143;
+    border-width: 8px; 
+    border-style: solid;
+    width: 6.6em; 
+    height: 3em; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 20px; 
+    margin-bottom: 30px; 
+}
+
+#saveProfileButton:hover {
+    background-color: white;
+    color: #1C2143; 
+}
+
+#deleteProfileButton {
+    font-family: 'SemiBold15';
+    font-size: 1.4rem; 
+    padding-top: 0.2em; 
+    padding-bottom: 0.2em; 
+    padding-right: 0.2em; 
+    padding-left: 0.2em; 
+    background-color: #1C2143;
+    color: white; 
+    cursor: pointer;
+    border-radius: 50px;
+    border-color: #1C2143;
+    border-width: 8px; 
+    border-style: solid;
+    width: 7.2em; 
+    height: 3em; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 30px; 
+    margin-bottom: 40px; 
+    margin-left: 10px; 
+}
+
+#deleteProfileButton:hover {
+    background-color: white;
+    color: #1C2143; 
+}
+
+.profileInput {
+    width: 20em; 
+    font-family: 'SemiBold15';
+    font-size: 1.4rem;
+    text-align: center;
+    color: #1C2143; 
+    height: 2em; 
+    padding-top: 0.2em; 
+    padding-bottom: 0.2em; 
+    background-color: white;
+    border-radius: 50px; 
+    border: none; 
+    margin-top: 15px; 
+    margin-bottom: 15px; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
