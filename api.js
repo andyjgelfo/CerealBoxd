@@ -791,32 +791,37 @@ exports.setApp = function (app, client)
 
     app.post('/api/getFav', async (req, res, next) => 
     {
-    // incoming: userId, search
-    // outgoing: results[], error
+
 
     var error = '';
 
     const {target} = req.body;
-
-    // var _collection = collection.trim();
-    // var _column = column.trim();
-    var _target = (target.trim());
-    
-    const db = client.db("cerealbox");
-    const results = await db.collection("favorites").find({"userID":new ObjectId(_target)}).toArray();
-    const cerealDB = db.collection("box");
-    var cereals;
-    var cer;
-    
     var _ret = [];
-    // _ret[0] = null;
-    for( var i=0; i<results.length; i++ )
-    {
-        // _ret.push( results[i].cerealID);
-        cereals = await cerealDB.find({"_id":new ObjectId(results[i].cerealID)}).toArray();
-        cer = cereals[0];
 
-        _ret.push(cer);
+    try
+    {
+        var _target = (target.trim());
+        
+        const db = client.db("cerealbox");
+        const results = await db.collection("favorites").find({"userID":new ObjectId(_target)}).toArray();
+        const cerealDB = db.collection("box");
+        var cereals;
+        var cer;
+        
+        
+        // _ret[0] = null;
+        for( var i=0; i<results.length; i++ )
+        {
+            // _ret.push( results[i].cerealID);
+            cereals = await cerealDB.find({"_id":new ObjectId(results[i].cerealID)}).toArray();
+            cer = cereals[0];
+
+            _ret.push(cer);
+        }
+    }
+    catch(e)
+    {
+        error = e.toString();
     }
     
     // var ret = {results:_ret, error:error};
