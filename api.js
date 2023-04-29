@@ -171,8 +171,6 @@ exports.setApp = function (app, client)
 
     const newUser = {fName:fName, lName:lName, userName:userName, password: password, email: email, recoveryEmail:'', confirmed: false};
     var error = '';
-    var dupe = '';
-    var _search = userName.trim();
 
     try
     {
@@ -196,11 +194,11 @@ exports.setApp = function (app, client)
     const {username} = req.body;
     var error = '';
     var dupe = '';
-    var _search = username.trim();
     var results = 0;
 
     try
     {
+        var _search = username.trim();
         const db = client.db("cerealbox");
         dupe = await db.collection('user').find({"userName":{$regex:_search+'.*', $options:'i'}}).toArray();
 
@@ -380,24 +378,23 @@ exports.setApp = function (app, client)
 
     // ascending: 1, descending: -1
     const {collection, column, order} = req.body;
+    var results;
 
-    var _collection = collection.trim();
-    var _column = column.trim();
-    
-    
-    const db = client.db("cerealbox").collection(_collection);
-    const results = await db.find().sort({[_column]:[order]}).toArray();
+    try
+    {
+        var _collection = collection.trim();
+        var _column = column.trim();
+        
+        
+        const db = client.db("cerealbox").collection(_collection);
+        results = await db.find().sort({[_column]:[order]}).toArray();
+    }
+    catch(e)
+    {
+        error = e.toString();
+    }
 
 
-    // const results =  db
-    
-    // var _ret = [];
-    // for( var i=0; i<results.length; i++ )
-    // {
-    //     _ret.push( results[i].name );
-    // }
-    
-    // var ret = {results:_ret, error:error};
     var ret = {results:results, error:error};
     res.status(200).json(ret);
     });
@@ -410,18 +407,26 @@ exports.setApp = function (app, client)
     var error = '';
 
     const {collection, column, target} = req.body;
+    var results;
 
-    var _collection = collection.trim();
-    var _column = column.trim();
-    var _target = target.trim();
-    
-    const db = client.db("cerealbox");
-    const results = await db.collection(_collection).find({[_column]:{$regex:_target+'.*', $options:'i'}}).toArray();
-    
-    var _ret = [];
-    for( var i=0; i<results.length; i++ )
+    try
     {
-        _ret.push( results[i].name );
+        var _collection = collection.trim();
+        var _column = column.trim();
+        var _target = target.trim();
+        
+        const db = client.db("cerealbox");
+        results = await db.collection(_collection).find({[_column]:{$regex:_target+'.*', $options:'i'}}).toArray();
+        
+        var _ret = [];
+        for( var i=0; i<results.length; i++ )
+        {
+            _ret.push( results[i].name );
+        }
+    }
+    catch(e)
+    {
+        error = e.toString();
     }
     
     // var ret = {results:_ret, error:error};
@@ -435,10 +440,11 @@ exports.setApp = function (app, client)
     var ObjectId = require('mongodb').ObjectId;
 
     const {collection, _id} = req.body;
-    var _collection = collection.trim();
+    
 
     try
     {
+        var _collection = collection.trim();
         const db = client.db("cerealbox").collection(_collection).deleteOne({_id: new ObjectId(_id)});
     }
     catch(e)
@@ -482,38 +488,45 @@ exports.setApp = function (app, client)
     {
     var error = '';
     var avg = '';
+    var result;
 
-
-    const box = client.db("cerealbox").collection('box');
-    const rev = client.db("cerealbox").collection('reviews');
-
-
-    let result = await rev.aggregate([
-        {
-        $group: {
-            _id: "$cerealID",
-            avgReview: {$avg: "$rating"}
-        }
-        }
-    ]).toArray();
-
-    let i = 0;
-    while (i < result.length)
+    try
     {
-        
-        let id = result[i]._id;
-        let average = Math.round(result[i].avgReview * 1e2 ) / 1e2;
-        // let average = result[i].avgReview
+        const box = client.db("cerealbox").collection('box');
+        const rev = client.db("cerealbox").collection('reviews');
 
-        let filter = {_id: new ObjectId(id)};
-        let edit = {
-        $set: {
-            rating: average
-        },
-        };
 
-        let edited = await box.updateOne(filter, edit);
-        i++;
+        result = await rev.aggregate([
+            {
+            $group: {
+                _id: "$cerealID",
+                avgReview: {$avg: "$rating"}
+            }
+            }
+        ]).toArray();
+
+        let i = 0;
+        while (i < result.length)
+        {
+            
+            let id = result[i]._id;
+            let average = Math.round(result[i].avgReview * 1e2 ) / 1e2;
+            // let average = result[i].avgReview
+
+            let filter = {_id: new ObjectId(id)};
+            let edit = {
+            $set: {
+                rating: average
+            },
+            };
+
+            let edited = await box.updateOne(filter, edit);
+            i++;
+        }
+    }
+    catch(e)
+    {
+        error = e.toString();
     }
 
     var ret = {result: result };
@@ -602,51 +615,60 @@ exports.setApp = function (app, client)
     app.post('/api/setKill', async (req, res, next) =>
     {
         var error = '';
+        var result;
 
-        const box = client.db("cerealbox").collection('box');
-        const nutrition = client.db("cerealbox").collection('nutrition');
-
-        var maxSugars = await nutrition.aggregate(
-            [
-                {$project: {_id: 1, ratio: {$divide: ["$addedSugars", "$servingSize"]}}}, 
-                {$sort: {ratio: -1}}
-            ]
-          ).toArray();
-        var maxSugar = maxSugars[0].ratio;
-
-
-        let result = await nutrition.aggregate([
-            {
-                $group: {
-                    _id: "$cerealID",
-                }
-            }
-        ]).toArray();
-
-        var i = 0;
-        while (i < result.length)
+        try
         {
-            let id = result[i]._id;
-            var cereals = await nutrition.find({"cerealID":new ObjectId(id)}).toArray();
-            var cereal = cereals[0]
-            if (cereal.addedSugars !== 0)
+
+            const box = client.db("cerealbox").collection('box');
+            const nutrition = client.db("cerealbox").collection('nutrition');
+
+            var maxSugars = await nutrition.aggregate(
+                [
+                    {$project: {_id: 1, ratio: {$divide: ["$addedSugars", "$servingSize"]}}}, 
+                    {$sort: {ratio: -1}}
+                ]
+            ).toArray();
+            var maxSugar = maxSugars[0].ratio;
+
+
+            result = await nutrition.aggregate([
+                {
+                    $group: {
+                        _id: "$cerealID",
+                    }
+                }
+            ]).toArray();
+
+            var i = 0;
+            while (i < result.length)
             {
-                var killBefore = (cereal.addedSugars/cereal.servingSize) / maxSugar;
-                
-                kill = Math.round(killBefore * 1e2 * 10) / 1e2;
+                let id = result[i]._id;
+                var cereals = await nutrition.find({"cerealID":new ObjectId(id)}).toArray();
+                var cereal = cereals[0]
+                if (cereal.addedSugars !== 0)
+                {
+                    var killBefore = (cereal.addedSugars/cereal.servingSize) / maxSugar;
+                    
+                    kill = Math.round(killBefore * 1e2 * 10) / 1e2;
+                }
+                else
+                    kill = 0;
+
+                let filter = {_id: new ObjectId(id)};
+                let edit = {
+                $set: {
+                    willItKillYou: kill
+                },
+                };
+
+                let edited = await box.updateOne(filter, edit);
+                i++;
             }
-            else
-                kill = 0;
-
-            let filter = {_id: new ObjectId(id)};
-            let edit = {
-            $set: {
-                willItKillYou: kill
-            },
-            };
-
-            let edited = await box.updateOne(filter, edit);
-            i++;
+        }
+        catch(e)
+        {
+            error = e.toString();
         }
 
         var ret = {result: result, error: error};
@@ -663,14 +685,15 @@ exports.setApp = function (app, client)
 
     const {collection, column, target} = req.body;
 
-    var _collection = collection.trim();
-    var _column = column.trim();
-    var _target = (target.trim());
+   
     var _ret = [];
 
     try
     {
     
+        var _collection = collection.trim();
+        var _column = column.trim();
+        var _target = (target.trim());
         const db = client.db("cerealbox");
         const results = await db.collection(_collection).find({[_column]:new ObjectId(_target)}).toArray();
         
@@ -705,13 +728,21 @@ exports.setApp = function (app, client)
     // outgoing: results[], error
 
     var error = '';
+    var results;
 
-    const {target} = req.body;
+    try
+    {
+        const {target} = req.body;
 
-    var _target = target.trim();
-    
-    const db = client.db("cerealbox");
-    const results = await db.collection("box").find({"ingredients":{$not: {$regex:_target+'.*', $options:'i'}}}).toArray();
+        var _target = target.trim();
+        
+        const db = client.db("cerealbox");
+        results = await db.collection("box").find({"ingredients":{$not: {$regex:_target+'.*', $options:'i'}}}).toArray();
+    }
+    catch(e)
+    {
+        error = e.toString();
+    }
     
     
     // var ret = {results:_ret, error:error};
@@ -723,12 +754,12 @@ exports.setApp = function (app, client)
     {
 
     const { userID, cerealID } = req.body;
-
-    const favorite = {userID: new ObjectId(userID.trim()), cerealID: new ObjectId(cerealID.trim())};
     var error = '';
+
 
     try
     {
+        const favorite = {userID: new ObjectId(userID.trim()), cerealID: new ObjectId(cerealID.trim())};
         const db = client.db("cerealbox");
         const fav = db.collection('favorites');
         
@@ -753,15 +784,16 @@ exports.setApp = function (app, client)
 
     const {collection, column1, column2, target1, target2} = req.body;
 
-    var _collection = collection.trim();
-    var _column1 = column1.trim();
-    var _column2 = column2.trim();
-    var _target1 = target1.trim();
-    var _target2 = target2.trim();
+    
     var _ret = [];
 
     try
     {
+        var _collection = collection.trim();
+        var _column1 = column1.trim();
+        var _column2 = column2.trim();
+        var _target1 = target1.trim();
+        var _target2 = target2.trim();
         const db = client.db("cerealbox");
         const results = await db.collection(_collection).find({[_column1]:new ObjectId(_target1), [_column2]:new ObjectId(_target2)}).toArray();
         
@@ -838,14 +870,14 @@ exports.setApp = function (app, client)
 
     const {collection, column, target} = req.body;
 
-    var _collection = collection.trim();
-    var _column = column.trim();
-    var _target = (target.trim());
-    
-    const db = client.db("cerealbox");
     var _ret = [];
     try
     {
+        var _collection = collection.trim();
+        var _column = column.trim();
+        var _target = (target.trim());
+        
+        const db = client.db("cerealbox");
         const results = await db.collection(_collection).find({[_column]:new ObjectId(_target)}).toArray();
         
         
@@ -935,12 +967,13 @@ exports.setApp = function (app, client)
     {
         var error = '';
         const {cerealID} = req.body;
-        let cerID = new ObjectId(cerealID.trim());
-        let average;
-
+        
 
         try
         {
+            let cerID = new ObjectId(cerealID.trim());
+            let average;
+
             const box = await client.db("cerealbox").collection('box');
             const result = await client.db("cerealbox").collection('reviews').aggregate([
                 {
