@@ -73,9 +73,9 @@ function Cereals()
 
     var sillyMessage = '';
     if (JSON.stringify(tokenResponse) === "null")
-        sillyMessage = "Silly Rabbit, you're not signed in!"
+        sillyMessage = "Silly Rabbit, You're Not Signed In!"
     else
-        sillyMessage = "Silly Rabbit, Cerealboxd is for @" + tokenResponse.username + "!";
+        sillyMessage = "Silly Rabbit, Cerealboxd Is For @" + tokenResponse.username + "!";
 
     
     // Modal: Pop-up message for requesting a new cereal
@@ -250,7 +250,9 @@ function Cereals()
                         pathname: `/CerealDetails/${cereal2._id}`, 
                         }}>
                             <div id="card" data-aos="flip-right">
-                                <img src={cereal2.image}/>
+                                <img                               
+                                    src={cereal2.image}
+                                />
                             </div>
                         </Link>
                     ); 
