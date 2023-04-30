@@ -20,11 +20,6 @@ function Cereals()
         document.title = 'Cereals';
     }, []);
 
-    const [allCereals, setAllCereals] = useState([]); 
-    const [cereal, setCereal] = useState([]); 
-
-    let cerealData; 
-
     // const app_name = 'cerealboxd'
     // function buildPath(route, type)
     // {
@@ -43,30 +38,35 @@ function Cereals()
     // }
     var bp = require('./Path.js');
 
+    // Obtains the cereal data from the database and sorts them in ascending order
+    const [sortCereals, setSortCereals] = useState([]); 
+    const [allCereals, setAllCereals] = useState([]); 
+    let sortData; 
     useEffect(() => {
         (async () => {
-            var obj = {collection:"box",column:"name",target:''};
+            var obj = {collection:"box",column:"name",order:1};
             var js = JSON.stringify(obj); 
 
             try {
-                const response = await fetch(bp.buildPath('api/search'),
+                const response = await fetch(bp.buildPath('api/sort'),
                 {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
-                cerealData = JSON.parse(await response.text()); 
+                sortData = JSON.parse(await response.text()); 
 
             } catch (error) {
-                cerealData = []; 
+                sortData = []; 
             }
 
-            setAllCereals(cerealData.results); 
-            setCereal(cerealData.results); 
+            setAllCereals(sortData.results); 
+            setSortCereals(sortData.results); 
         })(); 
     }, []); 
 
+    // Function for the search bar
     const filterCards = event => {
         const value = event.target.value.toLowerCase(); 
-        const filteredCereals = allCereals.filter(cereal => (`${cereal.name}`.toLowerCase().includes(value))); 
-        setCereal(filteredCereals); 
+        const filteredCereals = allCereals.filter(sortCereals => (`${sortCereals.name}`.toLowerCase().includes(value))); 
+        setSortCereals(filteredCereals); 
     }; 
 
     const tokenResponse = JSON.parse(localStorage.getItem('user_data'));
@@ -85,6 +85,7 @@ function Cereals()
         document.body.style.overflow = 'hidden';
 
     }
+
     const setModalIsOpenToFalse = () => {
         setModalIsOpen(false); 
         document.body.style.overflow = 'unset';
@@ -243,7 +244,7 @@ function Cereals()
 
             {/* Displays cereal images  */}
             <div id="cardContainer">
-                {cereal.map(cereal2 => {
+                {sortCereals.map(cereal2 => {
                     return (
                         <Link 
                         to={{
