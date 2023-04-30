@@ -8,7 +8,7 @@ exports.setApp = function (app, client)
     // app.post('/api/addDB', async(req, res, next) =>
     // {
     //   const db = client.db("cerealbox");
-    //   const results = db.collection('reviews').updateMany({}, {$set:{"cerealID":null
+    //   const results = db.collection('reviews').updateMany({}, {$set:{"dateAdded":"Apr 28, 2023"
     // }});
     //   res.status(200)
     // }
@@ -280,7 +280,7 @@ exports.setApp = function (app, client)
     app.post('/api/addReview', async (req, res, next) =>
     {
 
-    const {reviewerID, cerealID, rating, body} = req.body;
+    const {reviewerID, cerealID, rating, body, dateAdded} = req.body;
 
     var error = '';
     var reviewerName;
@@ -300,7 +300,7 @@ exports.setApp = function (app, client)
         const resBox = await box.find({"_id":cerID}).toArray();
         cerealName = resBox[0].name;
 
-        newReview = {cerealName:cerealName, cerealID: new ObjectId(cerealID), reviewerName:reviewerName, reviewerID: new ObjectId(reviewerID), rating:rating, body:body};
+        newReview = {cerealName:cerealName, cerealID: new ObjectId(cerealID), reviewerName:reviewerName, reviewerID: new ObjectId(reviewerID), rating:rating, body:body, dateAdded:dateAdded};
         const db = client.db("cerealbox").collection('reviews').insertOne(newReview);
         
     }
