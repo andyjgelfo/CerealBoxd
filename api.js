@@ -315,7 +315,7 @@ exports.setApp = function (app, client)
 
     app.post('/api/editReview', async (req, res, next) =>
     {
-    const {reviewerID, cerealID, rating, body} = req.body;
+    const {reviewerID, cerealID, rating, body, dateAdded} = req.body;
     // var ObjectId = require('mongodb').ObjectId;
     var error = '';
     var result;
@@ -327,7 +327,7 @@ exports.setApp = function (app, client)
         var filter = {reviewerID: new ObjectId(reviewerID), cerealID: cerID};
         var edit = {
         $set: {
-            'rating':rating, 'body':body
+            'rating':rating, 'body':body, 'dateAdded':dateAdded
         },
         };
 
