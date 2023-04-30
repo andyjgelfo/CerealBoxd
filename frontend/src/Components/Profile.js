@@ -154,8 +154,6 @@ function Profile()
     const handleEditUser = async event => {
         event.preventDefault();   
 
-        
-
         obj = {username:profileUsername.value}
         js = JSON.stringify(obj)
         let response = await fetch(bp.buildPath('api/checkUsername'), 
@@ -165,8 +163,9 @@ function Profile()
         // if dupe and also if not the current users username
         if (dupe.results === 1 && profileUsername.value != thisUser)
         {
-            setMessage("Username is already taken, please choose a different one");
+            setMessage("Username is already taken, please choose a different one!");
         }
+
         else
         {
 
@@ -238,7 +237,6 @@ function Profile()
 
                     <Tab eventKey="contact" title="EDIT PROFILE">
                         <div className="textArea">
-                            <span id="editResult">{message}</span><br/>
                             <span class="profileLabels">First Name</span><br />
                             <input type="text" class="profileInput" id="profileFirstName" placeholder="First Name" defaultValue={userDetails.fName} ref={(c) => profileFirstName =c}/><br />
                             <span class="profileLabels">Last Name</span><br />
@@ -251,6 +249,7 @@ function Profile()
                             <input type="text" class="profileInput" id="profileRecoveryEmail" placeholder="Recovery Email" defaultValue={userDetails.recoveryEmail} ref={(c) => profileRecoveryEmail =c}/><br />
                             <span class="profileLabels">Password</span><br />
                             <input type="password" class="profileInput" id="profilePassword" placeholder="Password" defaultValue={userDetails.password} ref={(c) => profilePassword =c}/><br />
+                            <span id="editResult">{message}</span><br/>
                             <button id="saveProfileButton" onClick={handleEditUser}>SAVE</button>
                             <button id="deleteProfileButton" onClick={deleteAccount}>DELETE ACCOUNT</button> 
                         </div>
