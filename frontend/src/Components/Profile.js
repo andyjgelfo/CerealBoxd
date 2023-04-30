@@ -148,19 +148,40 @@ function Profile()
     let profilePassword; 
     let profileEmail;
     let profileRecoveryEmail; 
+    const [message,setMessage] = useState('');
 
     // Edits the user's details
     const handleEditUser = async event => {
         event.preventDefault();   
 
-        var obj = {_id:userid,fName:profileFirstName.value,lName:profileLastName.value,userName:profileUsername.value,
-            password:profilePassword.value,email:profileEmail.value,recoveryEmail:profileRecoveryEmail.value};
-        var js = JSON.stringify(obj); 
+        
 
-        await fetch(bp.buildPath('api/editUser'), 
+        obj = {username:profileUsername.value}
+        js = JSON.stringify(obj)
+        let response = await fetch(bp.buildPath('api/checkUsername'), 
         {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
-            
-        window.location.reload(false);   
+        let dupe = JSON.parse(await response.text());
+
+        // if dupe and also if not the current users username
+        if (dupe.results === 1 && profileUsername.value != thisUser)
+        {
+            setMessage("Username is already taken, please choose a different one");
+        }
+        else
+        {
+
+            var obj = {_id:userid,fName:profileFirstName.value,lName:profileLastName.value,userName:profileUsername.value,
+                password:profilePassword.value,email:profileEmail.value,recoveryEmail:profileRecoveryEmail.value};
+            var js = JSON.stringify(obj); 
+    
+            await fetch(bp.buildPath('api/editUser'), 
+                {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
+
+            var user = {firstName:profileFirstName.value,lastName:profileLastName.value,username:profileUsername.value, id:userid}
+            localStorage.setItem('user_data', JSON.stringify(user));
+                
+            window.location.reload(false);   
+        }
     }
 
     return(
@@ -217,6 +238,7 @@ function Profile()
 
                     <Tab eventKey="contact" title="EDIT PROFILE">
                         <div className="textArea">
+                            <span id="editResult">{message}</span><br/>
                             <span class="profileLabels">First Name</span><br />
                             <input type="text" class="profileInput" id="profileFirstName" placeholder="First Name" defaultValue={userDetails.fName} ref={(c) => profileFirstName =c}/><br />
                             <span class="profileLabels">Last Name</span><br />
