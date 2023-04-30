@@ -1059,6 +1059,34 @@ exports.setApp = function (app, client)
         res.status(200).json(ret);
     });
 
+    app.post('/api/updateReviewerName', async (req, res, next) =>
+    {
+    const {target, name} = req.body;
+    // var ObjectId = require('mongodb').ObjectId;
+    var error = '';
+    var result;
+
+    try
+    {
+        const rev = client.db("cerealbox").collection('reviews')
+        var filter = {_id: new ObjectId(target)};
+        var edit = {
+        $set: {
+            'reviewerName':name
+        },
+        };
+
+        result = await rev.updateOne(filter, edit);
+    }
+    catch(e)
+    {
+        error = e.toString();
+    }
+
+    var ret = {result: result, error: error };
+    res.status(200).json(ret);
+    })
+
 
 }
 

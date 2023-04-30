@@ -178,6 +178,23 @@ function Profile()
 
             var user = {firstName:profileFirstName.value,lastName:profileLastName.value,username:profileUsername.value, id:userid}
             localStorage.setItem('user_data', JSON.stringify(user));
+
+            // updates name on all reviews
+            obj = {collection:"reviews",column:"reviewerID",target:userid};
+            js = JSON.stringify(obj);
+
+            response = await fetch(bp.buildPath('api/searchByIDmulti'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+            const reviews = (JSON.parse(await response.text()).results);
+            for (let i = 0; i < reviews.length; i++)
+            {
+                obj = {target:reviews[i]._id, name: profileUsername.value};
+                js = JSON.stringify(obj);
+                await fetch(bp.buildPath('api/updateReviewerName'),
+                    {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+            }
+            
                 
             window.location.reload(false);   
         }
