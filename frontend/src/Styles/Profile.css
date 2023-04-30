@@ -218,11 +218,12 @@ li.nav-item {
     padding: 0.6em 0.8em 0 0.8em;
 }
 
-.Link {
+#profileReviewTitle {
     color: #40bcf4; 
+    font-family: 'SemiBold15';
 }
 
-.Link:hover{
+#profileReviewTitle:hover{
     color: white; 
 }
 
@@ -305,4 +306,3 @@ li.nav-item {
     margin-bottom: 15px; 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-

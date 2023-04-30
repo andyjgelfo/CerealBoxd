@@ -7,6 +7,7 @@ import 'aos/dist/aos.css';
 import daisy from "../Images/daisy.jpg"; 
 import emmanuel from "../Images/emmanuel.jpg"; 
 import andyg from "../Images/andyg.jpg"; 
+import thomas from "../Images/thomas.JPG"; 
 import { TiStarFullOutline } from "react-icons/ti"; 
 import { FaUtensilSpoon } from "react-icons/fa"; 
 
@@ -40,6 +41,7 @@ function About()
                     <center><span id="teamFavorite">Favorite Cereal: Cocoa Pebbles</span></center>
                 </div>
                 <div id="teamCard">
+                    <center><img src={thomas} id="teamPhoto" /></center>
                     <center><span id="teamName"><TiStarFullOutline id="teamIcon" />Cap'n Thomas<TiStarFullOutline id="teamIcon" /><br/></span></center>
                     <center><span id="teamRole">API<br /></span></center>
                     <center><span id="teamFavorite">Favorite Cereal: Honey Nut Cheerios</span></center>
