@@ -15,6 +15,7 @@ import { MdNotifications } from "react-icons/md";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Modal from 'react-modal'; 
+import { FaUtensilSpoon } from 'react-icons/fa'; 
 
 const CerealCard = (_) => {
     // Obtains the ID of the cereal 
@@ -101,8 +102,6 @@ const CerealCard = (_) => {
     // Used to help check to see if a review was left previously by the user 
     const [leftRating, setLeftRating] = useState(''); 
 
- 
-
     // Adds or edits the review data and sends to the database
     const handleAddOrEdit = async event => {
         event.preventDefault();   
@@ -124,6 +123,11 @@ const CerealCard = (_) => {
 
                 var ratingScore = rating; 
 
+                let date1 = new Date().toLocaleDateString();
+                let date2 = new Date(date1);
+                let dateArray = date2.toDateString().split(' ');
+                let dateFormat = dateArray[1] + ' ' + dateArray[2] + ',' + ' ' + dateArray[3];
+
                 // User forgot to leave a rating before leaving a review 
                 if (ratingScore == null)
                 {
@@ -135,7 +139,7 @@ const CerealCard = (_) => {
                 {
                     var reviewsContent = event.target.reviewsContent.value; 
 
-                    var obj = {reviewerID:idReviewer, cerealID:_id, rating:ratingScore, body:reviewsContent};
+                    var obj = {reviewerID:idReviewer, cerealID:_id, rating:ratingScore, body:reviewsContent,dateAdded:dateFormat};
                     var js = JSON.stringify(obj); 
 
                     await fetch(bp.buildPath('api/addReview'), 
@@ -160,7 +164,14 @@ const CerealCard = (_) => {
                 var ratingScore1 = rating; 
                 var reviewsContent1 = event.target.reviewsContent.value; 
 
-                var obj1 = {reviewerID:idReviewer1, cerealID:_id, rating:ratingScore1, body:reviewsContent1};
+                let date1 = new Date().toLocaleDateString();
+                let date2 = new Date(date1);
+                let dateArray = date2.toDateString().split(' ');
+                let dateFormat = dateArray[1] + ' ' + dateArray[2] + ',' + ' ' + dateArray[3];
+
+                alert(dateFormat); 
+
+                var obj1 = {reviewerID:idReviewer1, cerealID:_id, rating:ratingScore1, body:reviewsContent1, dateAdded:dateFormat};
                 var js1 = JSON.stringify(obj1); 
 
                 await fetch(bp.buildPath('api/editReview'), 
@@ -546,8 +557,8 @@ const CerealCard = (_) => {
                 {reviewReview.map(reviewReview2 => {
                     return(
                         <div id="reviewCard" data-aos="fade">
-                            <span id="firstLineReviewCard1">Rating Given: {reviewReview2.rating}/5</span>
-                            <span id="firstLineReviewCard2">@{reviewReview2.reviewerName}</span>
+                            <span id="firstLineReviewCard1">@{reviewReview2.reviewerName}</span>
+                            <span id="firstLineReviewCard2">{reviewReview2.rating}/5 Stars <FaUtensilSpoon /> {reviewReview2.dateAdded}</span>
                             <br />
                             <span id="bodyReviewCard">{reviewReview2.body}</span>
                             <hr id="horizontalLine"/>

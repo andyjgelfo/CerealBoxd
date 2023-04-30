@@ -363,20 +363,20 @@ input[type="radio"] {
 #firstLineReviewCard1 {
     font-family: 'SemiBold15';
     color:white; 
-    font-size: 1.3rem; 
+    font-size: 1.2rem; 
 }
 
 #firstLineReviewCard2 {
     font-family: 'SemiBold15';
     color:white; 
-    font-size: 1.3rem; 
+    font-size: 1.2rem; 
     float: right; 
 }
 
 #bodyReviewCard {
     font-family: 'Book20';
     color: white; 
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 #horizontalLine {
@@ -472,4 +472,5 @@ input[type="radio"] {
 #modalAddReviewIcon {
     background-color: #F2EAC1;
 }
+
 

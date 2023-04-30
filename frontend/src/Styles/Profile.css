@@ -219,12 +219,12 @@ li.nav-item {
 }
 
 #profileReviewTitle {
-    color: #40bcf4; 
+    color: white; 
     font-family: 'SemiBold15';
 }
 
 #profileReviewTitle:hover{
-    color: white; 
+    color: #40bcf4; 
 }
 
 #horizontalLine {
@@ -309,4 +309,19 @@ li.nav-item {
 
 #editResult {
     color: #C41E3A;
+}
+
+#profileDateAdded {
+    float:right; 
+    font-family: 'SemiBold15'; 
+    font-size: 1.2rem;
+}
+
+#profileReviewInfo {
+    font-family: 'SemiBold15';
+    font-size: 1.2rem; 
+}
+
+#bodyReviewCard {
+    font-size:1.4rem; 
 }

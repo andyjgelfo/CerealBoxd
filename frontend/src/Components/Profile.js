@@ -7,6 +7,7 @@ import 'aos/dist/aos.css';
 import "../Styles/Profile.css";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import { FaUtensilSpoon } from "react-icons/fa"; 
 
 function Profile()
 {
@@ -242,7 +243,7 @@ function Profile()
                                             to={{
                                             pathname:`/CerealDetails/${review2.cerealID}`, 
                                             }}>
-                                            <div>{review2.cerealName}</div>
+                                            <div id="profileReviewInfo">{review2.cerealName}<span id="profileDateAdded">{review2.rating}/5 Stars <FaUtensilSpoon /> {review2.dateAdded}</span></div>
                                         </Link>
                                         <span id="bodyReviewCard">{review2.body}</span>
                                         <hr id="horizontalLine"/>
