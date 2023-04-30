@@ -155,8 +155,8 @@ function Profile()
     const handleEditUser = async event => {
         event.preventDefault();   
 
-        obj = {username:profileUsername.value}
-        js = JSON.stringify(obj)
+        var obj = {username:profileUsername.value}
+        var js = JSON.stringify(obj)
         let response = await fetch(bp.buildPath('api/checkUsername'), 
         {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
         let dupe = JSON.parse(await response.text());
@@ -170,9 +170,9 @@ function Profile()
         else
         {
 
-            var obj = {_id:userid,fName:profileFirstName.value,lName:profileLastName.value,userName:profileUsername.value,
+            obj = {_id:userid,fName:profileFirstName.value,lName:profileLastName.value,userName:profileUsername.value,
                 password:profilePassword.value,email:profileEmail.value,recoveryEmail:profileRecoveryEmail.value};
-            var js = JSON.stringify(obj); 
+            js = JSON.stringify(obj); 
     
             await fetch(bp.buildPath('api/editUser'), 
                 {method:'POST', body:js, headers:{'Content-Type': 'application/json'}}); 
@@ -180,20 +180,24 @@ function Profile()
             var user = {firstName:profileFirstName.value,lastName:profileLastName.value,username:profileUsername.value, id:userid}
             localStorage.setItem('user_data', JSON.stringify(user));
 
-            // updates name on all reviews
-            obj = {collection:"reviews",column:"reviewerID",target:userid};
-            js = JSON.stringify(obj);
-
-            response = await fetch(bp.buildPath('api/searchByIDmulti'),
-                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
-
-            const reviews = (JSON.parse(await response.text()).results);
-            for (let i = 0; i < reviews.length; i++)
+            // only does this if user changes the username
+            if (profileUsername.value != thisUser)
             {
-                obj = {target:reviews[i]._id, name: profileUsername.value};
+                // updates name on all reviews
+                obj = {collection:"reviews",column:"reviewerID",target:userid};
                 js = JSON.stringify(obj);
-                await fetch(bp.buildPath('api/updateReviewerName'),
+
+                response = await fetch(bp.buildPath('api/searchByIDmulti'),
                     {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+                const reviews = (JSON.parse(await response.text()).results);
+                for (let i = 0; i < reviews.length; i++)
+                {
+                    obj = {target:reviews[i]._id, name: profileUsername.value};
+                    js = JSON.stringify(obj);
+                    await fetch(bp.buildPath('api/updateReviewerName'),
+                        {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+                }
             }
             
                 
