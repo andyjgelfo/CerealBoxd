@@ -8,6 +8,8 @@ import daisy from "../Images/daisy.jpg";
 import emmanuel from "../Images/emmanuel.jpg"; 
 import andyg from "../Images/andyg.jpg"; 
 import thomas from "../Images/thomas.JPG"; 
+import evan from "../Images/evan.jpg"; 
+import arnav from "../Images/arnav.jpg"; 
 import { TiStarFullOutline } from "react-icons/ti"; 
 import { FaUtensilSpoon } from "react-icons/fa"; 
 
@@ -36,6 +38,7 @@ function About()
                     <center><span id="teamFavorite">Favorite Cereal: Raisin Bran</span></center>
                 </div>
                 <div id="teamCard">
+                    <center><img src={arnav} id="teamPhoto" /></center>
                     <center><span id="teamName"><TiStarFullOutline id="teamIcon" />Cap'n Arnav<TiStarFullOutline id="teamIcon" /><br/></span></center>
                     <center><span id="teamRole">Web Frontend<br /></span></center>
                     <center><span id="teamFavorite">Favorite Cereal: Cocoa Pebbles</span></center>
@@ -64,6 +67,7 @@ function About()
                     <center><span id="teamFavorite">Favorite Cereal: Honey Kix</span></center>
                 </div>
                 <div id="teamCard">
+                    <center><img src={evan} id="teamPhoto" /></center>
                     <center><span id="teamName"><TiStarFullOutline id="teamIcon" />Cap'n Evan<TiStarFullOutline id="teamIcon" /><br/></span></center>
                     <center><span id="teamRole">Project Manager & Mobile Frontend<br /></span></center>
                     <center><span id="teamFavorite">Favorite Cereal: Cinnamon Toast Crunch</span></center>

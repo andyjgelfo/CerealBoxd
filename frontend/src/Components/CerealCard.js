@@ -341,7 +341,7 @@ const CerealCard = (_) => {
         if (JSON.parse(localStorage.getItem('user_data') == null))
         {
             buttonChange = "ADD"; 
-            labelChange = "ADD REVIEW..."; 
+            labelChange = "ADD A REVIEW..."; 
             deleteChange = <BsEmojiSmile id="deleteIcon"/>; 
 
             setPosts(buttonChange); 
@@ -368,14 +368,14 @@ const CerealCard = (_) => {
             if (response1 == null)
             {
                 buttonChange = "ADD"; 
-                labelChange = "ADD REVIEW...";  
+                labelChange = "ADD A REVIEW...";  
                 deleteChange = <BsEmojiSmile id="deleteIcon"/>; 
             }
             // User did leave a review previously
             else 
             {
                 buttonChange = "EDIT"; 
-                labelChange = "EDIT REVIEW..."; 
+                labelChange = "EDIT YOUR REVIEW..."; 
                 valueChange = response1.body; 
                 deleteChange = "DELETE"; 
                 // alert(response1.rating)
@@ -532,7 +532,8 @@ const CerealCard = (_) => {
                     <span class="nutritionFacts">Folate: {(nutrition.folate* 100)}%</span>
                     <span class="nutritionFacts">Vitamin B12: {(nutrition.vitaminB12* 100)}%</span>
                     <span id="willItKillYouLabel"><BsSpeedometer2 id="killIcon"/> Will It Kill You Meter <BsSpeedometer2 id="killIcon"/></span>
-                    <span id="willItKillYou">{info.willItKillYou}</span>
+                    <span id="willItKillYou1">Calculated based on the amount of added sugars and serving size.</span>
+                    <span id="willItKillYou2">{info.willItKillYou} / 10</span>
                 </div>
             
             

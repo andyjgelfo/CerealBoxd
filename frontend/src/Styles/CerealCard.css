@@ -136,11 +136,20 @@
     padding-top: 3%; 
 }
 
-#willItKillYou {
+#willItKillYou1 {
     background-color: #F2EAC1;
     font-family: 'Book20';
     color: #1C2143; 
     font-size: 0.8rem;
+    padding-left: 6%; 
+    padding-right: 6%; 
+}
+
+#willItKillYou2 {
+    background-color: #F2EAC1;
+    font-family: 'Book20';
+    color: #1C2143; 
+    font-size: 1rem;
     padding-left: 6%; 
     padding-right: 6%; 
     padding-bottom: 3%; 
@@ -159,7 +168,7 @@
     background-color: #F2EAC1;
     font-family: 'Book20';
     color: #1C2143; 
-    font-size: 0.8rem;
+    font-size: 1rem;
     padding-left: 6%; 
     padding-right: 6%; 
     padding-bottom: 3%; 
@@ -363,7 +372,7 @@ input[type="radio"] {
 #firstLineReviewCard1 {
     font-family: 'SemiBold15';
     color:white; 
-    font-size: 1.2rem; 
+    font-size: 1.4rem; 
 }
 
 #firstLineReviewCard2 {
