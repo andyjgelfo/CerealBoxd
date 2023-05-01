@@ -27,7 +27,7 @@ function About()
                 The Breakfast Club
             </div>
 
-            <div id= "teamSubtitle">Inspired by Letterboxd <FaUtensilSpoon id="subtitleIcon" /> Check out the GitHub!</div>
+            <div id= "teamSubtitle">Inspired By Letterboxd <FaUtensilSpoon id="subtitleIcon" /> Check Out The GitHub!</div>
 
             <a href="https://github.com/andyjgelfo/CerealBoxd"><img src={github} id="github"></img></a>
 

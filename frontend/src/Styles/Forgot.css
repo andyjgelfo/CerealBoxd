@@ -92,6 +92,11 @@
     margin-bottom: 20px; 
 }
 
+#submitButton:hover {
+    color: #1C2143; 
+    background-color: white; 
+}
+
 #messageResult {
     color: #C41E3A;
     background-color: #F2EAC1;
@@ -118,8 +123,8 @@ input[name="emailtype"] {
     color: #C41E3A; 
 }
 
-p {
+#forgotPasswordMessage {
     background-color: #F2EAC1;
-    
+    padding: 0.6em; 
 }
 

@@ -86,7 +86,7 @@ function ForgotPass()
         <div class='wrapper-forgot d-flex align-items-center justify-content-center'>
             <div class='container align-items-center justify-content-center' id="forgotDiv">
                 <center><span id= "title">Forgot Password?</span></center>
-                <center><p>Enter your username and your temporary password will be sent to your main email and your recovery email if applicable</p></center>
+                <center><p id="forgotPasswordMessage">Enter your username and a temporary password will be sent to your main email and your recovery email if applicable.</p></center>
                 <form onSubmit={doForgot}>
                     <center><input type="text" id="usernameBox" placeholder='USERNAME' ref={(c) => username = c} /><br /></center>
                     
@@ -98,7 +98,6 @@ function ForgotPass()
                     
                     {/* <label><input type="checkbox" id="emailtype" name="email" value="recovery"/>
                     Send to recovery email instead?</label> */}
-
 
                     <center><input type="submit" id="submitButton" class="buttons" value="SUBMIT" onClick={doForgot}/></center>
                     <center><span id="confirmResult">{message}</span></center>

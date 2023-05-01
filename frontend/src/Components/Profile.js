@@ -242,12 +242,12 @@ function Profile()
                         <div className="Reviews">
                             {review.map(review2 => {
                                 return(
-                                    <div id="reviewCardPage">
+                                    <div id="reviewCardPage" data-aos="fade">
                                         <Link id="profileReviewTitle"
                                             to={{
                                             pathname:`/CerealDetails/${review2.cerealID}`, 
                                             }}>
-                                            <div id="profileReviewInfo">{review2.cerealName}<span id="profileDateAdded">{review2.rating}/5 Stars <FaUtensilSpoon /> {review2.dateAdded}</span></div>
+                                            <div id="profileReviewInfo">{review2.cerealName}<span id="profileDateAdded">{review2.rating}/5 Stars <FaUtensilSpoon />  {review2.dateAdded}</span></div>
                                         </Link>
                                         <span id="bodyReviewCard">{review2.body}</span>
                                         <hr id="horizontalLine"/>

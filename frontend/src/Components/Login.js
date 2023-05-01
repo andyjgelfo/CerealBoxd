@@ -93,7 +93,7 @@ function Login()
                     <center><input type="password" id="loginPassword" placeholder="PASSWORD" ref={(c) => loginPassword = c} /><br /></center>
                     <center><input type="submit" id="loginButton" class="buttons" value="SIGN IN" onClick={doLogin} /></center>
                     <center><a href="/RegisterPage"><span id="noAccount">Don't Have An Account? Register Here!</span></a></center>
-                    <center><a href="/ForgotPass"><span id="noAccount">Forgot Your Password?</span></a></center>
+                    <center><a href="/ForgotPass"><span id="noAccount">Forgot Password?</span></a></center>
                 </form>
             </div>
         </div>
