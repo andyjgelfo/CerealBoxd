@@ -61,7 +61,8 @@ ul.nav.nav-tabs {
     border-radius: 12px; 
     border-color: #1C2143; 
     border-width: 0.6em;
-    color: white;  
+    color: white;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out; 
 }
 
 /*For the account info section at the top*/

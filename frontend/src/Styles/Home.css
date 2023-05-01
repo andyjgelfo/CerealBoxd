@@ -24,8 +24,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-evenly;
+  align-items: center;
+  justify-content: center;
 }
 
 figure {
@@ -98,23 +98,28 @@ figure {
 
 h1 {
   color: white;
-  font-family: "SemiBold15";
+  font-family: "SemiBold20";
   font-size: 1rem;
   padding-top: 5%;
+  padding-bottom: 2%; 
   text-align: center;
   background-color: transparent;
+  align-items: center;
+  justify-content: center;
 }
 
   .article-wrapper {
-    width: 400px;
+    width: 480px;
     margin-bottom: 40px;
     padding: 20px;
-    height: 360px; 
+    height: 380px; 
     background-color: #F2EAC1;
     border-color: #1C2143;
     border-radius: 32px;
     border-style: solid;
     border-width: 0.6em; 
+    margin-left: 40px; 
+    margin-right: 40px; 
   }
   
   .article-wrapper h2 {
@@ -132,8 +137,8 @@ h1 {
     background-color: #F2EAC1;
     text-align: center;
     font-family: "Book20";
-    margin-top: 1.1em;
-    font-size: 1rem;
+    margin-top: 1.4em;
+    font-size: 1.1rem;
     border: none; 
   }
 
@@ -230,7 +235,7 @@ h1 {
 #cerealOfTheDay {
   font-family: 'Book20';
   color: #1C2143; 
-  font-size: 1rem;
+  font-size: 1.2rem;
   background-color: #F2EAC1;
 }
 
@@ -246,6 +251,11 @@ h1 {
   font-family: 'Book20'; 
   color: #1C2143; 
   font-size: 1rem; 
+  background-color: #F2EAC1;
+}
+
+#articleIcons {
+  color: #1C2143; 
   background-color: #F2EAC1;
 }
 

@@ -4,6 +4,8 @@ import "../Styles/Home.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Link } from "react-router-dom"; 
+import { BsTrophyFill } from "react-icons/bs"; 
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"; 
 
 function Home()
 {
@@ -71,11 +73,11 @@ function Home()
                 </div>
             </div>
 
-            <h1 data-aos="fade-up">Featured</h1>
+            <h1 data-aos="fade-up">Featured Content</h1>
             <br />
 
            <section data-aos = "fade-up" class="articles">
-                <article>
+                {/* <article>
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/SadCereal.png')} className="cards" />
@@ -85,9 +87,9 @@ function Home()
                             <center><a href="#" class="read-more">Read More</a></center>
                         </div>
                     </div>
-                </article>
+                </article> */}
 
-                <article>
+                {/* <article>
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/RaisinBran.png')} className="cards" />
@@ -97,9 +99,9 @@ function Home()
                             <center><a href="#" class="read-more">Read More</a></center>
                         </div>
                     </div>
-                </article>
+                </article> */}
 
-                <article>
+                {/* <article>
                     <div class="article-wrapper">
                         <figure>
                             <img src={require('../Images/SugarFree.png')} className="cards" />
@@ -109,16 +111,17 @@ function Home()
                             <center><a href="#" class="read-more">Read More</a></center>
                         </div>
                     </div>
-                </article>
+                </article> */}
 
                 {/* Cereal of the Day */}
                 <article>
                     <div class="article-wrapper" id="cerealOfTheDayRedirect">
+                        <center><span id="cerealOfTheDayTitle"><GiPerspectiveDiceSixFacesRandom id="articleIcons" /> Random Cereal Generator <GiPerspectiveDiceSixFacesRandom id="articleIcons" /></span></center>
+                        <br />
                         <figure>
                             <img src={random.image} className="cards" />
                         </figure>
                         <div class="article-body">
-                            <center><span id="cerealOfTheDayTitle">Random Cereal Generator!</span></center>
                             <Link 
                             to={{
                             pathname: `/CerealDetails/${random._id}`, 
@@ -133,7 +136,7 @@ function Home()
                 <article>
                     <div class="article-wrapper">
                         <div class="article-body">
-                            <center><span id="currentTop5Title">Current Top 5 Rated Cereals</span><br /></center>
+                            <center><span id="currentTop5Title"><BsTrophyFill id="articleIcons" /> Current Top 5 Rated Cereals <BsTrophyFill id="articleIcons" /></span><br /></center>
                             {top5.map((topFive, index) => {
                                 const indexTracker = index + 1; 
                                 return (
