@@ -169,8 +169,6 @@ const CerealCard = (_) => {
                 let dateArray = date2.toDateString().split(' ');
                 let dateFormat = dateArray[1] + ' ' + dateArray[2] + ',' + ' ' + dateArray[3];
 
-                alert(dateFormat); 
-
                 var obj1 = {reviewerID:idReviewer1, cerealID:_id, rating:ratingScore1, body:reviewsContent1, dateAdded:dateFormat};
                 var js1 = JSON.stringify(obj1); 
 

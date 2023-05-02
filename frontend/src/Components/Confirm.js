@@ -51,12 +51,12 @@ function Confirm()
             setMessage("Code entered is incorrect");
 
     }
+    
     return(
-
         <div class='wrapper-confirm d-flex align-items-center justify-content-center'>
             <div class='container align-items-center justify-content-center' id="confirmDiv">
                 <center><span id= "title">Confirm Email</span></center>
-                <center><p>A verification code has been sent to your email, please enter it</p></center>
+                <center><p id="confirmMessage">A verification code has been sent to your email, please enter it</p></center>
                 <form onSubmit={doConfirm}>
                     <center><input type="text" id="codeBox" placeholder='CODE' ref={(c) => codeInput = c} /><br /></center>
                     <center><input type="submit" id="confirmButton" class="buttons" value="SUBMIT" onClick={doConfirm}/></center>

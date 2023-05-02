@@ -100,7 +100,17 @@ text {
     margin-bottom: 40px; 
 }
 
+#confirmButton:hover {
+    color: #1C2143; 
+    background-color: white;
+}
+
 #confirmResult {
     color: red;
+    background-color: #F2EAC1;
+}
+
+#confirmMessage {
+    color: #1C2143; 
     background-color: #F2EAC1;
 }
